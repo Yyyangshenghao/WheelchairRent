@@ -1,52 +1,52 @@
 package com.wheelchair.wym.entity;
+
 /**
- * 
  * @Description 管理员账号
  */
 public class Admin {
-	private int id;
-	private String username;
-	private String userpwd;
+    private int id;
+    private String username;
+    private String userpwd;
 
-	public int getId() {
-		return id;
-	}
+    public Admin(int id, String username, String userpwd) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.userpwd = userpwd;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Admin(String username, String userpwd) {
+        super();
+        this.username = username;
+        this.userpwd = userpwd;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public Admin() {
+        super();
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getUserpwd() {
-		return userpwd;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setUserpwd(String userpwd) {
-		this.userpwd = userpwd;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public Admin(int id, String username, String userpwd) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.userpwd = userpwd;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public Admin(String username, String userpwd) {
-		super();
-		this.username = username;
-		this.userpwd = userpwd;
-	}
+    public String getUserpwd() {
+        return userpwd;
+    }
 
-	public Admin() {
-		super();
-	}
+    public void setUserpwd(String userpwd) {
+        this.userpwd = userpwd;
+    }
 
 }

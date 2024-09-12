@@ -3,62 +3,62 @@ package com.wheelchair.wym.entity;
 import java.util.List;
 
 public class UserWheelchairData {
-	private int code;
+    private int code;
 
-	private String msg;
+    private String msg;
 
-	private int count;
+    private int count;
 
-	private List<Wheelchair> data;
+    private List<Wheelchair> data;
 
-	public int getCode() {
-		return code;
-	}
+    public UserWheelchairData(String msg, int count, List<Wheelchair> data) {
+        super();
+        this.msg = msg;
+        this.count = count;
+        this.data = data;
+    }
 
-	public void setCode(int code) {
-		this.code = code;
-	}
+    public UserWheelchairData(int code, String msg, int count, List<Wheelchair> data) {
+        super();
+        this.code = code;
+        this.msg = msg;
+        this.count = count;
+        this.data = data;
+    }
 
-	public String getMsg() {
-		return msg;
-	}
+    public UserWheelchairData() {
+        super();
+    }
 
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
+    public int getCode() {
+        return code;
+    }
 
-	public int getCount() {
-		return count;
-	}
+    public void setCode(int code) {
+        this.code = code;
+    }
 
-	public void setCount(int count) {
-		this.count = count;
-	}
+    public String getMsg() {
+        return msg;
+    }
 
-	public List<Wheelchair> getData() {
-		return data;
-	}
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
-	public void setData(List<Wheelchair> data) {
-		this.data = data;
-	}
+    public int getCount() {
+        return count;
+    }
 
-	public UserWheelchairData(String msg, int count, List<Wheelchair> data) {
-		super();
-		this.msg = msg;
-		this.count = count;
-		this.data = data;
-	}
+    public void setCount(int count) {
+        this.count = count;
+    }
 
-	public UserWheelchairData(int code, String msg, int count, List<Wheelchair> data) {
-		super();
-		this.code = code;
-		this.msg = msg;
-		this.count = count;
-		this.data = data;
-	}
+    public List<Wheelchair> getData() {
+        return data;
+    }
 
-	public UserWheelchairData() {
-		super();
-	}
+    public void setData(List<Wheelchair> data) {
+        this.data = data;
+    }
 }

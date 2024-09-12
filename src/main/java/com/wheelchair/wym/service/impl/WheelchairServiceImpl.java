@@ -1,22 +1,23 @@
 package com.wheelchair.wym.service.impl;
 
-import java.util.List;
-
 import com.wheelchair.wym.dao.WheelchairMapper;
-import com.wheelchair.wym.entity.Wheelchair;
 import com.wheelchair.wym.entity.Page;
+import com.wheelchair.wym.entity.Wheelchair;
 import com.wheelchair.wym.service.IWheelchairService;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
 public class WheelchairServiceImpl implements IWheelchairService {
 
-	@Autowired
-	private WheelchairMapper dao;
-	
+	private final WheelchairMapper dao;
+
+	public WheelchairServiceImpl(WheelchairMapper dao) {
+		this.dao = dao;
+	}
+
 	@Override
 	public List<Wheelchair> findHomeInfo() {
 		return dao.findHomeInfo();
@@ -36,7 +37,7 @@ public class WheelchairServiceImpl implements IWheelchairService {
 	public List<Wheelchair> findWheelchairByUser(Page page) {
 		return dao.findWheelchairByUser(page);
 	}
-	
+
 	@Override
 	public int deleteUserWheelchair(int hID) {
 		return dao.deleteUserWheelchair(hID);

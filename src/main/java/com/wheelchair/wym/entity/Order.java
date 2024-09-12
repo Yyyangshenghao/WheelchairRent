@@ -1,75 +1,75 @@
 package com.wheelchair.wym.entity;
 
-import java.util.Date;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
+
 public class Order {
-	private int oID;
-	private int cID;
-	private int uID;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date orderTime;
-	private String orderUser;
+    private int oID;
+    private int cID;
+    private int uID;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date orderTime;
+    private String orderUser;
 
-	public int getuID() {
-		return uID;
-	}
+    public Order(int cID, int uID, Date orderTime, String orderUser) {
+        super();
+        this.cID = cID;
+        this.uID = uID;
+        this.orderTime = orderTime;
+        this.orderUser = orderUser;
+    }
 
-	public void setuID(int uID) {
-		this.uID = uID;
-	}
+    public Order(int oID, int cID, int uID, Date orderTime, String orderUser) {
+        super();
+        this.oID = oID;
+        this.cID = cID;
+        this.uID = uID;
+        this.orderTime = orderTime;
+        this.orderUser = orderUser;
+    }
 
-	public int getoID() {
-		return oID;
-	}
+    public Order() {
+        super();
+    }
 
-	public void setoID(int oID) {
-		this.oID = oID;
-	}
+    public int getuID() {
+        return uID;
+    }
 
-	public int getcID() {
-		return cID;
-	}
+    public void setuID(int uID) {
+        this.uID = uID;
+    }
 
-	public void setcID(int cID) {
-		this.cID = cID;
-	}
+    public int getoID() {
+        return oID;
+    }
 
-	public Date getOrderTime() {
-		return orderTime;
-	}
+    public void setoID(int oID) {
+        this.oID = oID;
+    }
 
-	public void setOrderTime(Date orderTime) {
-		this.orderTime = orderTime;
-	}
+    public int getcID() {
+        return cID;
+    }
 
-	public String getOrderUser() {
-		return orderUser;
-	}
+    public void setcID(int cID) {
+        this.cID = cID;
+    }
 
-	public void setOrderUser(String orderUser) {
-		this.orderUser = orderUser;
-	}
+    public Date getOrderTime() {
+        return orderTime;
+    }
 
-	public Order(int cID, int uID, Date orderTime, String orderUser) {
-		super();
-		this.cID = cID;
-		this.uID = uID;
-		this.orderTime = orderTime;
-		this.orderUser = orderUser;
-	}
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
 
-	public Order(int oID, int cID, int uID, Date orderTime, String orderUser) {
-		super();
-		this.oID = oID;
-		this.cID = cID;
-		this.uID = uID;
-		this.orderTime = orderTime;
-		this.orderUser = orderUser;
-	}
+    public String getOrderUser() {
+        return orderUser;
+    }
 
-	public Order() {
-		super();
-	}
+    public void setOrderUser(String orderUser) {
+        this.orderUser = orderUser;
+    }
 }

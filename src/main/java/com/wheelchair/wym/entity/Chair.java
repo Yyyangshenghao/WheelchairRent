@@ -11,28 +11,35 @@ public class Chair {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date lastMaintenanceDate;
 
-    public int getcID(){
+    public int getcID() {
         return cID;
     }
-    public void setcID(int cID){
+
+    public void setcID(int cID) {
         this.cID = cID;
     }
-    public int gethID(){
+
+    public int gethID() {
         return hID;
     }
-    public void sethID(int hID){
+
+    public void sethID(int hID) {
         this.hID = hID;
     }
-    public int getStatus(){
+
+    public int getStatus() {
         return status;
     }
-    public void setStatus(int status){
+
+    public void setStatus(int status) {
         this.status = status;
     }
-    public Date getLastMaintenanceDate(){
+
+    public Date getLastMaintenanceDate() {
         return lastMaintenanceDate;
     }
-    public void setLastMaintenanceDate(Date lastMaintenanceDate){
+
+    public void setLastMaintenanceDate(Date lastMaintenanceDate) {
         this.lastMaintenanceDate = lastMaintenanceDate;
     }
 }

@@ -3,185 +3,181 @@ package com.wheelchair.wym.entity;
 import java.util.Date;
 
 public class UserOrder {
-	private int oID;
-	private int hID;
-	private Date orderTime;
-	private String orderUser;
-	private String wheelchairDesc;
-	private String wheelchairModel;
-	private String wheelchairArea;
-	private String wheelchairFloor;
-	private String wheelchairType;
-	private int wheelchairPrice;
-	private String wheelchairAddress;
-	private String wheelchairImage;
-	private String communityName;
-	private String wheelchairLinkMan;
-	private String wheelchairOriented;
+    private int oID;
+    private int hID;
+    private Date orderTime;
+    private String orderUser;
+    private String wheelchairDesc;
+    private String wheelchairModel;
+    private String wheelchairArea;
+    private String wheelchairFloor;
+    private String wheelchairType;
+    private int wheelchairPrice;
+    private String wheelchairAddress;
+    private String wheelchairImage;
+    private String communityName;
+    private String wheelchairLinkMan;
+    private String wheelchairOriented;
 
-	public int getoID() {
-		return oID;
-	}
+    public UserOrder(int hID, Date orderTime, String orderUser, String wheelchairDesc, String wheelchairModel, String wheelchairArea, String wheelchairFloor, String wheelchairType, int wheelchairPrice, String wheelchairAddress, String wheelchairImage, String communityName, String wheelchairLinkMan, String wheelchairOriented) {
+        super();
+        this.hID = hID;
+        this.orderTime = orderTime;
+        this.orderUser = orderUser;
+        this.wheelchairDesc = wheelchairDesc;
+        this.wheelchairModel = wheelchairModel;
+        this.wheelchairArea = wheelchairArea;
+        this.wheelchairFloor = wheelchairFloor;
+        this.wheelchairType = wheelchairType;
+        this.wheelchairPrice = wheelchairPrice;
+        this.wheelchairAddress = wheelchairAddress;
+        this.wheelchairImage = wheelchairImage;
+        this.communityName = communityName;
+        this.wheelchairLinkMan = wheelchairLinkMan;
+        this.wheelchairOriented = wheelchairOriented;
+    }
 
-	public void setoID(int oID) {
-		this.oID = oID;
-	}
+    public UserOrder(int oID, int hID, Date orderTime, String orderUser, String wheelchairDesc, String wheelchairModel, String wheelchairArea, String wheelchairFloor, String wheelchairType, int wheelchairPrice, String wheelchairAddress, String wheelchairImage, String communityName, String wheelchairLinkMan, String wheelchairOriented) {
+        super();
+        this.oID = oID;
+        this.hID = hID;
+        this.orderTime = orderTime;
+        this.orderUser = orderUser;
+        this.wheelchairDesc = wheelchairDesc;
+        this.wheelchairModel = wheelchairModel;
+        this.wheelchairArea = wheelchairArea;
+        this.wheelchairFloor = wheelchairFloor;
+        this.wheelchairType = wheelchairType;
+        this.wheelchairPrice = wheelchairPrice;
+        this.wheelchairAddress = wheelchairAddress;
+        this.wheelchairImage = wheelchairImage;
+        this.communityName = communityName;
+        this.wheelchairLinkMan = wheelchairLinkMan;
+        this.wheelchairOriented = wheelchairOriented;
+    }
 
-	public int gethID() {
-		return hID;
-	}
+    public UserOrder() {
+        super();
+    }
 
-	public void sethID(int hID) {
-		this.hID = hID;
-	}
+    public int getoID() {
+        return oID;
+    }
 
-	public Date getOrderTime() {
-		return orderTime;
-	}
+    public void setoID(int oID) {
+        this.oID = oID;
+    }
 
-	public void setOrderTime(Date orderTime) {
-		this.orderTime = orderTime;
-	}
+    public int gethID() {
+        return hID;
+    }
 
-	public String getOrderUser() {
-		return orderUser;
-	}
+    public void sethID(int hID) {
+        this.hID = hID;
+    }
 
-	public void setOrderUser(String orderUser) {
-		this.orderUser = orderUser;
-	}
+    public Date getOrderTime() {
+        return orderTime;
+    }
 
-	public String getWheelchairDesc() {
-		return wheelchairDesc;
-	}
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
 
-	public void setWheelchairDesc(String wheelchairDesc) {
-		this.wheelchairDesc = wheelchairDesc;
-	}
+    public String getOrderUser() {
+        return orderUser;
+    }
 
-	public String getWheelchairModel() {
-		return wheelchairModel;
-	}
+    public void setOrderUser(String orderUser) {
+        this.orderUser = orderUser;
+    }
 
-	public void setWheelchairModel(String wheelchairModel) {
-		this.wheelchairModel = wheelchairModel;
-	}
+    public String getWheelchairDesc() {
+        return wheelchairDesc;
+    }
 
-	public String getWheelchairArea() {
-		return wheelchairArea;
-	}
+    public void setWheelchairDesc(String wheelchairDesc) {
+        this.wheelchairDesc = wheelchairDesc;
+    }
 
-	public void setWheelchairArea(String wheelchairArea) {
-		this.wheelchairArea = wheelchairArea;
-	}
+    public String getWheelchairModel() {
+        return wheelchairModel;
+    }
 
-	public String getWheelchairFloor() {
-		return wheelchairFloor;
-	}
+    public void setWheelchairModel(String wheelchairModel) {
+        this.wheelchairModel = wheelchairModel;
+    }
 
-	public void setWheelchairFloor(String wheelchairFloor) {
-		this.wheelchairFloor = wheelchairFloor;
-	}
+    public String getWheelchairArea() {
+        return wheelchairArea;
+    }
 
-	public String getWheelchairType() {
-		return wheelchairType;
-	}
+    public void setWheelchairArea(String wheelchairArea) {
+        this.wheelchairArea = wheelchairArea;
+    }
 
-	public void setWheelchairType(String wheelchairType) {
-		this.wheelchairType = wheelchairType;
-	}
+    public String getWheelchairFloor() {
+        return wheelchairFloor;
+    }
 
-	public int getWheelchairPrice() {
-		return wheelchairPrice;
-	}
+    public void setWheelchairFloor(String wheelchairFloor) {
+        this.wheelchairFloor = wheelchairFloor;
+    }
 
-	public void setWheelchairPrice(int wheelchairPrice) {
-		this.wheelchairPrice = wheelchairPrice;
-	}
+    public String getWheelchairType() {
+        return wheelchairType;
+    }
 
-	public String getWheelchairAddress() {
-		return wheelchairAddress;
-	}
+    public void setWheelchairType(String wheelchairType) {
+        this.wheelchairType = wheelchairType;
+    }
 
-	public void setWheelchairAddress(String wheelchairAddress) {
-		this.wheelchairAddress = wheelchairAddress;
-	}
+    public int getWheelchairPrice() {
+        return wheelchairPrice;
+    }
 
-	public String getWheelchairImage() {
-		return wheelchairImage;
-	}
+    public void setWheelchairPrice(int wheelchairPrice) {
+        this.wheelchairPrice = wheelchairPrice;
+    }
 
-	public void setWheelchairImage(String wheelchairImage) {
-		this.wheelchairImage = wheelchairImage;
-	}
+    public String getWheelchairAddress() {
+        return wheelchairAddress;
+    }
 
-	public String getCommunityName() {
-		return communityName;
-	}
+    public void setWheelchairAddress(String wheelchairAddress) {
+        this.wheelchairAddress = wheelchairAddress;
+    }
 
-	public void setCommunityName(String communityName) {
-		this.communityName = communityName;
-	}
+    public String getWheelchairImage() {
+        return wheelchairImage;
+    }
 
-	public String getWheelchairLinkMan() {
-		return wheelchairLinkMan;
-	}
+    public void setWheelchairImage(String wheelchairImage) {
+        this.wheelchairImage = wheelchairImage;
+    }
 
-	public void setWheelchairLinkMan(String wheelchairLinkMan) {
-		this.wheelchairLinkMan = wheelchairLinkMan;
-	}
+    public String getCommunityName() {
+        return communityName;
+    }
 
-	public String getWheelchairOriented() {
-		return wheelchairOriented;
-	}
+    public void setCommunityName(String communityName) {
+        this.communityName = communityName;
+    }
 
-	public void setWheelchairOriented(String wheelchairOriented) {
-		this.wheelchairOriented = wheelchairOriented;
-	}
+    public String getWheelchairLinkMan() {
+        return wheelchairLinkMan;
+    }
 
-	public UserOrder(int hID, Date orderTime, String orderUser, String wheelchairDesc, String wheelchairModel, String wheelchairArea,
-			String wheelchairFloor, String wheelchairType, int wheelchairPrice, String wheelchairAddress, String wheelchairImage,
-			String communityName, String wheelchairLinkMan, String wheelchairOriented) {
-		super();
-		this.hID = hID;
-		this.orderTime = orderTime;
-		this.orderUser = orderUser;
-		this.wheelchairDesc = wheelchairDesc;
-		this.wheelchairModel = wheelchairModel;
-		this.wheelchairArea = wheelchairArea;
-		this.wheelchairFloor = wheelchairFloor;
-		this.wheelchairType = wheelchairType;
-		this.wheelchairPrice = wheelchairPrice;
-		this.wheelchairAddress = wheelchairAddress;
-		this.wheelchairImage = wheelchairImage;
-		this.communityName = communityName;
-		this.wheelchairLinkMan = wheelchairLinkMan;
-		this.wheelchairOriented = wheelchairOriented;
-	}
+    public void setWheelchairLinkMan(String wheelchairLinkMan) {
+        this.wheelchairLinkMan = wheelchairLinkMan;
+    }
 
-	public UserOrder(int oID, int hID, Date orderTime, String orderUser, String wheelchairDesc, String wheelchairModel,
-			String wheelchairArea, String wheelchairFloor, String wheelchairType, int wheelchairPrice, String wheelchairAddress,
-			String wheelchairImage, String communityName, String wheelchairLinkMan, String wheelchairOriented) {
-		super();
-		this.oID = oID;
-		this.hID = hID;
-		this.orderTime = orderTime;
-		this.orderUser = orderUser;
-		this.wheelchairDesc = wheelchairDesc;
-		this.wheelchairModel = wheelchairModel;
-		this.wheelchairArea = wheelchairArea;
-		this.wheelchairFloor = wheelchairFloor;
-		this.wheelchairType = wheelchairType;
-		this.wheelchairPrice = wheelchairPrice;
-		this.wheelchairAddress = wheelchairAddress;
-		this.wheelchairImage = wheelchairImage;
-		this.communityName = communityName;
-		this.wheelchairLinkMan = wheelchairLinkMan;
-		this.wheelchairOriented = wheelchairOriented;
-	}
+    public String getWheelchairOriented() {
+        return wheelchairOriented;
+    }
 
-	public UserOrder() {
-		super();
-	}
+    public void setWheelchairOriented(String wheelchairOriented) {
+        this.wheelchairOriented = wheelchairOriented;
+    }
 
 }

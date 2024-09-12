@@ -1,76 +1,75 @@
 package com.wheelchair.wym.entity;
 
 /**
- * 
  * @Description 租房用户
  */
 public class Users {
 
-	private int uID;
-	private String uName;
-	private String uPassword;
-	private String uPhoneNumber;
-	private String uNickName;
+    private int uID;
+    private String uName;
+    private String uPassword;
+    private String uPhoneNumber;
+    private String uNickName;
 
-	public int getuID() {
-		return uID;
-	}
+    public Users(int uID, String uName, String uPassword, String uPhoneNumber, String uNickName) {
+        super();
+        this.uID = uID;
+        this.uName = uName;
+        this.uPassword = uPassword;
+        this.uPhoneNumber = uPhoneNumber;
+        this.uNickName = uNickName;
+    }
 
-	public void setuID(int uID) {
-		this.uID = uID;
-	}
+    public Users() {
+        super();
+    }
 
-	public String getuName() {
-		return uName;
-	}
+    public Users(String uName, String uPassword, String uPhoneNumber, String uNickName) {
+        super();
+        this.uName = uName;
+        this.uPassword = uPassword;
+        this.uPhoneNumber = uPhoneNumber;
+        this.uNickName = uNickName;
+    }
 
-	public void setuName(String uName) {
-		this.uName = uName;
-	}
+    public int getuID() {
+        return uID;
+    }
 
-	public String getuPassword() {
-		return uPassword;
-	}
+    public void setuID(int uID) {
+        this.uID = uID;
+    }
 
-	public void setuPassword(String uPassword) {
-		this.uPassword = uPassword;
-	}
+    public String getuName() {
+        return uName;
+    }
 
-	public String getuPhoneNumber() {
-		return uPhoneNumber;
-	}
+    public void setuName(String uName) {
+        this.uName = uName;
+    }
 
-	public void setuPhoneNumber(String uPhoneNumber) {
-		this.uPhoneNumber = uPhoneNumber;
-	}
+    public String getuPassword() {
+        return uPassword;
+    }
 
-	public String getuNickName() {
-		return uNickName;
-	}
+    public void setuPassword(String uPassword) {
+        this.uPassword = uPassword;
+    }
 
-	public void setuNickName(String uNickName) {
-		this.uNickName = uNickName;
-	}
+    public String getuPhoneNumber() {
+        return uPhoneNumber;
+    }
 
-	public Users(int uID, String uName, String uPassword, String uPhoneNumber, String uNickName) {
-		super();
-		this.uID = uID;
-		this.uName = uName;
-		this.uPassword = uPassword;
-		this.uPhoneNumber = uPhoneNumber;
-		this.uNickName = uNickName;
-	}
+    public void setuPhoneNumber(String uPhoneNumber) {
+        this.uPhoneNumber = uPhoneNumber;
+    }
 
-	public Users() {
-		super();
-	}
+    public String getuNickName() {
+        return uNickName;
+    }
 
-	public Users(String uName, String uPassword, String uPhoneNumber, String uNickName) {
-		super();
-		this.uName = uName;
-		this.uPassword = uPassword;
-		this.uPhoneNumber = uPhoneNumber;
-		this.uNickName = uNickName;
-	}
+    public void setuNickName(String uNickName) {
+        this.uNickName = uNickName;
+    }
 
 }

@@ -3,16 +3,18 @@ package com.wheelchair.wym.service.impl;
 import com.wheelchair.wym.dao.UserMapper;
 import com.wheelchair.wym.entity.Users;
 import com.wheelchair.wym.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class UserServiceImpl implements IUserService {
 
-	@Autowired
-	private UserMapper mapper;
-	
+	private final UserMapper mapper;
+
+	public UserServiceImpl(UserMapper mapper) {
+		this.mapper = mapper;
+	}
+
 	@Override
 	public Users login(Users user) {
 		return mapper.login(user);

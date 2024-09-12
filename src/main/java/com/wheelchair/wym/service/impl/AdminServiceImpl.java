@@ -1,14 +1,12 @@
 package com.wheelchair.wym.service.impl;
 
 
-
 import com.wheelchair.wym.dao.AdminMapper;
 import com.wheelchair.wym.entity.Admin;
-import com.wheelchair.wym.entity.Wheelchair;
 import com.wheelchair.wym.entity.Page;
 import com.wheelchair.wym.entity.Users;
+import com.wheelchair.wym.entity.Wheelchair;
 import com.wheelchair.wym.service.IAdminService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +15,11 @@ import java.util.List;
 @Service
 public class AdminServiceImpl implements IAdminService {
 
-	@Autowired
-	private AdminMapper service;
+	private final AdminMapper service;
+
+	public AdminServiceImpl(AdminMapper service) {
+		this.service = service;
+	}
 
 	@Override
 	public Admin adminAccess(Admin admin) {

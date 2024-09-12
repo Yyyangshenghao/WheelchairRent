@@ -2,63 +2,63 @@ package com.wheelchair.wym.entity;
 
 public class Page {
 
-	private int page;
+    private int page;
 
-	private int limit;
+    private int limit;
 
-	private int uID;
+    private int uID;
 
-	private String publisher;
+    private String publisher;
 
-	public int getPage() {
-		return page;
-	}
+    public Page(int page, int limit, int uID, String publisher) {
+        super();
+        this.page = page;
+        this.limit = limit;
+        this.uID = uID;
+        this.publisher = publisher;
+    }
 
-	public void setPage(int page) {
-		this.page = page;
-	}
+    public Page(int limit, int uID, String publisher) {
+        super();
+        this.limit = limit;
+        this.uID = uID;
+        this.publisher = publisher;
+    }
 
-	public int getLimit() {
-		return limit;
-	}
+    public Page() {
+        super();
+    }
 
-	public void setLimit(int limit) {
-		this.limit = limit;
-	}
+    public int getPage() {
+        return page;
+    }
 
-	public int getuID() {
-		return uID;
-	}
+    public void setPage(int page) {
+        this.page = page;
+    }
 
-	public void setuID(int uID) {
-		this.uID = uID;
-	}
+    public int getLimit() {
+        return limit;
+    }
 
-	public String getPublisher() {
-		return publisher;
-	}
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
 
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
+    public int getuID() {
+        return uID;
+    }
 
-	public Page(int page, int limit, int uID, String publisher) {
-		super();
-		this.page = page;
-		this.limit = limit;
-		this.uID = uID;
-		this.publisher = publisher;
-	}
+    public void setuID(int uID) {
+        this.uID = uID;
+    }
 
-	public Page(int limit, int uID, String publisher) {
-		super();
-		this.limit = limit;
-		this.uID = uID;
-		this.publisher = publisher;
-	}
+    public String getPublisher() {
+        return publisher;
+    }
 
-	public Page() {
-		super();
-	}
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
 
 }
