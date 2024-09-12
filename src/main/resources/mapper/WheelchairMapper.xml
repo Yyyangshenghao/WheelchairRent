@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wheelchair.wym.dao.WheelchairMapper">
+	<resultMap type="com.wheelchair.wym.entity.Wheelchair" id="BasicMap">
+		<id column="h_id" jdbcType="INTEGER" property="hID" />
+		<result column="wheelchair_desc" jdbcType="VARCHAR" property="wheelchairDesc"/>
+		<result column="wheelchair_model" jdbcType="VARCHAR" property="wheelchairModel"/>
+		<result column="wheelchair_area" jdbcType="VARCHAR" property="wheelchairArea"/>
+		<result column="wheelchair_floor" jdbcType="VARCHAR" property="wheelchairFloor"/>
+		<result column="wheelchair_type" jdbcType="VARCHAR" property="wheelchairType"/>
+		<result column="wheelchair_price" jdbcType="VARCHAR" property="wheelchairPrice"/>
+		<result column="wheelchair_address" jdbcType="VARCHAR" property="wheelchairAddress"/>
+		<result column="wheelchair_image" jdbcType="VARCHAR" property="wheelchairImage"/>
+		<result column="community_name" jdbcType="VARCHAR" property="communityName"/>
+		<result column="wheelchair_linkman" jdbcType="VARCHAR" property="wheelchairLinkMan"/>
+		<result column="wheelchair_oriented" jdbcType="VARCHAR" property="wheelchairOriented"/>
+		<result column="wheelchair_detailes_img" jdbcType="VARCHAR" property="wheelchairDetailsImg"/>
+		<result column="publisher" jdbcType="VARCHAR" property="publisher"/>
+		<result column="publish_time" jdbcType="VARCHAR" property="publishTime"/>
+	</resultMap>
+	
+	<!-- 首页信息查询 -->
+	<select id="findHomeInfo" resultMap="BasicMap">
+		SELECT
+			h_id,
+			wheelchair_desc,
+			wheelchair_model,
+			wheelchair_area,
+			wheelchair_type,
+			wheelchair_price,
+			wheelchair_floor,
+			wheelchair_address,
+			wheelchair_image
+		FROM
+			t_wheelchair
+	</select>
+	
+	<!-- 房屋详细信息 -->
+	<select id="findWheelchairDetailsById" parameterType="int" resultMap="BasicMap">
+		SELECT
+			h_id,
+			wheelchair_desc,
+			wheelchair_price,
+			wheelchair_type,
+			wheelchair_area,
+			wheelchair_floor,
+			community_name,
+			wheelchair_address,
+			wheelchair_linkman,
+			wheelchair_model,
+			wheelchair_area,
+			wheelchair_oriented,
+			wheelchair_detailes_img
+		FROM
+			t_wheelchair
+		WHERE
+			h_id=#{id}
+	</select>
+	
+	<insert id="addNewWheelchair" parameterType="com.wheelchair.wym.entity.Wheelchair">
+		insert into 
+			t_wheelchair 
+		values
+		(	0,
+			#{wheelchairDesc},
+			#{wheelchairModel},
+			#{wheelchairArea},
+			#{wheelchairFloor},
+			#{wheelchairType},
+			#{wheelchairPrice},
+			#{wheelchairAddress},
+			#{wheelchairImage},
+			#{communityName},
+			#{wheelchairLinkMan},
+			#{wheelchairOriented},
+			#{wheelchairDetailsImg},
+			#{publisher},
+			NOW()
+		)
+	</insert>
+	
+	<!-- 查找用户发布的房源信息 -->
+	<select id="findWheelchairByUser" parameterType="com.wheelchair.wym.entity.Page" resultMap="BasicMap">
+		select * from t_wheelchair where publisher = #{publisher} limit #{page},#{limit}
+	</select>
+	
+	<!-- 删除用户发布的房源信息 -->
+	<delete id="deleteUserWheelchair" parameterType="int">
+		delete from t_wheelchair where h_id=#{hID}
+	</delete>
+	<!-- 修改用户发布的房源信息 -->
+	<update id="updateWheelchair" parameterType="com.wheelchair.wym.entity.Wheelchair">
+		UPDATE t_wheelchair
+		SET 
+			wheelchair_desc = #{wheelchairDesc},
+			wheelchair_model = #{wheelchairModel},
+			wheelchair_area = #{wheelchairArea},
+			wheelchair_floor = #{wheelchairFloor},
+			wheelchair_type = #{wheelchairType},
+			wheelchair_price = #{wheelchairPrice},
+			wheelchair_address = #{wheelchairAddress},
+			wheelchair_oriented = #{wheelchairOriented},
+			wheelchair_linkman = #{wheelchairLinkMan},
+			community_name = #{communityName}
+		WHERE
+			h_id = #{hID}
+	</update>
+	
+	<!-- 条件搜索 -->
+	<select id="findWheelchairByLike" parameterType="string" resultMap="BasicMap">
+		SELECT
+			*
+		FROM
+			t_wheelchair h
+		WHERE
+			CONCAT(
+				h.community_name,
+				h.wheelchair_desc,
+				h.wheelchair_model
+			) LIKE CONCAT("%", #{keywords}, "%")
+	</select>
+	
+	<select id="findWheelchairOrderByDesc" resultMap="BasicMap">
+		SELECT * FROM t_wheelchair h ORDER BY wheelchair_price DESC
+	</select>
+	
+	<select id="findWheelchairOrderByAsc" resultMap="BasicMap">
+		SELECT * FROM t_wheelchair h ORDER BY wheelchair_price ASC
+	</select>
+</mapper>

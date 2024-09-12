@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wheelchair.wym.dao.OrderMapper">
+	<resultMap type="com.wheelchair.wym.entity.Order" id="BasicMap">
+		<id column="o_id" jdbcType="INTEGER" property="oID" />
+		<result column="h_id" jdbcType="VARCHAR" property="hID"/>
+		<result column="order_time" jdbcType="VARCHAR" property="orderTime"/>
+		<result column="order_user" jdbcType="VARCHAR" property="orderUser"/>
+	</resultMap>
+	
+	<resultMap type="com.wheelchair.wym.entity.UserOrder" id="UserOrderMapper">
+		<id column="o_id" jdbcType="INTEGER" property="oID" />
+		<result column="h_id" jdbcType="INTEGER" property="hID"/>
+		<result column="order_time" jdbcType="VARCHAR" property="orderTime"/>
+		<result column="order_user" jdbcType="VARCHAR" property="orderUser"/>
+		<result column="wheelchair_desc" jdbcType="VARCHAR" property="wheelchairDesc"/>
+		<result column="wheelchair_model" jdbcType="VARCHAR" property="wheelchairModel"/>
+		<result column="wheelchair_area" jdbcType="VARCHAR" property="wheelchairArea"/>
+		<result column="wheelchair_floor" jdbcType="VARCHAR" property="wheelchairFloor"/>
+		<result column="wheelchair_type" jdbcType="VARCHAR" property="wheelchairType"/>
+		<result column="wheelchair_price" jdbcType="INTEGER" property="wheelchairPrice"/>
+		<result column="wheelchair_address" jdbcType="INTEGER" property="wheelchairAddress"/>
+		<result column="wheelchair_image" jdbcType="INTEGER" property="wheelchairImage"/>
+		<result column="community_name" jdbcType="INTEGER" property="communityName"/>
+		<result column="wheelchair_linkman" jdbcType="INTEGER" property="wheelchairLinkMan"/>
+		<result column="wheelchair_oriented" jdbcType="INTEGER" property="wheelchairOriented"/>
+	</resultMap>
+	<!-- 添加订单信息 -->
+	<insert id="addOrder" parameterType="com.wheelchair.wym.entity.Order">
+		insert into t_order values(0,#{cID},#{uID},NOW(),#{orderUser})
+	</insert>
+	<!-- 查询所有订单信息 -->
+	<select id="findAllOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="UserOrderMapper">
+		select * from t_wheelchair h,t_order o where h.c_id=o.c_id and u_id=#{uID} limit #{page},#{limit}
+	</select>
+	<!-- 条件查询不同用户的订单数目 -->
+	<select id="getOrderCount" resultType="int" parameterType="int">
+		select count(o_id) from t_order where u_id=#{uID}
+	</select>
+	<!-- 删除订单 -->
+	<delete id="deleteOrder" parameterType="int">
+		delete from t_order where o_id=#{oID}za
+	</delete>
+	
+</mapper>
