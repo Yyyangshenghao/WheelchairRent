@@ -10,9 +10,27 @@ public class Chair {
     public int status;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date lastMaintenanceDate;
+    public int uID;
+    public String chairNo;
 
     public int getcID() {
         return cID;
+    }
+
+    public int getuID() {
+        return uID;
+    }
+
+    public void setuID(int uID) {
+        this.uID = uID;
+    }
+
+    public String getChairNo() {
+        return chairNo;
+    }
+
+    public void setChairNo(String chairNo) {
+        this.chairNo = chairNo;
     }
 
     public void setcID(int cID) {

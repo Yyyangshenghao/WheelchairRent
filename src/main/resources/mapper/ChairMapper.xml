@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wheelchair.wym.dao.ChairMapper">
+    <resultMap id="BasicMap" type="com.wheelchair.wym.entity.Chair">
+        <id column="c_id" jdbcType="INTEGER" property="cID" />
+        <result column="h_id" jdbcType="INTEGER" property="hID"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="u_id" jdbcType="INTEGER" property="uID"/>
+        <result column="last_maintenance_date" jdbcType="VARCHAR" property="lastMaintenanceDate"/>
+        <result column="chair_no" jdbcType="VARCHAR" property="chairNo"/>
+    </resultMap>
+
+<!--    增加新的轮椅单品-->
+    <insert id="addNewChair" parameterType="com.wheelchair.wym.entity.Chair">
+        insert into t_chair values(0 ,#{hID},#{status},#{uID},#{lastMaintenanceDate},#{chairNo})
+    </insert>
+</mapper>

@@ -213,7 +213,7 @@
         form.on("submit(addWheelchairRecord)",function(data){
         	$.post("addWheelchairRecord",$("#addWheelchairForm").serialize(),function(res){
         		if(res=="OK"){
-        			 layer.msg("添加房源信息成功！",{icon:1,end:function(){window.location.href="addWheelchair";}});
+        			 layer.msg("添加轮椅信息成功！",{icon:1,end:function(){window.location.href="addWheelchair";}});
                      $("#addWheelchairForm")[0].reset();
         		}
         	})

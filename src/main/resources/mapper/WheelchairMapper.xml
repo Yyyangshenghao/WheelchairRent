@@ -127,4 +127,8 @@
 	<select id="findWheelchairOrderByAsc" resultMap="BasicMap">
 		SELECT * FROM t_wheelchair h ORDER BY wheelchair_price ASC
 	</select>
+
+	<select id="getLastInsertedHID" resultType="java.lang.Integer">
+		SELECT LAST_INSERT_ID()
+	</select>
 </mapper>

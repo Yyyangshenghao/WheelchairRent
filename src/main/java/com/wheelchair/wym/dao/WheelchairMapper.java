@@ -52,4 +52,9 @@ public interface WheelchairMapper {
      * 升序序查询
      */
     List<Wheelchair> findWheelchairOrderByAsc();
+
+    /**
+     * 找到最新添加的轮椅品类ID
+     */
+    int getLastInsertedHID();
 }

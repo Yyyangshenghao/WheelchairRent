@@ -45,4 +45,6 @@ public interface IWheelchairService {
      * 升序查询
      */
     List<Wheelchair> findWheelchairOrderByAsc();
+
+    int getLastInsertedHID();
 }

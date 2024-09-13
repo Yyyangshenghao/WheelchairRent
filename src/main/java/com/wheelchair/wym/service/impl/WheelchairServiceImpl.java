@@ -54,6 +54,12 @@ public class WheelchairServiceImpl implements IWheelchairService {
 	public List<Wheelchair> findWheelchairOrderByAsc() {
 		return dao.findWheelchairOrderByAsc();
 	}
+
+	@Override
+	public int getLastInsertedHID() {
+		return dao.getLastInsertedHID();
+	}
+
 	@Override
 	public List<Wheelchair> findWheelchairOrderByDesc() {
 		return dao.findWheelchairOrderByDesc();
