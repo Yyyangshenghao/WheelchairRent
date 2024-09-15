@@ -14,4 +14,10 @@
     <insert id="addNewChair" parameterType="com.wheelchair.wym.entity.Chair">
         insert into t_chair values(0 ,#{hID},#{status},#{uID},#{lastMaintenanceDate},#{chairNo})
     </insert>
+    <update id="updateOrderedChair" parameterType="com.wheelchair.wym.entity.Order">
+        update t_chair set status = 1, u_id = #{uID} where c_id = #{cID}
+    </update>
+    <select id="findAvailableWheelchairByHID" parameterType="int" resultMap="BasicMap">
+        select * from t_chair where h_id = #{hID} and status = 0 LIMIT 1
+    </select>
 </mapper>

@@ -9,24 +9,52 @@ public class Order {
     private int cID;
     private int uID;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date orderTime;
-    private String orderUser;
+    private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endDate;
+    private String name;
+    private String address;
+    private String phone;
+    private int orderStatus;
 
-    public Order(int cID, int uID, Date orderTime, String orderUser) {
-        super();
-        this.cID = cID;
-        this.uID = uID;
-        this.orderTime = orderTime;
-        this.orderUser = orderUser;
+    public int getOrderStatus() {
+        return orderStatus;
     }
 
-    public Order(int oID, int cID, int uID, Date orderTime, String orderUser) {
-        super();
-        this.oID = oID;
-        this.cID = cID;
-        this.uID = uID;
-        this.orderTime = orderTime;
-        this.orderUser = orderUser;
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Order() {
@@ -57,19 +85,11 @@ public class Order {
         this.cID = cID;
     }
 
-    public Date getOrderTime() {
-        return orderTime;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setOrderTime(Date orderTime) {
-        this.orderTime = orderTime;
-    }
-
-    public String getOrderUser() {
-        return orderUser;
-    }
-
-    public void setOrderUser(String orderUser) {
-        this.orderUser = orderUser;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 }

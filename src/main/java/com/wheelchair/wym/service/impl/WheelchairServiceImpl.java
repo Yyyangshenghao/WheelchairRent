@@ -61,6 +61,11 @@ public class WheelchairServiceImpl implements IWheelchairService {
 	}
 
 	@Override
+	public int decreaseWheelchairType(int hID) {
+		return dao.decreaseWheelchairType(hID);
+	}
+
+	@Override
 	public List<Wheelchair> findWheelchairOrderByDesc() {
 		return dao.findWheelchairOrderByDesc();
 	}

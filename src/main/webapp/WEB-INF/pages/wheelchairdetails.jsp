@@ -98,75 +98,46 @@
         	<input type="hidden" class="uName" value="${loginUser.uName}">
             <button class="order-btn" lay-submit lay-filter="addOrder">现在租赁</button>
         </div>
+        <!-- 添加租赁表单 -->
+        <div id="rentForm" style="display: none;">
+            <form class="layui-form rent-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="phone" required lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">配送地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="address" required lay-verify="required" placeholder="请输入配送地址" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">租赁时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="startDate" id="startDate" required lay-verify="required" placeholder="开始日期" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid">-</div>
+                    <div class="layui-input-inline">
+                        <input type="text" name="endDate" id="endDate" required lay-verify="required" placeholder="结束日期" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn" lay-submit lay-filter="submitRentForm">提交订单</button>
+                </div>
+            </form>
+        </div>
     </div>
-<%--    <div class="anchor-title">--%>
-<%--        <h3>房屋配置</h3>--%>
-<%--    </div>--%>
-<%--    <div class="wheelchairhold-appliances">--%>
-<%--        <ul>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-chuang"></i>--%>
-<%--                <span>床</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-kongtiao"></i>--%>
-<%--                <span>空调</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-yigui"></i>--%>
-<%--                <span>衣柜</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-iconyihuifu-"></i>--%>
-<%--                <span>桌椅</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-xiyiji"></i>--%>
-<%--                <span>洗衣机</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-shafa"></i>--%>
-<%--                <span>沙发</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-xiaodugui"></i>--%>
-<%--                <span>消毒柜</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-weibolu"></i>--%>
-<%--                <span>微波炉</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-chouyouyanji"></i>--%>
-<%--                <span>抽油烟机</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-dianshi"></i>--%>
-<%--                <span>电视</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-meiqitianranqi"></i>--%>
-<%--                <span>天然气</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-kuandai"></i>--%>
-<%--                <span>宽带</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-reshuiqianzhuang"></i>--%>
-<%--                <span>热水器</span>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <i class="iconfont icon-bingxiang"></i>--%>
-<%--                <span>冰箱</span>--%>
-<%--            </li>--%>
-<%--        </ul>--%>
-<%--    </div>--%>
 </section>
 
-<footer>
-    <%--<p>2018年 毕业设计</p>--%>
-</footer>
+
 <div class="layui-container">
     <div class="layui-tab layui-tab-brief" id="sign" lay-filter="" style="display: none;">
         <ul class="layui-tab-title">
@@ -235,13 +206,18 @@
 </div>
 <script src="${pageContext.request.contextPath}/static/layui/layui.js"></script>
 <script>
-    layui.use(['element', 'carousel', 'layer','form'], function () {
+    layui.use(['element', 'carousel', 'layer','form', 'laydate'], function () {
         var element = layui.element,
             carousel = layui.carousel,
             $ = layui.jquery,
             layer = layui.layer,
-            form = layui.form;
-        
+            form = layui.form,
+            laydate = layui.laydate;
+
+        // 初始化日期选择器
+        laydate.render({elem: '#startDate'});
+        laydate.render({elem: '#endDate'});
+
 		var layer_index;
         carousel.render({
             elem: "#details-image",
@@ -275,25 +251,44 @@
         		layer.msg("请填写所有表单");
         	}
         });
+        // 点击租赁按钮弹出表单
         $(".order-btn").click(function(){
         	if($(".uName").val()==""){
         		layer.alert("您还没登录，请先登录再操作",{icon:5});
         		return;
         	}
-            // 检查轮椅剩余数量
-            var remainingQuantity = parseInt($(".wheelchairType").val()); // 从隐藏的字段或页面元素中获取当前轮椅的剩余数量
-            if(remainingQuantity <= 0) {
-                layer.alert("该轮椅已租满，请选择其他轮椅", {icon: 5});
-                return;
-            }
-        	$.post("addOrder",{id:$(".cID").val()},function(data){
-        		if(data=="OK"){
-    				layer.alert("租赁成功！",{icon:1});
-    				$(".order-btn").addClass("layui-btn-disabled");
-    				$(".order-btn").html("您已成功租赁");
-    				$(".order-btn").off("click");
-    			}
-        	});
+
+        // 弹出表单
+            layer.open({
+                type: 1,
+                title: '填写租赁信息',
+                area: ['500px', '400px'],
+                content: $('#rentForm')
+            });
+
+            // 提交订单表单
+            form.on('submit(submitRentForm)', function(data) {
+                // 提交表单内容到后台
+                $.post("addOrder", {
+                    hID: $(".HID").val(),
+                    name: data.field.name,
+                    phone: data.field.phone,
+                    address: data.field.address,
+                    startDate: data.field.startDate,
+                    endDate: data.field.endDate
+                }, function(response) {
+                    if (response === "OK") {
+                        layer.alert("租赁成功！", {icon: 1});
+                        layer.closeAll(); // 关闭所有弹层
+                        $(".order-btn").addClass("layui-btn-disabled").html("您已成功租赁").off("click");
+                    } else if(response === "No_AVAILABLE_CHAIR") {
+                        layer.alert("剩余数量不足", {icon: 5});
+                    } else {
+                        layer.alert("租赁失败，请重试", {icon: 5});
+                    }
+                });
+                return false;
+            });
         });
         form.on("submit(login)",function(){
      	   $.post("login",$('#login').serialize(),function (res) {
@@ -303,7 +298,7 @@
      	   			layer.msg("用户名或者密码错误");
      	   		}
      	   });
-     	  return false; 
+     	  return false;
         });
     });
 </script>

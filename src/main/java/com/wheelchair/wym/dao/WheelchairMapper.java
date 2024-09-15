@@ -57,4 +57,6 @@ public interface WheelchairMapper {
      * 找到最新添加的轮椅品类ID
      */
     int getLastInsertedHID();
+
+    int decreaseWheelchairType(int hID);
 }

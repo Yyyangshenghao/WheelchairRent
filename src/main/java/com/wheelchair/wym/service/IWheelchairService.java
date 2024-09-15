@@ -47,4 +47,9 @@ public interface IWheelchairService {
     List<Wheelchair> findWheelchairOrderByAsc();
 
     int getLastInsertedHID();
+
+    /**
+     * 订单后数量减少
+     */
+    int decreaseWheelchairType(int hID);
 }

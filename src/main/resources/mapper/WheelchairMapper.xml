@@ -105,7 +105,13 @@
 		WHERE
 			h_id = #{hID}
 	</update>
-	
+	<update id="decreaseWheelchairType">
+		update t_wheelchair
+		set
+		    wheelchair_type = wheelchair_type - 1
+		where h_id = #{hID} and wheelchair_type > 0
+	</update>
+
 	<!-- 条件搜索 -->
 	<select id="findWheelchairByLike" parameterType="string" resultMap="BasicMap">
 		SELECT
