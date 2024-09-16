@@ -10,20 +10,16 @@
 	
 	<resultMap type="com.wheelchair.wym.entity.UserOrder" id="UserOrderMapper">
 		<id column="o_id" jdbcType="INTEGER" property="oID" />
-		<result column="h_id" jdbcType="INTEGER" property="hID"/>
-		<result column="order_time" jdbcType="VARCHAR" property="orderTime"/>
-		<result column="order_user" jdbcType="VARCHAR" property="orderUser"/>
-		<result column="wheelchair_desc" jdbcType="VARCHAR" property="wheelchairDesc"/>
-		<result column="wheelchair_model" jdbcType="VARCHAR" property="wheelchairModel"/>
-		<result column="wheelchair_area" jdbcType="VARCHAR" property="wheelchairArea"/>
-		<result column="wheelchair_floor" jdbcType="VARCHAR" property="wheelchairFloor"/>
-		<result column="wheelchair_type" jdbcType="VARCHAR" property="wheelchairType"/>
-		<result column="wheelchair_price" jdbcType="INTEGER" property="wheelchairPrice"/>
-		<result column="wheelchair_address" jdbcType="INTEGER" property="wheelchairAddress"/>
-		<result column="wheelchair_image" jdbcType="INTEGER" property="wheelchairImage"/>
-		<result column="community_name" jdbcType="INTEGER" property="communityName"/>
-		<result column="wheelchair_linkman" jdbcType="INTEGER" property="wheelchairLinkMan"/>
-		<result column="wheelchair_oriented" jdbcType="INTEGER" property="wheelchairOriented"/>
+		<result column="c_id" jdbcType="INTEGER" property="cID"/>
+		<result column="u_id" jdbcType="INTEGER" property="uID"/>
+		<result column="community_name" jdbcType="VARCHAR" property="cName"/>
+		<result column="chair_no" jdbcType="VARCHAR" property="chairNo"/>
+		<result column="name" jdbcType="VARCHAR" property="uName"/>
+		<result column="phone" jdbcType="VARCHAR" property="uPhone"/>
+		<result column="address" jdbcType="VARCHAR" property="uAddress"/>
+		<result column="start_date" jdbcType="VARCHAR" property="startDate"/>
+		<result column="end_date" jdbcType="VARCHAR" property="endDate"/>
+		<result column="order_status" jdbcType="VARCHAR" property="orderStatus"/>
 	</resultMap>
 	<!-- 添加订单信息 -->
 	<insert id="addOrder" parameterType="com.wheelchair.wym.entity.Order">
@@ -31,7 +27,12 @@
 	</insert>
 	<!-- 查询所有订单信息 -->
 	<select id="findAllOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="UserOrderMapper">
-		select * from t_wheelchair h,t_order o where h.c_id=o.c_id and u_id=#{uID} limit #{page},#{limit}
+		select o.*, h.community_name AS community_name, c.chair_no AS chair_no
+		from t_order o
+				 join t_chair c on o.c_id = c.c_id
+				 join t_wheelchair h on c.h_id = h.h_id
+		where o.u_id = #{uID}
+		limit #{page}, #{limit}
 	</select>
 	<!-- 条件查询不同用户的订单数目 -->
 	<select id="getOrderCount" resultType="int" parameterType="int">

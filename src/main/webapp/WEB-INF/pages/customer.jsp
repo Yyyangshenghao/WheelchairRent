@@ -35,26 +35,14 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">用户信息管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="myorder" target="iframe">我的租房信息</a></dd>
+                    <dd><a href="myorder" target="iframe">我的租赁订单</a></dd>
                     <dd><a href="updatepwd" target="iframe">修改我的密码</a></dd>
-                </dl>
-            </li>
-        </ul>
-        <ul class="layui-nav layui-nav-tree" lay-filter="test">
-            <li class="layui-nav-item">
-                <a href="javascript:;">房源信息管理</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="addWheelchair" target="iframe">发布房源信息</a></dd>
-                    <dd><a href="toUserRentalPage" target="iframe">我发布的信息</a></dd>
                 </dl>
             </li>
         </ul>
     </div>
     <div class="layui-body">
         <iframe src="welcome" width="100%" height="100%" frameborder="0" name="iframe" scrolling="auto" seamless></iframe>
-    </div>
-    <div class="layui-footer" style="text-align: center;font-size: 16px">
-        <%--<p>2018年 毕业设计</p>--%>
     </div>
 </div>
 <script src="/static/layui/layui.js"></script>
