@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -39,16 +38,10 @@ public class OrderController {
 
     @RequestMapping("/addOrder")
     @ResponseBody
-    public String addOrder(@RequestParam("hID") int hID,
-                           @RequestParam("name") String name,
-                           @RequestParam("phone") String phone,
-                           @RequestParam("address") String address,
-                           @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-                           @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
-                           HttpServletRequest request) {
+    public String addOrder(@RequestParam("hID") int hID, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("address") String address, @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, HttpServletRequest request) {
         Users u = (Users) request.getSession().getAttribute("loginUser");
         Chair availableWheelchair = chairServiceImpl.findAvailableWheelchairByHID(hID);
-        if(availableWheelchair == null) {
+        if (availableWheelchair == null) {
             return "No_AVAILABLE_CHAIR";
         }
         System.out.println(availableWheelchair.gethID());
@@ -65,7 +58,7 @@ public class OrderController {
 
         sevice.addOrder(order);
 
-        //更新t_chair表中轮椅状态
+        // 更新t_chair表中轮椅状态
         availableWheelchair.setStatus(1);
         chairServiceImpl.updateOrderedChair(order);
         wheelchairServiceImpl.decreaseWheelchairType(hID);
@@ -79,7 +72,15 @@ public class OrderController {
         Page p = new Page();
         p.setPage((page - 1) * limit);
         p.setLimit(limit);
+
         Users u = (Users) request.getSession().getAttribute("loginUser");
+        if (u == null) {
+            UserOrderData errorResponse = new UserOrderData();
+            errorResponse.setCode(1); // 1 表示错误
+            errorResponse.setMsg("User not logged in");
+            return errorResponse;
+        }
+
         p.setuID(u.getuID());
         UserOrderData uod = new UserOrderData();
         List<UserOrder> order = sevice.findAllOrder(p);
@@ -89,6 +90,7 @@ public class OrderController {
         uod.setMsg("200");
         return uod;
     }
+
 
     @RequestMapping("/deleteOrder")
     @ResponseBody
