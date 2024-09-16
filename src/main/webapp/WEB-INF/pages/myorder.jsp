@@ -132,7 +132,8 @@
                             type: formData.field.type,
                             pickupDate: formData.field.pickupDate,
                             address: formData.field.address,
-                            phone: formData.field.phone
+                            phone: formData.field.phone,
+                            orderStatus: 0  // 替换为实际的整数值
                         }, function (response) {
                             if (response === "OK") {
                                 reloadTable();

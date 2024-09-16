@@ -2,6 +2,7 @@ package com.wheelchair.wym.service;
 
 import com.wheelchair.wym.entity.Order;
 import com.wheelchair.wym.entity.Page;
+import com.wheelchair.wym.entity.RepairOrder;
 import com.wheelchair.wym.entity.UserOrder;
 
 import java.util.List;
@@ -27,4 +28,12 @@ public interface IOrderService {
      * 删除用户订单
      */
     int deleteOrder(int oID);
+
+    /**
+     * 申请维修或保养订单
+     *
+     * @param repairOrder 维修/保养订单对象
+     * @return 操作结果
+     */
+    String applyRepairOrder(RepairOrder repairOrder);
 }

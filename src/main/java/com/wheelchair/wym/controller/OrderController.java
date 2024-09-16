@@ -99,4 +99,28 @@ public class OrderController {
         if (n > 0) return "OK";
         return "FAIL";
     }
+
+    @RequestMapping("/applyRepairOrder")
+    @ResponseBody
+    public String applyRepairOrder(@RequestParam("oID") int oID, @RequestParam("type") String type, @RequestParam("pickupDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date pickupDate, @RequestParam("address") String address, @RequestParam("phone") String phone, HttpServletRequest request) {
+        // 获取登录用户信息
+        Users u = (Users) request.getSession().getAttribute("loginUser");
+        if (u == null) {
+            return "User not logged in";
+        }
+
+        // 创建维修保养订单
+        RepairOrder repairOrder = new RepairOrder();
+        repairOrder.setOID(oID);
+        repairOrder.setUID(u.getuID());
+        repairOrder.setType(type);
+        repairOrder.setPickupDate(pickupDate);
+        repairOrder.setAddress(address);
+        repairOrder.setPhone(phone);
+        repairOrder.setOrderStatus(0);  // 0 表示 pending
+
+        // 调用 service 保存订单
+        return sevice.applyRepairOrder(repairOrder);
+    }
+
 }

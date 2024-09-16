@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wheelchair.wym.dao.RepairOrderMapper">
+
+    <!-- 插入维修/保养订单 -->
+    <insert id="insertRepairOrder" parameterType="com.wheelchair.wym.entity.RepairOrder">
+        INSERT INTO t_repair_order (oID, type, pickupDate, address, phone, orderStatus)
+        VALUES (#{oID}, #{type}, #{pickupDate}, #{address}, #{phone}, #{orderStatus})
+    </insert>
+
+    <!-- 根据 ID 查询维修/保养订单 -->
+    <select id="selectRepairOrderById" parameterType="int" resultType="com.wheelchair.wym.entity.RepairOrder">
+        SELECT * FROM t_repair_order
+        WHERE id = #{id}
+    </select>
+
+    <!-- 根据订单 ID 查询维修/保养订单 -->
+    <select id="selectRepairOrderByOrderId" parameterType="int" resultType="com.wheelchair.wym.entity.RepairOrder">
+        SELECT * FROM t_repair_order
+        WHERE oID = #{oID}
+    </select>
+
+    <!-- 更新维修/保养订单状态 -->
+    <update id="updateRepairOrderStatus" parameterType="map">
+        UPDATE t_repair_order
+        SET orderStatus = #{orderStatus}
+        WHERE id = #{id}
+    </update>
+
+</mapper>
