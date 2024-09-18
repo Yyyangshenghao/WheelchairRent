@@ -52,6 +52,15 @@
                 </dl>
             </li>
         </ul>
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li class="layui-nav-item">
+                <a href="javascript:;">订单信息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="${pageContext.request.contextPath }/toAllOrderPage" target="iframe">租赁订单信息</a></dd>
+                    <dd><a href="${pageContext.request.contextPath }/addWheelchair" target="iframe">保养订单信息</a></dd>
+                </dl>
+            </li>
+        </ul>
     </div>
     <div class="layui-body">
         <iframe src="${pageContext.request.contextPath }/welcome01" width="100%" height="100%" frameborder="0" name="iframe" scrolling="auto" seamless></iframe>

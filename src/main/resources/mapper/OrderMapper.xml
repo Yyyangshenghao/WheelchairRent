@@ -40,7 +40,7 @@
 	</select>
 	<!-- 删除订单 -->
 	<delete id="deleteOrder" parameterType="int">
-		delete from t_order where o_id=#{oID}za
+		delete from t_order where o_id=#{oID}
 	</delete>
 	
 </mapper>

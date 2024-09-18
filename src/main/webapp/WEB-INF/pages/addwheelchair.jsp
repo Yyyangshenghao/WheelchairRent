@@ -43,13 +43,6 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">总数量</label>
-<%--            <div class="layui-input-block">--%>
-<%--                <select name="wheelchairType" lay-verify="required">--%>
-<%--                    <option value=""></option>--%>
-<%--                    <option value="整租">整租</option>--%>
-<%--                    <option value="合租">合租</option>--%>
-<%--                </select>--%>
-<%--            </div>--%>
             <div class="layui-input-block">
                 <input type="text" name="wheelchairType" required lay-verify="required" placeholder=""
                        autocomplete="off" class="layui-input">

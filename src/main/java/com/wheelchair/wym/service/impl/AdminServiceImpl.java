@@ -2,10 +2,7 @@ package com.wheelchair.wym.service.impl;
 
 
 import com.wheelchair.wym.dao.AdminMapper;
-import com.wheelchair.wym.entity.Admin;
-import com.wheelchair.wym.entity.Page;
-import com.wheelchair.wym.entity.Users;
-import com.wheelchair.wym.entity.Wheelchair;
+import com.wheelchair.wym.entity.*;
 import com.wheelchair.wym.service.IAdminService;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +58,10 @@ public class AdminServiceImpl implements IAdminService {
 	@Override
 	public int updateAdminPwd(Admin admin) {
 		return service.updateAdminPwd(admin);
+	}
+
+	@Override
+	public List<UserOrder> findAllOrder(Page page) {
+		return service.findAllOrder(page);
 	}
 }

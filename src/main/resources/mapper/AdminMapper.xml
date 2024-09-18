@@ -32,6 +32,20 @@
 		<result column="publisher" jdbcType="VARCHAR" property="publisher"/>
 		<result column="publish_time" jdbcType="VARCHAR" property="publishTime"/>
 	</resultMap>
+
+	<resultMap type="com.wheelchair.wym.entity.UserOrder" id="UserOrderMapper">
+		<id column="o_id" jdbcType="INTEGER" property="oID" />
+		<result column="c_id" jdbcType="INTEGER" property="cID"/>
+		<result column="u_id" jdbcType="INTEGER" property="uID"/>
+		<result column="community_name" jdbcType="VARCHAR" property="cName"/>
+		<result column="chair_no" jdbcType="VARCHAR" property="chairNo"/>
+		<result column="name" jdbcType="VARCHAR" property="uName"/>
+		<result column="phone" jdbcType="VARCHAR" property="uPhone"/>
+		<result column="address" jdbcType="VARCHAR" property="uAddress"/>
+		<result column="start_date" jdbcType="VARCHAR" property="startDate"/>
+		<result column="end_date" jdbcType="VARCHAR" property="endDate"/>
+		<result column="order_status" jdbcType="VARCHAR" property="orderStatus"/>
+	</resultMap>
 	
 	<!-- 管理员登录 -->
 	<select id="adminAccess" resultMap="BasicMap" parameterType="com.wheelchair.wym.entity.Admin">
@@ -71,8 +85,17 @@
 	<select id="checkAdminPwd" parameterType="com.wheelchair.wym.entity.Admin" resultMap="BasicMap">
 		select * from t_admin where userpwd=#{userpwd} and id = #{id}
 	</select>
-	
-	<update id="updateAdminPwd" parameterType="com.wheelchair.wym.entity.Admin">
+
+<!--	管理员查询所有租赁订单-->
+    <select id="findAllOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="UserOrderMapper">
+		select o.*, h.community_name AS community_name, c.chair_no AS chair_no
+		from t_order o
+				 join t_chair c on o.c_id = c.c_id
+				 join t_wheelchair h on c.h_id = h.h_id
+			limit #{page}, #{limit}
+	</select>
+
+    <update id="updateAdminPwd" parameterType="com.wheelchair.wym.entity.Admin">
 		update t_admin set
 			userpwd=#{userpwd}
 		where id=#{id}

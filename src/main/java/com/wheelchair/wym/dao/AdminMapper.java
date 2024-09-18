@@ -1,9 +1,6 @@
 package com.wheelchair.wym.dao;
 
-import com.wheelchair.wym.entity.Admin;
-import com.wheelchair.wym.entity.Page;
-import com.wheelchair.wym.entity.Users;
-import com.wheelchair.wym.entity.Wheelchair;
+import com.wheelchair.wym.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -55,4 +52,6 @@ public interface AdminMapper {
      * 修改管理员密码
      */
     int updateAdminPwd(Admin admin);
+
+    List<UserOrder> findAllOrder(Page page);
 }

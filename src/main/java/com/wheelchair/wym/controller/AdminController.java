@@ -93,6 +93,11 @@ public class AdminController {
         return "allwheelchair";
     }
 
+    @RequestMapping("/toAllOrderPage")
+    public String toAllOrderPage() {
+        return "allorder";
+    }
+
     /**
      * 查询所有房源
      *
@@ -111,6 +116,28 @@ public class AdminController {
         data.setCode(0);
         data.setCount(findAllWheelchair.size());
         data.setData(findAllWheelchair);
+        data.setMsg("OK");
+        return data;
+    }
+
+    /**
+     * 查询所有租赁订单
+     *
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping("/findAllOrder")
+    @ResponseBody
+    public UserOrderData findAllOrder(int page, int limit) {
+        Page p = new Page();
+        p.setLimit(limit);
+        p.setPage((page - 1) * limit);
+        List<UserOrder> findAllOrder = service.findAllOrder(p);
+        UserOrderData data = new UserOrderData();
+        data.setCode(0);
+        data.setCount(findAllOrder.size());
+        data.setData(findAllOrder);
         data.setMsg("OK");
         return data;
     }

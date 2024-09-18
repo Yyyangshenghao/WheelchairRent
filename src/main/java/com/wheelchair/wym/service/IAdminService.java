@@ -1,10 +1,7 @@
 package com.wheelchair.wym.service;
 
 
-import com.wheelchair.wym.entity.Admin;
-import com.wheelchair.wym.entity.Page;
-import com.wheelchair.wym.entity.Users;
-import com.wheelchair.wym.entity.Wheelchair;
+import com.wheelchair.wym.entity.*;
 
 import java.util.List;
 
@@ -55,4 +52,9 @@ public interface IAdminService {
      * 修改管理员密码
      */
     int updateAdminPwd(Admin admin);
+
+    /**
+     * 查询用户租赁订单
+     */
+    List<UserOrder> findAllOrder(Page page);
 }
