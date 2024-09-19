@@ -103,6 +103,11 @@ public class AdminController {
         return "repairorder";
     }
 
+    @RequestMapping("/toDeliveryOrderPage")
+    public String toDeliveryOrderPage() {
+        return "deliveryorder";
+    }
+
     /**
      * 查询所有房源
      *
@@ -168,6 +173,29 @@ public class AdminController {
         rod.setData(repairOrder);
         rod.setMsg("OK");
         return rod;
+    }
+
+    /**
+     * 查询所有保养/维修订单
+     *
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping("findAllDeliveryOrder")
+    @ResponseBody
+    public DeliveryOrderData findAllDeliveryOrder(int page, int limit) {
+        Page p = new Page();
+        p.setPage((page - 1) * limit);
+        p.setLimit(limit);
+
+        DeliveryOrderData dod = new DeliveryOrderData();
+        List<DeliveryOrder> DeliveryOrder = service.findAllDeliveryOrder(p);
+        dod.setCode(0);
+        dod.setCount(DeliveryOrder.size());
+        dod.setData(DeliveryOrder);
+        dod.setMsg("OK");
+        return dod;
     }
 
     /**

@@ -33,7 +33,7 @@
 		<result column="publish_time" jdbcType="VARCHAR" property="publishTime"/>
 	</resultMap>
 
-	<resultMap type="com.wheelchair.wym.entity.UserOrder" id="UserOrderMapper">
+	<resultMap type="com.wheelchair.wym.entity.UserOrder" id="UserOrderMap">
 		<id column="o_id" jdbcType="INTEGER" property="oID" />
 		<result column="c_id" jdbcType="INTEGER" property="cID"/>
 		<result column="u_id" jdbcType="INTEGER" property="uID"/>
@@ -47,7 +47,7 @@
 		<result column="order_status" jdbcType="VARCHAR" property="orderStatus"/>
 	</resultMap>
 
-	<resultMap id="RepairOrderMapper" type="com.wheelchair.wym.entity.RepairOrder">
+	<resultMap id="RepairOrderMap" type="com.wheelchair.wym.entity.RepairOrder">
 		<id column="id" jdbcType="INTEGER" property="repairOrderID"/>
 		<result column="oID" jdbcType="INTEGER" property="oID"/>
 		<result column="u_id" jdbcType="INTEGER" property="uID"/>
@@ -56,6 +56,16 @@
 		<result column="address" jdbcType="VARCHAR" property="address"/>
 		<result column="phone" jdbcType="VARCHAR" property="phone"/>
 		<result column="orderStatus" jdbcType="INTEGER" property="orderStatus"/>
+	</resultMap>
+
+	<resultMap id="DeliveryOrderMap" type="com.wheelchair.wym.entity.DeliveryOrder">
+		<id column="id" jdbcType="INTEGER" property="dID"/>
+		<result column="oID" jdbcType="INTEGER" property="oID"/>
+		<result column="u_id" jdbcType="INTEGER" property="uID"/>
+		<result column="c_id" jdbcType="INTEGER" property="cID"/>
+		<result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
+		<result column="address" jdbcType="VARCHAR" property="address"/>
+		<result column="phone" jdbcType="VARCHAR" property="phone"/>
 	</resultMap>
 	
 	<!-- 管理员登录 -->
@@ -98,7 +108,7 @@
 	</select>
 
 <!--	管理员查询所有租赁订单-->
-    <select id="findAllOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="UserOrderMapper">
+    <select id="findAllOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="UserOrderMap">
 		select o.*, h.community_name AS community_name, c.chair_no AS chair_no
 		from t_order o
 				 join t_chair c on o.c_id = c.c_id
@@ -106,12 +116,17 @@
 			limit #{page}, #{limit}
 	</select>
 
-    <select id="findAllRepairOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="RepairOrderMapper">
+    <select id="findAllRepairOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="RepairOrderMap">
 		select r.*, o.u_id
 		from t_repair_order r
 		join t_order o on r.oID = o.o_id
 		limit #{page}, #{limit}
 	</select>
+
+<!--    <select id="findAllDeliveryOrder" parameterType="com.wheelchair.wym.entity.Page" resultType="com.wheelchair.wym.entity.DeliveryOrder">-->
+<!--		select *-->
+<!--		from t_order o,-->
+<!--	</select>-->
 
     <update id="updateAdminPwd" parameterType="com.wheelchair.wym.entity.Admin">
 		update t_admin set

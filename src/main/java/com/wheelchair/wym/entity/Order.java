@@ -15,7 +15,17 @@ public class Order {
     private String name;
     private String address;
     private String phone;
+    /**
+     * 订单状态
+     * 0为已结束，
+     * 1为等待发货，后台管理员确认订单后转为2
+     * 2为配送中，客户确认收到货后转为3
+     * 3为使用中，租赁到期/客户选择保修后转为4
+     * 4为等待回收，后台管理员确认回收请求后转为5
+     * 5为回收中，管理员确认收到货后转为0
+     */
     private int orderStatus;
+
 
     public int getOrderStatus() {
         return orderStatus;

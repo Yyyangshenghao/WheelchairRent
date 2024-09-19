@@ -62,4 +62,9 @@ public interface IAdminService {
      * 查询用户保养/维修订单
      */
     List<RepairOrder> findAllRepairOrder(Page page);
+
+    /**
+     * 查询用户的配送订单
+     */
+    List<DeliveryOrder> findAllDeliveryOrder(Page page);
 }

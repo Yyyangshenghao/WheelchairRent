@@ -1,9 +1,6 @@
 package com.wheelchair.wym.service;
 
-import com.wheelchair.wym.entity.Order;
-import com.wheelchair.wym.entity.Page;
-import com.wheelchair.wym.entity.RepairOrder;
-import com.wheelchair.wym.entity.UserOrder;
+import com.wheelchair.wym.entity.*;
 
 import java.util.List;
 
@@ -13,6 +10,11 @@ public interface IOrderService {
      * 添加订单信息
      */
     int addOrder(Order order);
+
+    /**
+     * 自动生成配送订单
+     */
+    int addDeliveryOrder(DeliveryOrder deliveryOrder);
 
     /**
      * 查询所有订单信息

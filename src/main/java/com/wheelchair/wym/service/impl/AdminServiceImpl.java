@@ -69,4 +69,9 @@ public class AdminServiceImpl implements IAdminService {
 	public List<RepairOrder> findAllRepairOrder(Page page) {
 		return service.findAllRepairOrder(page);
 	}
+
+	@Override
+	public List<DeliveryOrder> findAllDeliveryOrder(Page page) {
+		return service.findAllDeliveryOrder(page);
+	}
 }

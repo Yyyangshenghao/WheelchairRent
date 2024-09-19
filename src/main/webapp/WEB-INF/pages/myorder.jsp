@@ -53,7 +53,23 @@
                         return util.toDateString(d.endDate, 'yyyy-MM-dd');
                     }
                 },
-                {field: 'orderStatus', title: '订单状态', align: 'center'},
+                {field: 'orderStatus', title: '订单状态', align: 'center',
+                    templet:function(d) {
+                    switch (d.orderStatus){
+                        case 0:
+                            return '已结束';
+                        case 1:
+                            return '等待发货';
+                        case 2:
+                            return '配送中';
+                        case 3:
+                            return '使用中';
+                        case 4:
+                            return '等待回收';
+                        case 5:
+                            return '回收中';
+                    }
+                    }},
                 {title: '操作', align: 'center', toolbar: "#tools"}
             ]]
         });
@@ -70,12 +86,12 @@
 
         // 删除订单操作
         function deleteOrder(data, obj) {
-            layer.confirm('确认删除当前数据吗？', {icon: 5, shade: 0.1}, function (index) {
+            layer.confirm('确认取消当前订单吗？', {icon: 5, shade: 0.1}, function (index) {
                 $.post("deleteOrder", {oID: data.oID}, function (response) {
                     if (response === "OK") {
                         obj.del();
                         reloadTable();
-                        layer.msg("删除成功");
+                        layer.msg("取消成功");
                     } else {
                         handleAjaxError(response);
                     }
@@ -129,11 +145,12 @@
                     layui.form.on('submit(submitRepair)', function (formData) {
                         $.post("applyRepairOrder", {
                             oID: data.oID,
+                            cID: data.cID,
                             type: formData.field.type,
                             pickupDate: formData.field.pickupDate,
                             address: formData.field.address,
                             phone: formData.field.phone,
-                            orderStatus: 0  // 替换为实际的整数值
+                            orderStatus: data.orderStatus  // 替换为实际的整数值
                         }, function (response) {
                             if (response === "OK") {
                                 reloadTable();
@@ -149,6 +166,7 @@
             });
         }
 
+        // 监听工具条事件
         table.on('tool(order)', function (obj) {
             var data = obj.data;
             var layEvent = obj.event;
@@ -163,8 +181,13 @@
 </script>
 
 <script type="text/html" id="tools">
-    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    {{# if(d.orderStatus == 3) { }}
     <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="repair">保养/维修</a>
+    {{# } }}
+
+    {{# if(d.orderStatus < 3) { }}
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">取消</a>
+    {{# } }}
 </script>
 </body>
 </html>

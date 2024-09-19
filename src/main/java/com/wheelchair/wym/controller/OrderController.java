@@ -58,10 +58,23 @@ public class OrderController {
 
         service.addOrder(order);
 
+        // 创建配送订单
+        DeliveryOrder deliveryOrder = new DeliveryOrder();
+        deliveryOrder.setuID(u.getuID());
+        deliveryOrder.setcID(availableWheelchair.getcID());
+        deliveryOrder.setOrderStatus(0); //0代表配送订单需要管理员后台确认
+        deliveryOrder.setAddress(address);
+        deliveryOrder.setName(name);
+        deliveryOrder.setPhone(phone);
+        deliveryOrder.setType(0); //0代表送出轮椅
+        deliveryOrder.setDate(startDate);
+
+        service.addDeliveryOrder(deliveryOrder);
+
         // 更新t_chair表中轮椅状态
         availableWheelchair.setStatus(1);
         chairServiceImpl.updateOrderedChair(order);
-        wheelchairServiceImpl.decreaseWheelchairType(hID);
+        wheelchairServiceImpl.decreaseWheelchairType(hID); // 该轮椅可用数量 - 1
 
         return "OK";
     }
@@ -102,11 +115,15 @@ public class OrderController {
 
     @RequestMapping("/applyRepairOrder")
     @ResponseBody
-    public String applyRepairOrder(@RequestParam("oID") int oID, @RequestParam("type") String type, @RequestParam("pickupDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date pickupDate, @RequestParam("address") String address, @RequestParam("phone") String phone, HttpServletRequest request) {
+    public String applyRepairOrder(@RequestParam("oID") int oID, @RequestParam("cID") int cID, @RequestParam("type") String type, @RequestParam("pickupDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date pickupDate, @RequestParam("address") String address, @RequestParam("phone") String phone, @RequestParam("orderStatus") int orderStatus, HttpServletRequest request) {
         // 获取登录用户信息
         Users u = (Users) request.getSession().getAttribute("loginUser");
         if (u == null) {
             return "User not logged in";
+        }
+
+        if (orderStatus != 3){
+            return "Chair not using";
         }
 
         // 创建维修保养订单
@@ -120,7 +137,22 @@ public class OrderController {
         repairOrder.setOrderStatus(0);  // 0 表示 pending
 
         // 调用 service 保存订单
-        return service.applyRepairOrder(repairOrder);
+        service.applyRepairOrder(repairOrder);
+
+        // 创建配送订单
+        DeliveryOrder deliveryOrder = new DeliveryOrder();
+        deliveryOrder.setuID(u.getuID());
+        deliveryOrder.setcID(cID);
+        deliveryOrder.setOrderStatus(0); //0代表配送订单需要管理员后台确认
+        deliveryOrder.setAddress(address);
+        deliveryOrder.setName(u.getuName());
+        deliveryOrder.setPhone(phone);
+        deliveryOrder.setType(1); //1代表收回轮椅
+        deliveryOrder.setDate(pickupDate);
+
+        int n = service.addDeliveryOrder(deliveryOrder);
+        if (n > 0) return "OK";
+        return "FAIL";
     }
 
     @RequestMapping("/deleteRepairOrder")

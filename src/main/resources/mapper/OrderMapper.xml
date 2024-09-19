@@ -25,7 +25,10 @@
 	<insert id="addOrder" parameterType="com.wheelchair.wym.entity.Order">
 		insert into t_order values(0,#{cID},#{uID},#{startDate},#{endDate},#{name},#{address},#{phone},#{orderStatus})
 	</insert>
-	<!-- 查询所有订单信息 -->
+    <insert id="addDeliverOrder" parameterType="com.wheelchair.wym.entity.DeliveryOrder">
+		insert into t_delivery_order values(0,#{uID},#{cID},#{orderStatus},#{address},#{name},#{phone},#{type},#{date})
+	</insert>
+    <!-- 查询所有订单信息 -->
 	<select id="findAllOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="UserOrderMapper">
 		select o.*, h.community_name AS community_name, c.chair_no AS chair_no
 		from t_order o

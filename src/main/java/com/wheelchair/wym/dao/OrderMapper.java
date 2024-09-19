@@ -1,5 +1,6 @@
 package com.wheelchair.wym.dao;
 
+import com.wheelchair.wym.entity.DeliveryOrder;
 import com.wheelchair.wym.entity.Order;
 import com.wheelchair.wym.entity.Page;
 import com.wheelchair.wym.entity.UserOrder;
@@ -29,4 +30,9 @@ public interface OrderMapper {
      */
     int deleteOrder(int oID);
 
+
+    /**
+     * 添加配送订单
+     */
+    int addDeliverOrder(DeliveryOrder deliveryOrder);
 }

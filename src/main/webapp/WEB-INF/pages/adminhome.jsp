@@ -57,6 +57,7 @@
                 <a href="javascript:;">订单信息管理</a>
                 <dl class="layui-nav-child">
                     <dd><a href="${pageContext.request.contextPath }/toAllOrderPage" target="iframe">租赁订单信息</a></dd>
+                    <dd><a href="${pageContext.request.contextPath }/toDeliveryOrderPage" target="iframe">配送订单管理</a></dd>
                     <dd><a href="${pageContext.request.contextPath }/toRepairOrderPage" target="iframe">保养/维修订单信息</a></dd>
                 </dl>
             </li>

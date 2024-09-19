@@ -56,4 +56,6 @@ public interface AdminMapper {
     List<UserOrder> findAllOrder(Page page);
 
     List<RepairOrder> findAllRepairOrder(Page page);
+
+    List<DeliveryOrder> findAllDeliveryOrder(Page page);
 }
