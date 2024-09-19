@@ -20,7 +20,7 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
-    private IOrderService sevice;
+    private IOrderService service;
     @Autowired
     private WheelchairServiceImpl wheelchairServiceImpl;
     @Autowired
@@ -56,7 +56,7 @@ public class OrderController {
         order.setEndDate(endDate);
         order.setOrderStatus(1);
 
-        sevice.addOrder(order);
+        service.addOrder(order);
 
         // 更新t_chair表中轮椅状态
         availableWheelchair.setStatus(1);
@@ -83,9 +83,9 @@ public class OrderController {
 
         p.setuID(u.getuID());
         UserOrderData uod = new UserOrderData();
-        List<UserOrder> order = sevice.findAllOrder(p);
+        List<UserOrder> order = service.findAllOrder(p);
         uod.setCode(0);
-        uod.setCount(sevice.getOrderCount(u.getuID()));
+        uod.setCount(service.getOrderCount(u.getuID()));
         uod.setData(order);
         uod.setMsg("200");
         return uod;
@@ -95,7 +95,7 @@ public class OrderController {
     @RequestMapping("/deleteOrder")
     @ResponseBody
     public String deleteOrder(int oID) {
-        int n = sevice.deleteOrder(oID);
+        int n = service.deleteOrder(oID);
         if (n > 0) return "OK";
         return "FAIL";
     }
@@ -120,7 +120,15 @@ public class OrderController {
         repairOrder.setOrderStatus(0);  // 0 表示 pending
 
         // 调用 service 保存订单
-        return sevice.applyRepairOrder(repairOrder);
+        return service.applyRepairOrder(repairOrder);
+    }
+
+    @RequestMapping("/deleteRepairOrder")
+    @ResponseBody
+    public String deleteRepairOrder(int id) {
+        int n = service.deleteRepairOrder(id);
+        if (n > 0) return "OK";
+        return "FAIL";
     }
 
 }

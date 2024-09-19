@@ -98,6 +98,11 @@ public class AdminController {
         return "allorder";
     }
 
+    @RequestMapping("/toRepairOrderPage")
+    public String toRepairOrderPage() {
+        return "repairorder";
+    }
+
     /**
      * 查询所有房源
      *
@@ -140,6 +145,29 @@ public class AdminController {
         data.setData(findAllOrder);
         data.setMsg("OK");
         return data;
+    }
+
+    /**
+     * 查询所有保养/维修订单
+     *
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping("findAllRepairOrder")
+    @ResponseBody
+    public RepairOrderData findAllRepairOrder(int page, int limit) {
+        Page p = new Page();
+        p.setPage((page - 1) * limit);
+        p.setLimit(limit);
+
+        RepairOrderData rod = new RepairOrderData();
+        List<RepairOrder> repairOrder = service.findAllRepairOrder(p);
+        rod.setCode(0);
+        rod.setCount(repairOrder.size());
+        rod.setData(repairOrder);
+        rod.setMsg("OK");
+        return rod;
     }
 
     /**
@@ -218,6 +246,7 @@ public class AdminController {
     public String toUpdateAdminPwdPage() {
         return "updateAdminPwd";
     }
+
 
     @RequestMapping("/welcome01")
     public String toWelcomePage() {

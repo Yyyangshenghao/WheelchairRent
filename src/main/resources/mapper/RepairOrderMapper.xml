@@ -9,6 +9,11 @@
         VALUES (#{oID}, #{type}, #{pickupDate}, #{address}, #{phone}, #{orderStatus})
     </insert>
 
+    <delete id="deleteRepairOrder" parameterType="int">
+        delete from t_repair_order
+        where id = #{id}
+    </delete>
+
     <!-- 根据 ID 查询维修/保养订单 -->
     <select id="selectRepairOrderById" parameterType="int" resultType="com.wheelchair.wym.entity.RepairOrder">
         SELECT * FROM t_repair_order

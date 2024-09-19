@@ -36,4 +36,11 @@ public interface IOrderService {
      * @return 操作结果
      */
     String applyRepairOrder(RepairOrder repairOrder);
+
+    /**
+     * 管理员删除保养/维修订单
+     * @param id
+     * @return
+     */
+    int deleteRepairOrder(int id);
 }

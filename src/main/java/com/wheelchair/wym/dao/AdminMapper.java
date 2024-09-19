@@ -54,4 +54,6 @@ public interface AdminMapper {
     int updateAdminPwd(Admin admin);
 
     List<UserOrder> findAllOrder(Page page);
+
+    List<RepairOrder> findAllRepairOrder(Page page);
 }

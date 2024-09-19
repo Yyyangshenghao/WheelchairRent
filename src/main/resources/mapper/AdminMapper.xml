@@ -46,6 +46,17 @@
 		<result column="end_date" jdbcType="VARCHAR" property="endDate"/>
 		<result column="order_status" jdbcType="VARCHAR" property="orderStatus"/>
 	</resultMap>
+
+	<resultMap id="RepairOrderMapper" type="com.wheelchair.wym.entity.RepairOrder">
+		<id column="id" jdbcType="INTEGER" property="repairOrderID"/>
+		<result column="oID" jdbcType="INTEGER" property="oID"/>
+		<result column="u_id" jdbcType="INTEGER" property="uID"/>
+		<result column="type" jdbcType="VARCHAR" property="type"/>
+		<result column="pickupDate" jdbcType="VARCHAR" property="pickupDate"/>
+		<result column="address" jdbcType="VARCHAR" property="address"/>
+		<result column="phone" jdbcType="VARCHAR" property="phone"/>
+		<result column="orderStatus" jdbcType="INTEGER" property="orderStatus"/>
+	</resultMap>
 	
 	<!-- 管理员登录 -->
 	<select id="adminAccess" resultMap="BasicMap" parameterType="com.wheelchair.wym.entity.Admin">
@@ -93,6 +104,13 @@
 				 join t_chair c on o.c_id = c.c_id
 				 join t_wheelchair h on c.h_id = h.h_id
 			limit #{page}, #{limit}
+	</select>
+
+    <select id="findAllRepairOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="RepairOrderMapper">
+		select r.*, o.u_id
+		from t_repair_order r
+		join t_order o on r.oID = o.o_id
+		limit #{page}, #{limit}
 	</select>
 
     <update id="updateAdminPwd" parameterType="com.wheelchair.wym.entity.Admin">

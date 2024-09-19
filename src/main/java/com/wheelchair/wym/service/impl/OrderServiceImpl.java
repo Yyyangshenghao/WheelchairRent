@@ -62,4 +62,9 @@ public class OrderServiceImpl implements IOrderService {
             return "ERROR";
         }
     }
+
+    @Override
+    public int deleteRepairOrder(int id) {
+        return repairOrderMapper.deleteRepairOrder(id);
+    }
 }

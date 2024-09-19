@@ -57,4 +57,9 @@ public interface IAdminService {
      * 查询用户租赁订单
      */
     List<UserOrder> findAllOrder(Page page);
+
+    /**
+     * 查询用户保养/维修订单
+     */
+    List<RepairOrder> findAllRepairOrder(Page page);
 }
