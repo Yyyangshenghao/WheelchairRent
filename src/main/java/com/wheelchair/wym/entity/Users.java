@@ -1,5 +1,7 @@
 package com.wheelchair.wym.entity;
 
+import java.util.Date;
+
 /**
  * @Description 租房用户
  */
@@ -10,26 +12,35 @@ public class Users {
     private String uPassword;
     private String uPhoneNumber;
     private String uNickName;
+    private String uGender;      // 性别 (M: 男, F: 女)
+    private Date uBirthdate;     // 生日
+    private int uAge;            // 年龄
 
-    public Users(int uID, String uName, String uPassword, String uPhoneNumber, String uNickName) {
+    public Users(int uID, String uName, String uPassword, String uPhoneNumber, String uNickName, String uGender, Date uBirthdate, int uAge) {
         super();
         this.uID = uID;
         this.uName = uName;
         this.uPassword = uPassword;
         this.uPhoneNumber = uPhoneNumber;
         this.uNickName = uNickName;
+        this.uGender = uGender;
+        this.uBirthdate = uBirthdate;
+        this.uAge = uAge;
     }
 
     public Users() {
         super();
     }
 
-    public Users(String uName, String uPassword, String uPhoneNumber, String uNickName) {
+    public Users(String uName, String uPassword, String uPhoneNumber, String uNickName, String uGender, Date uBirthdate, int uAge) {
         super();
         this.uName = uName;
         this.uPassword = uPassword;
         this.uPhoneNumber = uPhoneNumber;
         this.uNickName = uNickName;
+        this.uGender = uGender;
+        this.uBirthdate = uBirthdate;
+        this.uAge = uAge;
     }
 
     public int getuID() {
@@ -72,4 +83,27 @@ public class Users {
         this.uNickName = uNickName;
     }
 
+    public String getuGender() {
+        return uGender;
+    }
+
+    public void setuGender(String uGender) {
+        this.uGender = uGender;
+    }
+
+    public Date getuBirthdate() {
+        return uBirthdate;
+    }
+
+    public void setuBirthdate(Date uBirthdate) {
+        this.uBirthdate = uBirthdate;
+    }
+
+    public int getuAge() {
+        return uAge;
+    }
+
+    public void setuAge(int uAge) {
+        this.uAge = uAge;
+    }
 }

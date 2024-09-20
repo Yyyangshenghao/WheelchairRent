@@ -13,6 +13,9 @@
 		<result column="u_password" jdbcType="VARCHAR" property="uPassword"/>
 		<result column="u_phone_number" jdbcType="VARCHAR" property="uPhoneNumber"/>
 		<result column="u_nickname" jdbcType="VARCHAR" property="uNickName"/>
+		<result column="u_birthdate" jdbcType="DATE" property="uBirthdate"/>
+		<result column="u_age" jdbcType="INTEGER" property="uAge"/>
+		<result column="u_gender" jdbcType="VARCHAR" property="uGender"/>
 	</resultMap>
 
 	<resultMap type="com.wheelchair.wym.entity.Wheelchair" id="AllWheelchairMap">
