@@ -14,27 +14,27 @@ public interface WheelchairMapper {
     List<Wheelchair> findHomeInfo();
 
     /**
-     * 通过id查询房屋详情
+     * 通过id查询轮椅详情
      */
     Wheelchair findWheelchairDetailsById(int id);
 
     /**
-     * 添加房源信息
+     * 添加轮椅信息
      */
     int addNewWheelchair(Wheelchair wheelchair);
 
     /**
-     * 查询用户发布的房源信息
+     * 查询用户发布的轮椅信息
      */
     List<Wheelchair> findWheelchairByUser(Page page);
 
     /**
-     * 删除用户发布的房源信息
+     * 删除用户发布的轮椅信息
      */
     int deleteUserWheelchair(int hID);
 
     /**
-     * 修改用户发布的房源信息
+     * 修改用户发布的轮椅信息
      */
     int updateWheelchair(Wheelchair wheelchair);
 

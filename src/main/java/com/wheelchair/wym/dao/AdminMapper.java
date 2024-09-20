@@ -16,10 +16,10 @@ public interface AdminMapper {
     // 查询所有用户
     List<Users> findAllUser();
 
-    // 查询所有房源信息
+    // 查询所有轮椅信息
     List<Wheelchair> findAllWheelchair(Page page);
 
-    // 管理员删除房源信息
+    // 管理员删除轮椅信息
     int deleteWheelchair(int hID);
 
     // 通过id查询用户

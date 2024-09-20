@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface OrderMapper {
     /**
-     * 添加房屋订单
+     * 添加轮椅订单
      */
     int addOrder(Order order);
 

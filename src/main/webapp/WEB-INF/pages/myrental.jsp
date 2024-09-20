@@ -4,13 +4,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>我发布的租房信息</title>
+    <title>我发布的轮椅信息</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/layui/css/layui.css">
 </head>
 <body>
 <div class="layui-fluid" style="margin-top: 40px;">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend style="font-size: 26px">我发布的租房信息</legend>
+        <legend style="font-size: 26px">我发布的轮椅信息</legend>
     </fieldset>
     <table id="wheelchairList" lay-filter="wheelchair"></table>
 </div>
@@ -39,17 +39,17 @@
                 {field: 'wheelchairAddress', title: '地址', align: 'center'},
                 {field: 'communityName', title: '小区名字', align: 'center'},
                 {field: 'wheelchairLinkMan', title: '联系电话', align: 'center'},
-                {field: 'wheelchairOriented', title: '房屋朝向', align: 'center'},
+                {field: 'wheelchairOriented', title: '轮椅朝向', align: 'center'},
                 {title: '操作', align: 'center',toolbar:"#tools",width:190}
             ]],
         });
-        
+
         table.on('tool(wheelchair)',function(obj){
             var data = obj.data;
             var layEvent = obj.event;
             var tr = obj.tr;
             var currPage = dt.config.page.curr;
-            
+
             if(layEvent === "view"){
             	window.open("toIndexPage");
             }

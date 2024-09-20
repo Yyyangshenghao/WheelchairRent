@@ -18,7 +18,7 @@
 		<result column="publisher" jdbcType="VARCHAR" property="publisher"/>
 		<result column="publish_time" jdbcType="VARCHAR" property="publishTime"/>
 	</resultMap>
-	
+
 	<!-- 首页信息查询 -->
 	<select id="findHomeInfo" resultMap="BasicMap">
 		SELECT
@@ -34,8 +34,8 @@
 		FROM
 			t_wheelchair
 	</select>
-	
-	<!-- 房屋详细信息 -->
+
+	<!-- 轮椅详细信息 -->
 	<select id="findWheelchairDetailsById" parameterType="int" resultMap="BasicMap">
 		SELECT
 			h_id,
@@ -56,10 +56,10 @@
 		WHERE
 			h_id=#{id}
 	</select>
-	
+
 	<insert id="addNewWheelchair" parameterType="com.wheelchair.wym.entity.Wheelchair">
-		insert into 
-			t_wheelchair 
+		insert into
+			t_wheelchair
 		values
 		(	0,
 			#{wheelchairDesc},
@@ -78,20 +78,20 @@
 			NOW()
 		)
 	</insert>
-	
-	<!-- 查找用户发布的房源信息 -->
+
+	<!-- 查找用户发布的轮椅信息 -->
 	<select id="findWheelchairByUser" parameterType="com.wheelchair.wym.entity.Page" resultMap="BasicMap">
 		select * from t_wheelchair where publisher = #{publisher} limit #{page},#{limit}
 	</select>
-	
-	<!-- 删除用户发布的房源信息 -->
+
+	<!-- 删除用户发布的轮椅信息 -->
 	<delete id="deleteUserWheelchair" parameterType="int">
 		delete from t_wheelchair where h_id=#{hID}
 	</delete>
-	<!-- 修改用户发布的房源信息 -->
+	<!-- 修改用户发布的轮椅信息 -->
 	<update id="updateWheelchair" parameterType="com.wheelchair.wym.entity.Wheelchair">
 		UPDATE t_wheelchair
-		SET 
+		SET
 			wheelchair_desc = #{wheelchairDesc},
 			wheelchair_model = #{wheelchairModel},
 			wheelchair_area = #{wheelchairArea},
@@ -125,11 +125,11 @@
 				h.wheelchair_model
 			) LIKE CONCAT("%", #{keywords}, "%")
 	</select>
-	
+
 	<select id="findWheelchairOrderByDesc" resultMap="BasicMap">
 		SELECT * FROM t_wheelchair h ORDER BY wheelchair_price DESC
 	</select>
-	
+
 	<select id="findWheelchairOrderByAsc" resultMap="BasicMap">
 		SELECT * FROM t_wheelchair h ORDER BY wheelchair_price ASC
 	</select>

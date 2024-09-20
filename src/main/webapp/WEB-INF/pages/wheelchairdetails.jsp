@@ -231,7 +231,7 @@
                 type: 1,
                 content: $('#sign'),
                 area: ['360px', '460px'],
-                title: "房屋租赁",
+                title: "轮椅租赁",
                 closeBtn: 2
             });
         });

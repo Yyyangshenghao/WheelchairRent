@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>添加房屋信息</title>
+    <title>添加轮椅信息</title>
     <link rel="stylesheet" href="/static/layui/css/layui.css">
 </head>
 <body>
@@ -93,7 +93,7 @@
                 <img id="simpleImg" width="60px" height="60px">
             </div>
         </div>
-        
+
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
             <legend>上传多张详细图片</legend>
         </fieldset>
@@ -132,7 +132,7 @@
             layer = layui.layer,
             upload = layui.upload,
             $ = layui.jquery;
-		
+
         upload.render({
             elem:"#SingleUpload",
             url:"/singleUpload",
@@ -147,7 +147,7 @@
                 }
             }
         });
-        
+
         var demoListView = $('#detailsList')
             ,uploadListIns = upload.render({
             elem: '#MultipleUpload'
@@ -202,7 +202,7 @@
                 tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
             }
         });
-        
+
         form.on("submit(addWheelchairRecord)",function(data){
         	$.post("addWheelchairRecord",$("#addWheelchairForm").serialize(),function(res){
         		if(res=="OK"){
