@@ -175,6 +175,15 @@ public class AdminController {
         return rod;
     }
 
+    @RequestMapping("confirmRepairOrder")
+    @ResponseBody
+    public String confirmRepairOrder(int id) {
+        int n = service.confirmRepairOrder(id);
+        if(n > 0){
+            return "OK";
+        }
+    }
+
     /**
      * 查询所有保养/维修订单
      *

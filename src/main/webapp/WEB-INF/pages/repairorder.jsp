@@ -39,7 +39,14 @@
                     }},
                 {field: 'address', title: '取件地址', align: 'center'},
                 {field: 'phone', title: '联系电话', align: 'center'},
-                {field: 'orderStatus', title: '订单状态', align: 'center'},
+                {field: 'orderStatus', title: '订单状态', align: 'center',
+                    templet:function(d) {
+                        switch (d.orderStatus){
+                            case 0:
+                                return '未确认';
+                            case 1:
+                                return '已确认';
+                        }}},
                 {title: '操作', align: 'center', toolbar: "#tools"}
             ]]
         });
@@ -56,12 +63,28 @@
 
         // 删除订单操作
         function deleteRepairOrder(data, obj) {
-            layer.confirm('确认删除当前数据吗？', {icon: 5, shade: 0.1}, function (index) {
+            layer.confirm('确认删除当前订单吗？', {icon: 5, shade: 0.1}, function (index) {
                 $.post("deleteRepairOrder", {id: data.repairOrderID}, function (response) {
                     if (response === "OK") {
                         obj.del();
                         reloadTable();
                         layer.msg("删除成功");
+                    } else {
+                        handleAjaxError(response);
+                    }
+                });
+                layer.close(index);
+            });
+        }
+
+        // 确认订单操作
+        function confirmRepairOrder(data, obj){
+            layer.confirm('是否确认当前订单？',{icon: 5, shade: 0.1}, function (index) {
+                $.post("confirmRepairOrder", {id: data.repairOrderID}, function (response) {
+                    if (response === "OK") {
+                        obj.del();
+                        reloadTable();
+                        layer.msg("确认成功");
                     } else {
                         handleAjaxError(response);
                     }
@@ -83,11 +106,16 @@
             if(layEvent === 'delete'){
                 deleteRepairOrder(data, obj);
             }
+
+            if(layEvent === 'confirm'){
+                confirmRepairOrder(data, obj);
+            }
         });
     })
 </script>
 <script type="text/html" id="tools">
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="confirm">确认</a>
 
 </script>
 </body>

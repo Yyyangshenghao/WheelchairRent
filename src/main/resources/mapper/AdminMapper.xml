@@ -127,6 +127,9 @@
 			userpwd=#{userpwd}
 		where id=#{id}
 	</update>
+	<update id="confirmRepairOrder">
+		update t_
+	</update>
 
 	<select id="findAllDeliveryOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="DeliveryOrderMap">
 		SELECT * FROM t_delivery_order
