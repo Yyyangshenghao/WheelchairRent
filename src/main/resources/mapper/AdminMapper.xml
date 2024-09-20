@@ -59,8 +59,7 @@
 	</resultMap>
 
 	<resultMap id="DeliveryOrderMap" type="com.wheelchair.wym.entity.DeliveryOrder">
-		<id column="id" jdbcType="INTEGER" property="dID"/>
-		<result column="oID" jdbcType="INTEGER" property="oID"/>
+		<id column="d_id" jdbcType="INTEGER" property="dID"/>
 		<result column="u_id" jdbcType="INTEGER" property="uID"/>
 		<result column="c_id" jdbcType="INTEGER" property="cID"/>
 		<result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
@@ -122,11 +121,6 @@
 		join t_order o on r.oID = o.o_id
 		limit #{page}, #{limit}
 	</select>
-
-<!--    <select id="findAllDeliveryOrder" parameterType="com.wheelchair.wym.entity.Page" resultType="com.wheelchair.wym.entity.DeliveryOrder">-->
-<!--		select *-->
-<!--		from t_order o,-->
-<!--	</select>-->
 
     <update id="updateAdminPwd" parameterType="com.wheelchair.wym.entity.Admin">
 		update t_admin set
