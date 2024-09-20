@@ -12,7 +12,7 @@
 <body>
 <div class="layui-layout layui-layout-admin">
     <!-- 头部导航 -->
-    <jsp:include page="/WEB-INF/pages/header.jsp" />
+    <jsp:include page="/WEB-INF/pages/header.jsp"/>
 
 
     <!-- 侧边栏 -->
@@ -25,8 +25,13 @@
                     <dd><a href="updatepwd" target="iframe">修改我的密码</a></dd>
                 </dl>
             </li>
+            <!-- 添加回到主页的按钮 -->
+            <li class="layui-nav-item">
+                <a href="/toIndexPage">回到租赁平台主页</a>
+            </li>
         </ul>
     </div>
+
 
     <!-- 内容区域 -->
     <div class="layui-body">
