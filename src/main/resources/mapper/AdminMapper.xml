@@ -6,7 +6,7 @@
 		<result column="username" jdbcType="VARCHAR" property="username"/>
 		<result column="userpwd" jdbcType="VARCHAR" property="userpwd"/>
 	</resultMap>
-	
+
 	<resultMap type="com.wheelchair.wym.entity.Users" id="AllUserMap">
 		<id column="u_id" jdbcType="INTEGER" property="uID" />
 		<result column="u_name" jdbcType="VARCHAR" property="uName"/>
@@ -14,7 +14,7 @@
 		<result column="u_phone_number" jdbcType="VARCHAR" property="uPhoneNumber"/>
 		<result column="u_nickname" jdbcType="VARCHAR" property="uNickName"/>
 	</resultMap>
-	
+
 	<resultMap type="com.wheelchair.wym.entity.Wheelchair" id="AllWheelchairMap">
 		<id column="h_id" jdbcType="INTEGER" property="hID" />
 		<result column="wheelchair_desc" jdbcType="VARCHAR" property="wheelchairDesc"/>
@@ -67,29 +67,29 @@
 		<result column="address" jdbcType="VARCHAR" property="address"/>
 		<result column="phone" jdbcType="VARCHAR" property="phone"/>
 	</resultMap>
-	
+
 	<!-- 管理员登录 -->
 	<select id="adminAccess" resultMap="BasicMap" parameterType="com.wheelchair.wym.entity.Admin">
 		select * from t_admin where username=#{username} and userpwd=#{userpwd}
 	</select>
-	
+
 	<!-- 查询所有用户 -->
 	<select id="findAllUser" resultMap="AllUserMap">
-		select * from t_users 
+		select * from t_users
 	</select>
-	
+
 	<select id="findAllWheelchair" resultMap="AllWheelchairMap" parameterType="com.wheelchair.wym.entity.Page">
 		select * from t_wheelchair limit #{page},#{limit}
 	</select>
-	
+
 	<delete id="deleteWheelchair" parameterType="int">
 		delete from t_wheelchair where h_id=#{hID}
 	</delete>
-	
+
 	<select id="findUserById" parameterType="int" resultMap="AllUserMap">
 		select * from t_users where u_id = #{uID}
 	</select>
-	
+
 	<update id="updateUser" parameterType="com.wheelchair.wym.entity.Users">
 		update t_users set
 			u_name = #{uName},
@@ -98,11 +98,11 @@
 			u_nickname = #{uNickName}
 		where u_id=#{uID}
 	</update>
-	
+
 	<delete id="deleteUser" parameterType="int">
 		delete from t_users where u_id=#{uID}
 	</delete>
-	
+
 	<select id="checkAdminPwd" parameterType="com.wheelchair.wym.entity.Admin" resultMap="BasicMap">
 		select * from t_admin where userpwd=#{userpwd} and id = #{id}
 	</select>
@@ -133,4 +133,9 @@
 			userpwd=#{userpwd}
 		where id=#{id}
 	</update>
+
+	<select id="findAllDeliveryOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="DeliveryOrderMap">
+		SELECT * FROM t_delivery_order
+		LIMIT #{page}, #{limit}
+	</select>
 </mapper>

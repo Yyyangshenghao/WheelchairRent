@@ -21,22 +21,6 @@ public class DeliveryOrder {
         this.dID = dID;
     }
 
-    public int getuID() {
-        return uID;
-    }
-
-    public void setuID(int uID) {
-        this.uID = uID;
-    }
-
-    public int getcID() {
-        return cID;
-    }
-
-    public void setcID(int cID) {
-        this.cID = cID;
-    }
-
     public int getOrderStatus() {
         return orderStatus;
     }
@@ -83,5 +67,21 @@ public class DeliveryOrder {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getuID() {
+        return uID;
+    }
+
+    public void setuID(int uID) {
+        this.uID = uID;
+    }
+
+    public int getcID() {
+        return cID;
+    }
+
+    public void setcID(int cID) {
+        this.cID = cID;
     }
 }

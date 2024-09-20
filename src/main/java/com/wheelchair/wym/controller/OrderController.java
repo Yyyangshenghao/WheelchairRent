@@ -90,7 +90,7 @@ public class OrderController {
         if (u == null) {
             UserOrderData errorResponse = new UserOrderData();
             errorResponse.setCode(1); // 1 表示错误
-            errorResponse.setMsg("User not logged in");
+            errorResponse.setMsg("用户没有登录");
             return errorResponse;
         }
 
@@ -119,7 +119,7 @@ public class OrderController {
         // 获取登录用户信息
         Users u = (Users) request.getSession().getAttribute("loginUser");
         if (u == null) {
-            return "User not logged in";
+            return "用户没有登录";
         }
 
         if (orderStatus != 3){

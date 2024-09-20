@@ -34,7 +34,7 @@
 <body>
 <div class="welcome">
     <p><span class="layui-icon layui-icon-tree"></span></p>
-    <p class="wel-world">Welcome to user center!</p>
+    <p class="wel-world">欢迎来到个人中心！</p>
 </div>
 </body>
 </html>

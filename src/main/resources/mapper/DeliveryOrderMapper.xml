@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wheelchair.wym.dao.DeliveryOrderMapper">
+
+    <!-- 插入配送订单 -->
+    <insert id="insertDeliveryOrder" parameterType="com.wheelchair.wym.entity.DeliveryOrder">
+        INSERT INTO t_delivery_order (u_id, c_id, order_status, address, name, phone, type, date)
+        VALUES (#{uId}, #{cId}, #{orderStatus}, #{address}, #{name}, #{phone}, #{type}, #{date})
+    </insert>
+
+    <!-- 根据ID删除配送订单 -->
+    <delete id="deleteDeliveryOrder" parameterType="long">
+        DELETE FROM t_delivery_order
+        WHERE d_id = #{id}
+    </delete>
+
+    <!-- 根据ID查询配送订单 -->
+    <select id="getDeliveryOrderById" parameterType="long" resultType="com.wheelchair.wym.entity.DeliveryOrder">
+        SELECT * FROM t_delivery_order
+        WHERE d_id = #{id}
+    </select>
+
+    <!-- 获取所有配送订单 -->
+    <select id="getAllDeliveryOrders" resultType="com.wheelchair.wym.entity.DeliveryOrder">
+        SELECT * FROM t_delivery_order
+    </select>
+
+    <!-- 更新配送订单 -->
+    <update id="updateDeliveryOrder" parameterType="com.wheelchair.wym.entity.DeliveryOrder">
+        UPDATE t_delivery_order
+        SET u_id = #{uId}, c_id = #{cId}, order_status = #{orderStatus}, address = #{address}, name = #{name},
+            phone = #{phone}, type = #{type}, date = #{date}
+        WHERE d_id = #{dId}
+    </update>
+
+</mapper>
