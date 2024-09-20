@@ -95,7 +95,7 @@
             }
 
             if (layEvent === 'update') {
-                $.post("updateOrderStatus", { id: data.dID, status: 1 }, function (response) {
+                $.post("/delivery-orders/updateOrderStatus", { id: data.dID, status: 1 }, function (response) {
                     if (response === "OK") {
                         layer.msg("订单状态已更新");
                         reloadTable();  // 刷新表格

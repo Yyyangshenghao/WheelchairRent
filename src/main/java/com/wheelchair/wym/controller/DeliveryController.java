@@ -69,7 +69,6 @@ public class DeliveryController {
 
     @PostMapping("/updateOrderStatus")
     public String updateOrderStatus(@RequestParam("id") Long id, @RequestParam("status") Integer status) {
-        // 调用服务层方法更新订单状态
         boolean success = deliveryOrderService.updateOrderStatus(id, status);
         return success ? "OK" : "FAIL";
     }

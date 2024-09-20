@@ -34,10 +34,11 @@
         WHERE d_id = #{dId}
     </update>
 
+    <!-- 根据ID更新配送订单状态 -->
     <update id="updateOrderStatus" parameterType="map">
         UPDATE t_delivery_order
         SET order_status = #{status}
-        WHERE dID = #{id}
+        WHERE d_id = #{id}
     </update>
 
 </mapper>

@@ -42,7 +42,6 @@ public class DeliveryOrderServiceImpl implements IDeliveryOrderService {
 
     @Override
     public boolean updateOrderStatus(Long id, Integer status) {
-        // 假设你有一个 Mapper 来执行数据库操作
         return deliveryOrderMapper.updateOrderStatus(id, status) > 0;
     }
 }
