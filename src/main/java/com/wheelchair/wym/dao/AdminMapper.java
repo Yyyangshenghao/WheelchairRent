@@ -58,4 +58,6 @@ public interface AdminMapper {
     List<RepairOrder> findAllRepairOrder(Page page);
 
     List<DeliveryOrder> findAllDeliveryOrder(Page page);
+
+    int confirmRepairOrder(int id);
 }

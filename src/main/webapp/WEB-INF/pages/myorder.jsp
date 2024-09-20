@@ -88,6 +88,7 @@
         function deleteOrder(data, obj) {
             layer.confirm('确认取消当前订单吗？', {icon: 5, shade: 0.1}, function (index) {
                 $.post("deleteOrder", {oID: data.oID}, function (response) {
+                    console.log()
                     if (response === "OK") {
                         obj.del();
                         reloadTable();

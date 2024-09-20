@@ -67,4 +67,6 @@ public interface IAdminService {
      * 查询用户的配送订单
      */
     List<DeliveryOrder> findAllDeliveryOrder(Page page);
+
+    int confirmRepairOrder(int id);
 }

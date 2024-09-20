@@ -53,7 +53,22 @@
                         return util.toDateString(d.endDate, 'yyyy-MM-dd');
                     }
                 },
-                {field: 'orderStatus', title: '订单状态', align: 'center'},
+                {field: 'orderStatus', title: '订单状态', align: 'center',
+                    templet:function(d) {
+                        switch (d.orderStatus){
+                            case 0:
+                                return '已结束';
+                            case 1:
+                                return '等待发货';
+                            case 2:
+                                return '配送中';
+                            case 3:
+                                return '使用中';
+                            case 4:
+                                return '等待回收';
+                            case 5:
+                                return '回收中';
+                        }}},
                 {title: '操作', align: 'center', toolbar: "#tools"}
             ]]
         });
