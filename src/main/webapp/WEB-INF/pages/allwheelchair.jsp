@@ -31,7 +31,7 @@
                 ,{field: 'wheelchairModel', title: '特点', align: 'center'}
                 ,{field: 'wheelchairArea', title: '续航', align: 'center'}
                 ,{field: 'wheelchairFloor', title: '型号', align: 'center'}
-                ,{field: 'wheelchairType', title: '总数量', align: 'center'}
+                ,{field: 'wheelchairType', title: '可用数量', align: 'center'}
                 ,{field: 'wheelchairPrice', title: '价格', align: 'center'}
                 ,{field: 'wheelchairAddress', title: '发货地址', align: 'center'}
                 ,{field: 'wheelchairLinkMan', title: '联系电话', align: 'center'}

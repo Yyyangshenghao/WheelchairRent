@@ -69,4 +69,24 @@ public class OrderServiceImpl implements IOrderService {
     public int deleteRepairOrder(int id) {
         return repairOrderMapper.deleteRepairOrder(id);
     }
+
+    @Override
+    public boolean updateOrderStatus(int oID, int orderStatus) {
+        return mapper.updateOrderStatus(oID, orderStatus);
+    }
+
+    @Override
+    public int findAnOrder(int uID, int cID) {
+        return mapper.findAnOrder(uID,cID);
+    }
+
+    @Override
+    public int findChairByoID(int oID) {
+        return mapper.findChairByoID(oID);
+    }
+
+    @Override
+    public int deleteRepairOrderByoID(int oID) {
+        return repairOrderMapper.deleteRepairOrderByoID(oID);
+    }
 }

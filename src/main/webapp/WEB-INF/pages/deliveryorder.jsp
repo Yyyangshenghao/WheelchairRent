@@ -31,15 +31,34 @@
             cols: [[
                 {field: 'dID', title: '配送订单id', align: 'center'},
                 {field: 'uID', title: '用户id', align: 'center'},
-                {field: 'cID', title: '客户id', align: 'center'},
-                {field: 'type', title: '配送类型', align: 'center'},
-                {field: 'date', title: '配送日期', align: 'center',
+                {field: 'cID', title: '轮椅id', align: 'center'},
+                {field: 'type', title: '配送类型', align: 'center',
+                templet:function (d){
+                    switch (d.type){
+                        case 0:
+                            return '送出'
+                        case 1:
+                            return '收回'
+                    }
+                }},
+                {field: 'date', title: '配送/取件日期', align: 'center',
                     templet: function(d) {
                         return util.toDateString(d.date, 'yyyy-MM-dd');  // 日期格式化
                     }},
                 {field: 'address', title: '地址', align: 'center'},
+                {field: 'name', title: '姓名', align: 'center'},
                 {field: 'phone', title: '联系电话', align: 'center'},
-                {field: 'orderStatus', title: '订单状态', align: 'center'},
+                {field: 'orderStatus', title: '订单状态', align: 'center',
+                    templet:function (d){
+                        switch (d.orderStatus){
+                            case 0:
+                                return '未处理'
+                            case 1:
+                                return '已确认，正在配送'
+                            case 2:
+                                return '签收成功'
+                        }
+                    }},
                 {title: '操作', align: 'center', toolbar: "#tools"}
             ]]
         });
@@ -95,7 +114,18 @@
             }
 
             if (layEvent === 'update') {
-                $.post("/delivery-orders/updateOrderStatus", { id: data.dID, status: 1 }, function (response) {
+                $.post("/delivery-orders/updateOrderStatus", { dID: data.dID, d_status: 1, uID: data.uID, cID: data.cID, o_status: 2}, function (response) {
+                    if (response === "OK") {
+                        layer.msg("订单状态已更新");
+                        reloadTable();  // 刷新表格
+                    } else {
+                        handleAjaxError(response);  // 错误处理
+                    }
+                });
+            }
+
+            if(layEvent === 'signed') {
+                $.post("/delivery-orders/updateOrderStatus", { dID: data.dID, d_status: 2, uID: data.uID, cID: data.cID, o_status: 3}, function (response) {
                     if (response === "OK") {
                         layer.msg("订单状态已更新");
                         reloadTable();  // 刷新表格
@@ -108,8 +138,16 @@
     })
 </script>
 <script type="text/html" id="tools">
+    {{# if(d.orderStatus == 0) { }}
+    <a class="layui-btn layui-btn-xs" lay-event="update">确认</a>
+    {{# } }}
+
+    {{# if(d.orderStatus == 1) { }}
+    <a class="layui-btn layui-btn-xs" lay-event="signed">签收确认</a>
+    {{# } }}
+
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
-    <a class="layui-btn layui-btn-sm" lay-event="update">确认</a>
+
 </script>
 </body>
 </html>

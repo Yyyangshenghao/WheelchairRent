@@ -101,6 +101,23 @@
             });
         }
 
+        // 删除订单操作
+        function cancelRepairOrder(data, obj) {
+            layer.confirm('确认取消当前维修/保养吗？', {icon: 5, shade: 0.1}, function (index) {
+                $.post("deleteRepairOrderByoID", {oID: data.oID}, function (response) {
+                    console.log()
+                    if (response === "OK") {
+                        obj.del();
+                        reloadTable();
+                        layer.msg("取消成功");
+                    } else {
+                        handleAjaxError(response);
+                    }
+                });
+                layer.close(index);
+            });
+        }
+
         // 申请维修保养表单弹出
         function openRepairForm(data) {
             layer.open({
@@ -127,6 +144,11 @@
                         <div class="layui-input-block">
                             <input type="text" name="address" required lay-verify="required" placeholder="请输入地址" class="layui-input">
                         </div>
+                    </div><div class="layui-form-item">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" class="layui-input">
+                        </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">联系电话</label>
@@ -150,6 +172,7 @@
                             type: formData.field.type,
                             pickupDate: formData.field.pickupDate,
                             address: formData.field.address,
+                            name:formData.field.name,
                             phone: formData.field.phone,
                             orderStatus: data.orderStatus  // 替换为实际的整数值
                         }, function (response) {
@@ -176,6 +199,8 @@
                 deleteOrder(data, obj);
             } else if (layEvent === 'repair') {
                 openRepairForm(data);
+            } else if (layEvent === 'cancel') {
+                cancelRepairOrder(data, obj);
             }
         });
     });
@@ -186,8 +211,16 @@
     <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="repair">保养/维修</a>
     {{# } }}
 
-    {{# if(d.orderStatus < 3) { }}
-    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">取消</a>
+    {{# if(d.orderStatus < 2) { }}
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">取消订单</a>
+    {{# } }}
+
+    {{# if(d.orderStatus == 2 || d.orderStatus == 5) { }}
+    <a class="layui-btn layui-btn-xs layui-btn-danger layui-btn-disabled" disabled>请联系客服取消配送</a>
+    {{# } }}
+
+    {{# if(d.orderStatus == 4) { }}
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="cancel">取消保养/维修</a>
     {{# } }}
 </script>
 </body>

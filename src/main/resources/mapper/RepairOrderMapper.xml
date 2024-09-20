@@ -5,8 +5,8 @@
 
     <!-- 插入维修/保养订单 -->
     <insert id="insertRepairOrder" parameterType="com.wheelchair.wym.entity.RepairOrder">
-        INSERT INTO t_repair_order (oID, type, pickupDate, address, phone, orderStatus)
-        VALUES (#{oID}, #{type}, #{pickupDate}, #{address}, #{phone}, #{orderStatus})
+        INSERT INTO t_repair_order (oID, type, pickupDate, address, name, phone, orderStatus)
+        VALUES (#{oID}, #{type}, #{pickupDate}, #{address}, #{name}, #{phone}, #{orderStatus})
     </insert>
 
     <delete id="deleteRepairOrder" parameterType="int">
@@ -33,4 +33,7 @@
         WHERE id = #{id}
     </update>
 
+    <delete id="deleteRepairOrderByoID">
+        delete from t_repair_order where oID=#{oID}
+    </delete>
 </mapper>

@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface RepairOrderMapper {
     int insertRepairOrder(RepairOrder repairOrder);
     int deleteRepairOrder(int id);
+    int deleteRepairOrderByoID(int oID);
 }

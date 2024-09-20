@@ -9,6 +9,7 @@ public class RepairOrder {
     private String type; // 维修或保养类型
     private Date pickupDate; // 取件日期
     private String address; // 取件地址
+    private String name;
     private String phone; // 联系电话
     private Integer orderStatus; // 订单状态（例如“待处理”，“已处理”等）
 
@@ -73,6 +74,30 @@ public class RepairOrder {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getuID() {
+        return uID;
+    }
+
+    public void setuID(int uID) {
+        this.uID = uID;
+    }
+
+    public int getoID() {
+        return oID;
+    }
+
+    public void setoID(int oID) {
+        this.oID = oID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhone() {

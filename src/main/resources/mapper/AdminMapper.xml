@@ -147,8 +147,10 @@
         where id = #{id}
     </update>
 
-    <update id="confirmRepairOrder">
-        update t_
+    <update id="confirmRepairOrder" parameterType="int">
+        update t_repair_order
+        set orderStatus = #{status}
+        where id = #{id}
     </update>
 
     <select id="findAllDeliveryOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="DeliveryOrderMap">

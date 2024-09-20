@@ -25,9 +25,16 @@
 	<insert id="addOrder" parameterType="com.wheelchair.wym.entity.Order">
 		insert into t_order values(0,#{cID},#{uID},#{startDate},#{endDate},#{name},#{address},#{phone},#{orderStatus})
 	</insert>
+
     <insert id="addDeliverOrder" parameterType="com.wheelchair.wym.entity.DeliveryOrder">
-		insert into t_delivery_order values(0,#{uID},#{cID},#{orderStatus},#{address},#{name},#{phone},#{type},#{date})
+		insert into t_delivery_order values(0, #{uID},#{cID},#{orderStatus},#{address},#{name},#{phone},#{type},#{date})
 	</insert>
+
+    <update id="updateOrderStatus" parameterType="map">
+	update t_order
+	set order_status = #{orderStatus}
+	where o_id = #{oID}
+	</update>
     <!-- 查询所有订单信息 -->
 	<select id="findAllOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="UserOrderMapper">
 		select o.*, h.community_name AS community_name, c.chair_no AS chair_no
@@ -41,6 +48,14 @@
 	<select id="getOrderCount" resultType="int" parameterType="int">
 		select count(o_id) from t_order where u_id=#{uID}
 	</select>
+
+	<select id="findAnOrder" resultType="java.lang.Integer">
+		select o_id from t_order where u_id = #{uID} and c_id = #{cID}
+	</select>
+	<select id="findChairByoID" resultType="java.lang.Integer">
+		select c_id from t_order where o_id = #{oID}
+	</select>
+
 	<!-- 删除订单 -->
 	<delete id="deleteOrder" parameterType="int">
 		delete from t_order where o_id=#{oID}

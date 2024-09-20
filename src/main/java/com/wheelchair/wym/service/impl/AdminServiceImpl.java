@@ -80,8 +80,8 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public int confirmRepairOrder(int id) {
-        return service.confirmRepairOrder(id);
+    public int confirmRepairOrder(int id, int status) {
+        return service.confirmRepairOrder(id,status);
     }
 
     @Override

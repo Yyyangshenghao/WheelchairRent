@@ -44,7 +44,6 @@ public class OrderController {
         if (availableWheelchair == null) {
             return "No_AVAILABLE_CHAIR";
         }
-        System.out.println(availableWheelchair.gethID());
         // 创建订单
         Order order = new Order();
         order.setcID(availableWheelchair.getcID());
@@ -68,7 +67,6 @@ public class OrderController {
         deliveryOrder.setPhone(phone);
         deliveryOrder.setType(0); //0代表送出轮椅
         deliveryOrder.setDate(startDate);
-
         service.addDeliveryOrder(deliveryOrder);
 
         // 更新t_chair表中轮椅状态
@@ -115,7 +113,7 @@ public class OrderController {
 
     @RequestMapping("/applyRepairOrder")
     @ResponseBody
-    public String applyRepairOrder(@RequestParam("oID") int oID, @RequestParam("cID") int cID, @RequestParam("type") String type, @RequestParam("pickupDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date pickupDate, @RequestParam("address") String address, @RequestParam("phone") String phone, @RequestParam("orderStatus") int orderStatus, HttpServletRequest request) {
+    public String applyRepairOrder(@RequestParam("oID") int oID, @RequestParam("cID") int cID, @RequestParam("type") String type, @RequestParam("pickupDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date pickupDate, @RequestParam("address") String address, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("orderStatus") int orderStatus, HttpServletRequest request) {
         // 获取登录用户信息
         Users u = (Users) request.getSession().getAttribute("loginUser");
         if (u == null) {
@@ -133,26 +131,13 @@ public class OrderController {
         repairOrder.setType(type);
         repairOrder.setPickupDate(pickupDate);
         repairOrder.setAddress(address);
+        repairOrder.setName(name);
         repairOrder.setPhone(phone);
         repairOrder.setOrderStatus(0);  // 0 表示 pending
 
+        service.updateOrderStatus(oID,4);
         // 调用 service 保存订单
-        service.applyRepairOrder(repairOrder);
-
-        // 创建配送订单
-        DeliveryOrder deliveryOrder = new DeliveryOrder();
-        deliveryOrder.setuID(u.getuID());
-        deliveryOrder.setcID(cID);
-        deliveryOrder.setOrderStatus(0); //0代表配送订单需要管理员后台确认
-        deliveryOrder.setAddress(address);
-        deliveryOrder.setName(u.getuName());
-        deliveryOrder.setPhone(phone);
-        deliveryOrder.setType(1); //1代表收回轮椅
-        deliveryOrder.setDate(pickupDate);
-
-        int n = service.addDeliveryOrder(deliveryOrder);
-        if (n > 0) return "OK";
-        return "FAIL";
+        return service.applyRepairOrder(repairOrder);
     }
 
     @RequestMapping("/deleteRepairOrder")
@@ -160,6 +145,15 @@ public class OrderController {
     public String deleteRepairOrder(int id) {
         int n = service.deleteRepairOrder(id);
         if (n > 0) return "OK";
+        return "FAIL";
+    }
+
+    @RequestMapping("/deleteRepairOrderByoID")
+    @ResponseBody
+    public String deleteRepairOrderByoID(int oID) {
+        int n = service.deleteRepairOrderByoID(oID);
+        boolean m = service.updateOrderStatus(oID, 3);
+        if (n > 0 && m) return "OK";
         return "FAIL";
     }
 

@@ -69,7 +69,7 @@ public interface IAdminService {
      */
     List<DeliveryOrder> findAllDeliveryOrder(Page page);
 
-    int confirmRepairOrder(int id);
+    int confirmRepairOrder(int id, int status);
 
     /**
      * 查询用户男女数量

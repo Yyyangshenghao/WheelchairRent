@@ -35,4 +35,10 @@ public interface OrderMapper {
      * 添加配送订单
      */
     int addDeliverOrder(DeliveryOrder deliveryOrder);
+
+    boolean updateOrderStatus(int oID, int orderStatus);
+
+    int findAnOrder(int uID, int cID);
+
+    int findChairByoID(int oID);
 }

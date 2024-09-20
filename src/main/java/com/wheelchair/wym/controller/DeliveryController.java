@@ -2,6 +2,7 @@ package com.wheelchair.wym.controller;
 
 import com.wheelchair.wym.entity.DeliveryOrder;
 import com.wheelchair.wym.service.IDeliveryOrderService;
+import com.wheelchair.wym.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ public class DeliveryController {
 
     @Autowired
     private IDeliveryOrderService deliveryOrderService;
+    @Autowired
+    private IOrderService orderService;
 
     // 创建配送订单
     @PostMapping
@@ -68,8 +71,9 @@ public class DeliveryController {
     }
 
     @PostMapping("/updateOrderStatus")
-    public String updateOrderStatus(@RequestParam("id") Long id, @RequestParam("status") Integer status) {
-        boolean success = deliveryOrderService.updateOrderStatus(id, status);
+    public String updateOrderStatus(@RequestParam("dID") Long dID, @RequestParam("d_status") Integer d_status, @RequestParam("uID") int uID, @RequestParam("cID") int cID, @RequestParam("o_status") Integer o_status) {
+        int oID = orderService.findAnOrder(uID,cID);
+        boolean success = deliveryOrderService.updateOrderStatus(dID, d_status) && orderService.updateOrderStatus(oID, o_status);
         return success ? "OK" : "FAIL";
     }
 }

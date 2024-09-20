@@ -35,9 +35,10 @@
                 {field: 'type', title: '保养/维修', align: 'center'},
                 {field: 'pickupDate', title: '取件时间', align: 'center',
                     templet: function(d) {
-                        return util.toDateString(d.startDate, 'yyyy-MM-dd');
+                        return util.toDateString(d.pickupDate, 'yyyy-MM-dd');
                     }},
                 {field: 'address', title: '取件地址', align: 'center'},
+                {field: 'name', title: '姓名', align: 'center'},
                 {field: 'phone', title: '联系电话', align: 'center'},
                 {field: 'orderStatus', title: '订单状态', align: 'center',
                     templet:function(d) {
@@ -45,7 +46,9 @@
                             case 0:
                                 return '未确认';
                             case 1:
-                                return '已确认';
+                                return '已确认,正在回收中';
+                            case 2:
+                                return '已完成'
                         }}},
                 {title: '操作', align: 'center', toolbar: "#tools"}
             ]]
@@ -80,7 +83,7 @@
         // 确认订单操作
         function confirmRepairOrder(data, obj){
             layer.confirm('是否确认当前订单？',{icon: 5, shade: 0.1}, function (index) {
-                $.post("confirmRepairOrder", {id: data.repairOrderID}, function (response) {
+                $.post("confirmRepairOrder", {rID: data.repairOrderID, oID: data.oID, uID:data.uID, Date:data.pickupDate, address:data.address, name:data.name, phone:data.phone, status:1}, function (response) {
                     if (response === "OK") {
                         obj.del();
                         reloadTable();
@@ -114,8 +117,11 @@
     })
 </script>
 <script type="text/html" id="tools">
+    {{# if(d.orderStatus == 0) { }}
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+    {{# } }}
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
-    <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="confirm">确认</a>
+
 
 </script>
 </body>

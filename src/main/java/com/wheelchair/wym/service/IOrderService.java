@@ -45,4 +45,18 @@ public interface IOrderService {
      * @return
      */
     int deleteRepairOrder(int id);
+
+    boolean updateOrderStatus(int oID, int orderStatus);
+
+    /**
+     * 根据客户和轮椅找到订单
+     * @param uID
+     * @param cID
+     * @return
+     */
+    int findAnOrder(int uID, int cID);
+
+    int findChairByoID(int oID);
+
+    int deleteRepairOrderByoID(int oID);
 }

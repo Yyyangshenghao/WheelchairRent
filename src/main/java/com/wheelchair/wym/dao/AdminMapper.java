@@ -47,7 +47,7 @@ public interface AdminMapper {
     List<DeliveryOrder> findAllDeliveryOrder(Page page);
 
     // 确认维修订单
-    int confirmRepairOrder(int id);
+    int confirmRepairOrder(int id, int status);
 
     // 查询用户男女数量
     @MapKey("u_gender") // 将结果映射为以性别为键的Map
