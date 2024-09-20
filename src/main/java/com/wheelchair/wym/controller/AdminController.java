@@ -21,24 +21,11 @@ public class AdminController {
     @Autowired
     private IWheelchairService dao;
 
-    /**
-     * 跳转到登录页
-     *
-     * @return
-     */
     @RequestMapping("/toAdminLogin")
     public String toAdminLogin() {
         return "admin";
     }
 
-    /**
-     * 登录
-     *
-     * @param username
-     * @param userpwd
-     * @param req
-     * @return
-     */
     @RequestMapping("/adminAccess")
     @ResponseBody
     public String adminAccess(String username, String userpwd, HttpServletRequest req) {
@@ -49,12 +36,6 @@ public class AdminController {
         return "FAIL";
     }
 
-    /**
-     * 登出
-     *
-     * @param request
-     * @return
-     */
     @RequestMapping("/adminSingnout")
     public String signout(HttpServletRequest request) {
         request.getSession().invalidate();
@@ -71,11 +52,6 @@ public class AdminController {
         return "alluser";
     }
 
-    /**
-     * 查询所有用户
-     *
-     * @return
-     */
     @RequestMapping("/AllUsers")
     @ResponseBody
     public UserData findAllUser() {
@@ -108,13 +84,6 @@ public class AdminController {
         return "deliveryorder";
     }
 
-    /**
-     * 查询所有房源
-     *
-     * @param page
-     * @param limit
-     * @return
-     */
     @RequestMapping("/findAllWheelchair")
     @ResponseBody
     public UserWheelchairData findAllWheelchair(int page, int limit) {
@@ -130,13 +99,6 @@ public class AdminController {
         return data;
     }
 
-    /**
-     * 查询所有租赁订单
-     *
-     * @param page
-     * @param limit
-     * @return
-     */
     @RequestMapping("/findAllOrder")
     @ResponseBody
     public UserOrderData findAllOrder(int page, int limit) {
@@ -152,13 +114,6 @@ public class AdminController {
         return data;
     }
 
-    /**
-     * 查询所有保养/维修订单
-     *
-     * @param page
-     * @param limit
-     * @return
-     */
     @RequestMapping("findAllRepairOrder")
     @ResponseBody
     public RepairOrderData findAllRepairOrder(int page, int limit) {
@@ -179,18 +134,12 @@ public class AdminController {
     @ResponseBody
     public String confirmRepairOrder(int id) {
         int n = service.confirmRepairOrder(id);
-        if(n > 0){
+        if (n > 0) {
             return "OK";
         }
+        return "FAIL";
     }
 
-    /**
-     * 查询所有保养/维修订单
-     *
-     * @param page
-     * @param limit
-     * @return
-     */
     @RequestMapping("findAllDeliveryOrder")
     @ResponseBody
     public DeliveryOrderData findAllDeliveryOrder(int page, int limit) {
@@ -207,12 +156,6 @@ public class AdminController {
         return dod;
     }
 
-    /**
-     * 删除房源
-     *
-     * @param hID
-     * @return
-     */
     @RequestMapping("/deleteWheelchair")
     @ResponseBody
     public String deleteWheelchair(int hID) {
@@ -223,13 +166,6 @@ public class AdminController {
         return "FAIL";
     }
 
-    /**
-     * 跳转到管理员更新房源界面
-     *
-     * @param hID
-     * @param request
-     * @return
-     */
     @RequestMapping("/toAdminUpdateWheelchairPage")
     public String toUpdatePage(int hID, HttpServletRequest request) {
         Wheelchair wheelchair = dao.findWheelchairDetailsById(hID);
@@ -237,11 +173,6 @@ public class AdminController {
         return "updatewheelchair";
     }
 
-    /**
-     * 传入id,跳转到修改用户界面
-     *
-     * @return
-     */
     @RequestMapping("/toEditUserPage")
     public String toEditUserPage(int uID, HttpServletRequest req) {
         Users findUserById = service.findUserById(uID);
@@ -249,12 +180,6 @@ public class AdminController {
         return "editUser";
     }
 
-    /**
-     * 更新用户信息
-     *
-     * @param users
-     * @return
-     */
     @RequestMapping("/editUser")
     @ResponseBody
     public String editUser(Users users) {
@@ -263,12 +188,6 @@ public class AdminController {
         return "FAIL";
     }
 
-    /**
-     * 管理员删除用户
-     *
-     * @param uID
-     * @return
-     */
     @RequestMapping("/deleteUser")
     @ResponseBody
     public String deleteUser(int uID) {
