@@ -4,6 +4,7 @@ package com.wheelchair.wym.service;
 import com.wheelchair.wym.entity.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface IAdminService {
@@ -69,4 +70,9 @@ public interface IAdminService {
     List<DeliveryOrder> findAllDeliveryOrder(Page page);
 
     int confirmRepairOrder(int id);
+
+    /**
+     * 查询用户男女数量
+     */
+    Map<String, Integer> countGender();
 }

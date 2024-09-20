@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -229,5 +230,19 @@ public class AdminController {
         int n = service.updateAdminPwd(a);
         if (n > 0) return "OK";
         return "FAIL";
+    }
+
+    @RequestMapping("/genderCount")
+    @ResponseBody
+    public String genderCount() {
+        Map<String, Integer> genderCountMap = service.countGender();
+
+        // 在控制台和终端输出结果
+        System.out.println("Gender Count: " + genderCountMap);
+
+        // 创建响应字符串
+        String response = "User Gender Count:\n" + "Male: " + genderCountMap.getOrDefault("M", 0) + "\n" + "Female: " + genderCountMap.getOrDefault("F", 0) + "\n";
+
+        return response;
     }
 }

@@ -1,141 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wheelchair.wym.dao.AdminMapper">
-	<resultMap type="com.wheelchair.wym.entity.Admin" id="BasicMap">
-		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="username" jdbcType="VARCHAR" property="username"/>
-		<result column="userpwd" jdbcType="VARCHAR" property="userpwd"/>
-	</resultMap>
 
-	<resultMap type="com.wheelchair.wym.entity.Users" id="AllUserMap">
-		<id column="u_id" jdbcType="INTEGER" property="uID" />
-		<result column="u_name" jdbcType="VARCHAR" property="uName"/>
-		<result column="u_password" jdbcType="VARCHAR" property="uPassword"/>
-		<result column="u_phone_number" jdbcType="VARCHAR" property="uPhoneNumber"/>
-		<result column="u_nickname" jdbcType="VARCHAR" property="uNickName"/>
-		<result column="u_birthdate" jdbcType="DATE" property="uBirthdate"/>
-		<result column="u_age" jdbcType="INTEGER" property="uAge"/>
-		<result column="u_gender" jdbcType="VARCHAR" property="uGender"/>
-	</resultMap>
+    <resultMap type="com.wheelchair.wym.entity.Admin" id="BasicMap">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="userpwd" jdbcType="VARCHAR" property="userpwd"/>
+    </resultMap>
 
-	<resultMap type="com.wheelchair.wym.entity.Wheelchair" id="AllWheelchairMap">
-		<id column="h_id" jdbcType="INTEGER" property="hID" />
-		<result column="wheelchair_desc" jdbcType="VARCHAR" property="wheelchairDesc"/>
-		<result column="wheelchair_model" jdbcType="VARCHAR" property="wheelchairModel"/>
-		<result column="wheelchair_area" jdbcType="VARCHAR" property="wheelchairArea"/>
-		<result column="wheelchair_floor" jdbcType="VARCHAR" property="wheelchairFloor"/>
-		<result column="wheelchair_type" jdbcType="VARCHAR" property="wheelchairType"/>
-		<result column="wheelchair_price" jdbcType="VARCHAR" property="wheelchairPrice"/>
-		<result column="wheelchair_address" jdbcType="VARCHAR" property="wheelchairAddress"/>
-		<result column="wheelchair_image" jdbcType="VARCHAR" property="wheelchairImage"/>
-		<result column="community_name" jdbcType="VARCHAR" property="communityName"/>
-		<result column="wheelchair_linkman" jdbcType="VARCHAR" property="wheelchairLinkMan"/>
-		<result column="wheelchair_oriented" jdbcType="VARCHAR" property="wheelchairOriented"/>
-		<result column="wheelchair_detailes_img" jdbcType="VARCHAR" property="wheelchairDetailsImg"/>
-		<result column="publisher" jdbcType="VARCHAR" property="publisher"/>
-		<result column="publish_time" jdbcType="VARCHAR" property="publishTime"/>
-	</resultMap>
+    <resultMap type="com.wheelchair.wym.entity.Users" id="AllUserMap">
+        <id column="u_id" jdbcType="INTEGER" property="uID"/>
+        <result column="u_name" jdbcType="VARCHAR" property="uName"/>
+        <result column="u_password" jdbcType="VARCHAR" property="uPassword"/>
+        <result column="u_phone_number" jdbcType="VARCHAR" property="uPhoneNumber"/>
+        <result column="u_nickname" jdbcType="VARCHAR" property="uNickName"/>
+        <result column="u_birthdate" jdbcType="DATE" property="uBirthdate"/>
+        <result column="u_age" jdbcType="INTEGER" property="uAge"/>
+        <result column="u_gender" jdbcType="VARCHAR" property="uGender"/>
+    </resultMap>
 
-	<resultMap type="com.wheelchair.wym.entity.UserOrder" id="UserOrderMap">
-		<id column="o_id" jdbcType="INTEGER" property="oID" />
-		<result column="c_id" jdbcType="INTEGER" property="cID"/>
-		<result column="u_id" jdbcType="INTEGER" property="uID"/>
-		<result column="community_name" jdbcType="VARCHAR" property="cName"/>
-		<result column="chair_no" jdbcType="VARCHAR" property="chairNo"/>
-		<result column="name" jdbcType="VARCHAR" property="uName"/>
-		<result column="phone" jdbcType="VARCHAR" property="uPhone"/>
-		<result column="address" jdbcType="VARCHAR" property="uAddress"/>
-		<result column="start_date" jdbcType="VARCHAR" property="startDate"/>
-		<result column="end_date" jdbcType="VARCHAR" property="endDate"/>
-		<result column="order_status" jdbcType="VARCHAR" property="orderStatus"/>
-	</resultMap>
+    <resultMap type="com.wheelchair.wym.entity.Wheelchair" id="AllWheelchairMap">
+        <id column="h_id" jdbcType="INTEGER" property="hID"/>
+        <result column="wheelchair_desc" jdbcType="VARCHAR" property="wheelchairDesc"/>
+        <result column="wheelchair_model" jdbcType="VARCHAR" property="wheelchairModel"/>
+        <result column="wheelchair_area" jdbcType="VARCHAR" property="wheelchairArea"/>
+        <result column="wheelchair_floor" jdbcType="VARCHAR" property="wheelchairFloor"/>
+        <result column="wheelchair_type" jdbcType="VARCHAR" property="wheelchairType"/>
+        <result column="wheelchair_price" jdbcType="VARCHAR" property="wheelchairPrice"/>
+        <result column="wheelchair_address" jdbcType="VARCHAR" property="wheelchairAddress"/>
+        <result column="wheelchair_image" jdbcType="VARCHAR" property="wheelchairImage"/>
+        <result column="community_name" jdbcType="VARCHAR" property="communityName"/>
+        <result column="wheelchair_linkman" jdbcType="VARCHAR" property="wheelchairLinkMan"/>
+        <result column="wheelchair_oriented" jdbcType="VARCHAR" property="wheelchairOriented"/>
+        <result column="wheelchair_detailes_img" jdbcType="VARCHAR" property="wheelchairDetailsImg"/>
+        <result column="publisher" jdbcType="VARCHAR" property="publisher"/>
+        <result column="publish_time" jdbcType="VARCHAR" property="publishTime"/>
+    </resultMap>
 
-	<resultMap id="RepairOrderMap" type="com.wheelchair.wym.entity.RepairOrder">
-		<id column="id" jdbcType="INTEGER" property="repairOrderID"/>
-		<result column="oID" jdbcType="INTEGER" property="oID"/>
-		<result column="u_id" jdbcType="INTEGER" property="uID"/>
-		<result column="type" jdbcType="VARCHAR" property="type"/>
-		<result column="pickupDate" jdbcType="VARCHAR" property="pickupDate"/>
-		<result column="address" jdbcType="VARCHAR" property="address"/>
-		<result column="phone" jdbcType="VARCHAR" property="phone"/>
-		<result column="orderStatus" jdbcType="INTEGER" property="orderStatus"/>
-	</resultMap>
+    <resultMap type="com.wheelchair.wym.entity.UserOrder" id="UserOrderMap">
+        <id column="o_id" jdbcType="INTEGER" property="oID"/>
+        <result column="c_id" jdbcType="INTEGER" property="cID"/>
+        <result column="u_id" jdbcType="INTEGER" property="uID"/>
+        <result column="community_name" jdbcType="VARCHAR" property="cName"/>
+        <result column="chair_no" jdbcType="VARCHAR" property="chairNo"/>
+        <result column="name" jdbcType="VARCHAR" property="uName"/>
+        <result column="phone" jdbcType="VARCHAR" property="uPhone"/>
+        <result column="address" jdbcType="VARCHAR" property="uAddress"/>
+        <result column="start_date" jdbcType="VARCHAR" property="startDate"/>
+        <result column="end_date" jdbcType="VARCHAR" property="endDate"/>
+        <result column="order_status" jdbcType="VARCHAR" property="orderStatus"/>
+    </resultMap>
 
-	<resultMap id="DeliveryOrderMap" type="com.wheelchair.wym.entity.DeliveryOrder">
-		<id column="d_id" jdbcType="INTEGER" property="dID"/>
-		<result column="u_id" jdbcType="INTEGER" property="uID"/>
-		<result column="c_id" jdbcType="INTEGER" property="cID"/>
-		<result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
-		<result column="address" jdbcType="VARCHAR" property="address"/>
-		<result column="phone" jdbcType="VARCHAR" property="phone"/>
-	</resultMap>
+    <resultMap id="RepairOrderMap" type="com.wheelchair.wym.entity.RepairOrder">
+        <id column="id" jdbcType="INTEGER" property="repairOrderID"/>
+        <result column="oID" jdbcType="INTEGER" property="oID"/>
+        <result column="u_id" jdbcType="INTEGER" property="uID"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="pickupDate" jdbcType="VARCHAR" property="pickupDate"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="orderStatus" jdbcType="INTEGER" property="orderStatus"/>
+    </resultMap>
 
-	<!-- 管理员登录 -->
-	<select id="adminAccess" resultMap="BasicMap" parameterType="com.wheelchair.wym.entity.Admin">
-		select * from t_admin where username=#{username} and userpwd=#{userpwd}
-	</select>
+    <resultMap id="DeliveryOrderMap" type="com.wheelchair.wym.entity.DeliveryOrder">
+        <id column="d_id" jdbcType="INTEGER" property="dID"/>
+        <result column="u_id" jdbcType="INTEGER" property="uID"/>
+        <result column="c_id" jdbcType="INTEGER" property="cID"/>
+        <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    </resultMap>
 
-	<!-- 查询所有用户 -->
-	<select id="findAllUser" resultMap="AllUserMap">
-		select * from t_users
-	</select>
+    <!-- 管理员登录 -->
+    <select id="adminAccess" resultMap="BasicMap" parameterType="com.wheelchair.wym.entity.Admin">
+        select *
+        from t_admin
+        where username = #{username}
+          and userpwd = #{userpwd}
+    </select>
 
-	<select id="findAllWheelchair" resultMap="AllWheelchairMap" parameterType="com.wheelchair.wym.entity.Page">
-		select * from t_wheelchair limit #{page},#{limit}
-	</select>
+    <!-- 查询所有用户 -->
+    <select id="findAllUser" resultMap="AllUserMap">
+        select *
+        from t_users
+    </select>
 
-	<delete id="deleteWheelchair" parameterType="int">
-		delete from t_wheelchair where h_id=#{hID}
-	</delete>
+    <select id="findAllWheelchair" resultMap="AllWheelchairMap" parameterType="com.wheelchair.wym.entity.Page">
+        select *
+        from t_wheelchair
+        limit #{page},#{limit}
+    </select>
 
-	<select id="findUserById" parameterType="int" resultMap="AllUserMap">
-		select * from t_users where u_id = #{uID}
-	</select>
+    <delete id="deleteWheelchair" parameterType="int">
+        delete
+        from t_wheelchair
+        where h_id = #{hID}
+    </delete>
 
-	<update id="updateUser" parameterType="com.wheelchair.wym.entity.Users">
-		update t_users set
-			u_name = #{uName},
-			u_password = #{uPassword},
-			u_phone_number=#{uPhoneNumber},
-			u_nickname = #{uNickName}
-		where u_id=#{uID}
-	</update>
+    <select id="findUserById" parameterType="int" resultMap="AllUserMap">
+        select *
+        from t_users
+        where u_id = #{uID}
+    </select>
 
-	<delete id="deleteUser" parameterType="int">
-		delete from t_users where u_id=#{uID}
-	</delete>
+    <update id="updateUser" parameterType="com.wheelchair.wym.entity.Users">
+        update t_users
+        set u_name        = #{uName},
+            u_password    = #{uPassword},
+            u_phone_number=#{uPhoneNumber},
+            u_nickname    = #{uNickName}
+        where u_id = #{uID}
+    </update>
 
-	<select id="checkAdminPwd" parameterType="com.wheelchair.wym.entity.Admin" resultMap="BasicMap">
-		select * from t_admin where userpwd=#{userpwd} and id = #{id}
-	</select>
+    <delete id="deleteUser" parameterType="int">
+        delete
+        from t_users
+        where u_id = #{uID}
+    </delete>
 
-<!--	管理员查询所有租赁订单-->
+    <select id="checkAdminPwd" parameterType="com.wheelchair.wym.entity.Admin" resultMap="BasicMap">
+        select *
+        from t_admin
+        where userpwd = #{userpwd}
+          and id = #{id}
+    </select>
+
+    <!-- 管理员查询所有租赁订单 -->
     <select id="findAllOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="UserOrderMap">
-		select o.*, h.community_name AS community_name, c.chair_no AS chair_no
-		from t_order o
-				 join t_chair c on o.c_id = c.c_id
-				 join t_wheelchair h on c.h_id = h.h_id
-			limit #{page}, #{limit}
-	</select>
+        select o.*, h.community_name AS community_name, c.chair_no AS chair_no
+        from t_order o
+                 join t_chair c on o.c_id = c.c_id
+                 join t_wheelchair h on c.h_id = h.h_id
+        limit #{page}, #{limit}
+    </select>
 
     <select id="findAllRepairOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="RepairOrderMap">
-		select r.*, o.u_id
-		from t_repair_order r
-		join t_order o on r.oID = o.o_id
-		limit #{page}, #{limit}
-	</select>
+        select r.*, o.u_id
+        from t_repair_order r
+                 join t_order o on r.oID = o.o_id
+        limit #{page}, #{limit}
+    </select>
 
     <update id="updateAdminPwd" parameterType="com.wheelchair.wym.entity.Admin">
-		update t_admin set
-			userpwd=#{userpwd}
-		where id=#{id}
-	</update>
-	<update id="confirmRepairOrder">
-		update t_
-	</update>
+        update t_admin
+        set userpwd=#{userpwd}
+        where id = #{id}
+    </update>
 
-	<select id="findAllDeliveryOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="DeliveryOrderMap">
-		SELECT * FROM t_delivery_order
-		LIMIT #{page}, #{limit}
-	</select>
+    <update id="confirmRepairOrder">
+        update t_
+    </update>
+
+    <select id="findAllDeliveryOrder" parameterType="com.wheelchair.wym.entity.Page" resultMap="DeliveryOrderMap">
+        SELECT *
+        FROM t_delivery_order
+        LIMIT #{page}, #{limit}
+    </select>
+
+    <!-- 查询男女用户数量 -->
+    <select id="countGender" resultType="map">
+        SELECT u_gender,
+               COUNT(*) AS count
+        FROM t_users
+        GROUP BY u_gender
+    </select>
+
 </mapper>

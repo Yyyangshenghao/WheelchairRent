@@ -2,9 +2,6 @@ package com.wheelchair.wym.entity;
 
 import java.util.Date;
 
-/**
- * @Description 租房用户
- */
 public class Users {
 
     private int uID;
