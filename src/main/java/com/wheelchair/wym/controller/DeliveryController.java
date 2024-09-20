@@ -58,12 +58,19 @@ public class DeliveryController {
 
     // 删除配送订单
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteDeliveryOrder(@PathVariable Long id) {
+    public ResponseEntity<String> deleteDeliveryOrder(@PathVariable int id) {
         int result = deliveryOrderService.deleteDeliveryOrder(id);
         if (result > 0) {
             return ResponseEntity.ok("Delivery order deleted successfully");
         } else {
             return ResponseEntity.status(500).body("Failed to delete delivery order");
         }
+    }
+
+    @PostMapping("/updateOrderStatus")
+    public String updateOrderStatus(@RequestParam("id") Long id, @RequestParam("status") Integer status) {
+        // 调用服务层方法更新订单状态
+        boolean success = deliveryOrderService.updateOrderStatus(id, status);
+        return success ? "OK" : "FAIL";
     }
 }

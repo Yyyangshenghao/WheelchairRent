@@ -27,7 +27,7 @@
     </select>
 
     <!-- 更新维修/保养订单状态 -->
-    <update id="updateRepairOrderStatus" parameterType="map">
+    <update id="updateRepairOrderStatus" parameterType="com.wheelchair.wym.entity.RepairOrder">
         UPDATE t_repair_order
         SET orderStatus = #{orderStatus}
         WHERE id = #{id}

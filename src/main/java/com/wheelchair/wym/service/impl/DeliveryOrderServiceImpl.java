@@ -34,8 +34,15 @@ public class DeliveryOrderServiceImpl implements IDeliveryOrderService {
         return deliveryOrderMapper.updateDeliveryOrder(deliveryOrder);
     }
 
+
     @Override
-    public int deleteDeliveryOrder(Long id) {
+    public int deleteDeliveryOrder(int id) {
         return deliveryOrderMapper.deleteDeliveryOrder(id);
+    }
+
+    @Override
+    public boolean updateOrderStatus(Long id, Integer status) {
+        // 假设你有一个 Mapper 来执行数据库操作
+        return deliveryOrderMapper.updateOrderStatus(id, status) > 0;
     }
 }

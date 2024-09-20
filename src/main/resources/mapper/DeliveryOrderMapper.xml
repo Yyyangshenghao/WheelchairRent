@@ -10,7 +10,7 @@
     </insert>
 
     <!-- 根据ID删除配送订单 -->
-    <delete id="deleteDeliveryOrder" parameterType="long">
+    <delete id="deleteDeliveryOrder" parameterType="int">
         DELETE FROM t_delivery_order
         WHERE d_id = #{id}
     </delete>
@@ -32,6 +32,12 @@
         SET u_id = #{uId}, c_id = #{cId}, order_status = #{orderStatus}, address = #{address}, name = #{name},
             phone = #{phone}, type = #{type}, date = #{date}
         WHERE d_id = #{dId}
+    </update>
+
+    <update id="updateOrderStatus" parameterType="map">
+        UPDATE t_delivery_order
+        SET order_status = #{status}
+        WHERE dID = #{id}
     </update>
 
 </mapper>

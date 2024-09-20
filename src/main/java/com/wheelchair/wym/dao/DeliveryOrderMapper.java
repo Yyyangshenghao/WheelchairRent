@@ -11,7 +11,7 @@ public interface DeliveryOrderMapper {
     int insertDeliveryOrder(DeliveryOrder deliveryOrder);
 
     // 根据ID删除配送订单
-    int deleteDeliveryOrder(Long id);
+    int deleteDeliveryOrder(int id);
 
     // 根据ID获取配送订单
     DeliveryOrder getDeliveryOrderById(Long id);
@@ -21,4 +21,7 @@ public interface DeliveryOrderMapper {
 
     // 更新配送订单
     int updateDeliveryOrder(DeliveryOrder deliveryOrder);
+
+    // 更新订单状态
+    int updateOrderStatus(Long id, Integer status);
 }

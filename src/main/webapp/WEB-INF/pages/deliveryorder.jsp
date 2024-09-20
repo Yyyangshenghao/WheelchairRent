@@ -57,18 +57,29 @@
         // 删除订单操作
         function deleteDeliveryOrder(data, obj) {
             layer.confirm('确认删除当前数据吗？', {icon: 5, shade: 0.1}, function (index) {
-                $.post("deleteDeliveryOrder", {id: data.dId}, function (response) {  // 确保发送正确的 id
-                    if (response === "OK") {
-                        obj.del();
-                        reloadTable();
-                        layer.msg("删除成功");
-                    } else {
-                        handleAjaxError(response);
+                $.ajax({
+                    url: "/delivery-orders/" + data.dID,  // 确保发送正确的 id
+                    type: "DELETE",  // 设置请求方法为 DELETE
+                    success: function (response) {
+                        console.log("data.dID:\n", data.dID);
+                        console.log("data:\n", data);
+                        if (response === "Delivery order deleted successfully") {  // 确保根据后端返回的内容判断
+                            obj.del();
+                            reloadTable();
+                            layer.msg("删除成功");
+                        } else {
+                            handleAjaxError(response);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error:", error);
+                        handleAjaxError(xhr.responseText);
                     }
                 });
                 layer.close(index);
             });
         }
+
 
         table.on('tool(order)', function (obj) {
             var data = obj.data;
@@ -82,11 +93,23 @@
             if (layEvent === 'delete') {
                 deleteDeliveryOrder(data, obj);  // 执行删除操作
             }
+
+            if (layEvent === 'update') {
+                $.post("updateOrderStatus", { id: data.dID, status: 1 }, function (response) {
+                    if (response === "OK") {
+                        layer.msg("订单状态已更新");
+                        reloadTable();  // 刷新表格
+                    } else {
+                        handleAjaxError(response);  // 错误处理
+                    }
+                });
+            }
         });
     })
 </script>
 <script type="text/html" id="tools">
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn-sm" lay-event="update">确认</a>
 </script>
 </body>
 </html>

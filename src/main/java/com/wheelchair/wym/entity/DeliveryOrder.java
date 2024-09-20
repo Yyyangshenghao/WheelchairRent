@@ -1,7 +1,5 @@
 package com.wheelchair.wym.entity;
 
-import com.sun.javafx.beans.IDProperty;
-
 import java.util.Date;
 
 public class DeliveryOrder {

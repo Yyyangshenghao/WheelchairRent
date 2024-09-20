@@ -19,5 +19,8 @@ public interface IDeliveryOrderService {
     int updateDeliveryOrder(DeliveryOrder deliveryOrder);
 
     // 删除配送订单
-    int deleteDeliveryOrder(Long id);
+    int deleteDeliveryOrder(int id);
+
+    // 确认配送订单
+    boolean updateOrderStatus(Long id, Integer status);
 }
