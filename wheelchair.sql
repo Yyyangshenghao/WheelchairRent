@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : dc
+ Source Server         : 1
  Source Server Type    : MySQL
- Source Server Version : 80032 (8.0.32)
+ Source Server Version : 80033 (8.0.33)
  Source Host           : localhost:3306
  Source Schema         : wheelchair
 
  Target Server Type    : MySQL
- Target Server Version : 80032 (8.0.32)
+ Target Server Version : 80033 (8.0.33)
  File Encoding         : 65001
 
- Date: 21/09/2024 03:54:19
+ Date: 21/09/2024 22:19:12
 */
 
 SET NAMES utf8mb4;
@@ -149,7 +149,7 @@ CREATE TABLE `t_users`  (
   `u_age` int NOT NULL COMMENT '年龄',
   PRIMARY KEY (`u_id`) USING BTREE,
   UNIQUE INDEX `uniq`(`u_name` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_users
@@ -188,8 +188,8 @@ CREATE TABLE `t_wheelchair`  (
 -- ----------------------------
 -- Records of t_wheelchair
 -- ----------------------------
-INSERT INTO `t_wheelchair` VALUES (30, '互邦HBLD2-E电动轮椅可折叠轻便携铝合金锂电池老年人残疾人轮椅代步车', '加宽轮椅，手动折叠', '20', 'HBLD2-E', 0, 30, '上海', 'http://localhost:8090/images/997b2cc4-fb5c-46da-b8da-82a6ab0de843.jpg', '碧桂园豪庭一期', '13813813800', '22', 'http://localhost:8090/images/b70a0eed-5182-4172-b9f3-d900f066097c.jpg~http://localhost:8090/images/5356fd0b-8ac9-4d39-adb4-c861b5522671.jpg~http://localhost:8090/images/1a6660f5-53b9-4498-aa50-f029af6bfd29.jpg~', 'wym', '2019-12-12 00:28:43');
-INSERT INTO `t_wheelchair` VALUES (31, '迪护电动轮椅老人全自动越野轻便可折叠旅行便携式家用老年代步电动车专用智能可躺上飞机带坐便器DH-QBK12AQ', '小轮便携，手动折叠', '18', 'DH-QBK12AQ', 0, 40, '上海', 'http://localhost:8090/images/382f528c-59ee-4a4e-bb37-564b88e8489e.jpg', '虎门万达广场', '18818818822', '21', 'http://localhost:8090/images/92930fad-8fdb-4320-a66e-5189b9c66727.jpg~http://localhost:8090/images/c7f62778-a9b5-4832-b988-452f6ead0d9d.jpg~http://localhost:8090/images/1b33a1f3-a3e5-4f1f-8945-150581a6ee08.jpg~', 'wym', '2019-12-12 00:32:02');
-INSERT INTO `t_wheelchair` VALUES (41, '互邦HBLD2-E电动轮椅可折叠轻便携铝合金锂电池老年人残疾人轮椅代步车', '加宽轮椅，手动折叠', '20', 'HBLD2-E', 8, 30, '上海', '', '互邦', '13817355618', '21', '', '管理员', '2024-09-15 16:29:10');
+INSERT INTO `t_wheelchair` VALUES (30, '互邦HBLD2-E电动轮椅可折叠轻便携铝合金锂电池老年人残疾人轮椅代步车', '加宽轮椅，手动折叠', '20', 'HBLD2-E', 0, 30, '上海', '/static/img/wheelchair1.png', '碧桂园豪庭一期', '13813813800', '22', '/static/img/wheelchair1.png', 'wym', '2019-12-12 00:28:43');
+INSERT INTO `t_wheelchair` VALUES (31, '迪护电动轮椅老人全自动越野轻便可折叠旅行便携式家用老年代步电动车专用智能可躺上飞机带坐便器DH-QBK12AQ', '小轮便携，手动折叠', '18', 'DH-QBK12AQ', 0, 40, '上海', '/static/img/wheelchair2.png', '虎门万达广场', '18818818822', '21', '/static/img/wheelchair2.png', 'wym', '2019-12-12 00:32:02');
+INSERT INTO `t_wheelchair` VALUES (41, '互邦HBLD2-E电动轮椅可折叠轻便携铝合金锂电池老年人残疾人轮椅代步车', '加宽轮椅，手动折叠', '20', 'HBLD2-E', 8, 30, '上海', '/static/img/wheelchair3.png', '互邦', '13817355618', '21', '/static/img/wheelchair3.png', '管理员', '2024-09-15 16:29:10');
 
 SET FOREIGN_KEY_CHECKS = 1;
