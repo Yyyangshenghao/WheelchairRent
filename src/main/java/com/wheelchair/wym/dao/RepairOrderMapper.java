@@ -8,4 +8,8 @@ public interface RepairOrderMapper {
     int insertRepairOrder(RepairOrder repairOrder);
     int deleteRepairOrder(int id);
     int deleteRepairOrderByoID(int oID);
+
+    boolean updateRepairOrderStatus(int id, int orderStatus);
+
+    boolean updateRepairOrderStatusByoID(int oID, Integer rStatus);
 }

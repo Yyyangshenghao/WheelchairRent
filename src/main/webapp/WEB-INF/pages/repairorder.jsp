@@ -46,9 +46,15 @@
                             case 0:
                                 return '未确认';
                             case 1:
-                                return '已确认,正在回收中';
+                                return '已确认，正在回收中';
                             case 2:
-                                return '已完成'
+                                return '已回收，等待维修/保养'
+                            case 3:
+                                return '正在维修/保养'
+                            case 4:
+                                return '维修/保养完成'
+                            case 5:
+                                return '维修/保养失败'
                         }}},
                 {title: '操作', align: 'center', toolbar: "#tools"}
             ]]

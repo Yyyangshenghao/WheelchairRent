@@ -71,9 +71,12 @@ public class DeliveryController {
     }
 
     @PostMapping("/updateOrderStatus")
-    public String updateOrderStatus(@RequestParam("dID") Long dID, @RequestParam("d_status") Integer d_status, @RequestParam("uID") int uID, @RequestParam("cID") int cID, @RequestParam("o_status") Integer o_status) {
+    public String updateOrderStatus(@RequestParam("dID") Long dID, @RequestParam("d_status") Integer d_status, @RequestParam("uID") int uID, @RequestParam("cID") int cID, @RequestParam("o_status") Integer o_status, @RequestParam("r_status") Integer r_status) {
         int oID = orderService.findAnOrder(uID,cID);
+        int Original_O_Status = orderService.findStatusByoID(oID);
+        if (Original_O_Status == 5) o_status = 0;
         boolean success = deliveryOrderService.updateOrderStatus(dID, d_status) && orderService.updateOrderStatus(oID, o_status);
-        return success ? "OK" : "FAIL";
+        boolean success2 = deliveryOrderService.updateOrderStatus(dID, d_status) && orderService.updateRepairOrderStatus(oID, r_status);
+        return (success || success2)? "OK" : "FAIL";
     }
 }

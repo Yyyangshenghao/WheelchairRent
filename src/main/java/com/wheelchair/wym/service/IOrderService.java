@@ -59,4 +59,8 @@ public interface IOrderService {
     int findChairByoID(int oID);
 
     int deleteRepairOrderByoID(int oID);
+
+    boolean updateRepairOrderStatus(int oID, Integer rStatus);
+
+    int findStatusByoID(int oID);
 }

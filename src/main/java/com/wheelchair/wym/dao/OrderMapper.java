@@ -41,4 +41,6 @@ public interface OrderMapper {
     int findAnOrder(int uID, int cID);
 
     int findChairByoID(int oID);
+
+    int findStatusByoID(int oID);
 }

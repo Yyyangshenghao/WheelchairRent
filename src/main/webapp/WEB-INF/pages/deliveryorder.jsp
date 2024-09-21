@@ -114,7 +114,7 @@
             }
 
             if (layEvent === 'update') {
-                $.post("/delivery-orders/updateOrderStatus", { dID: data.dID, d_status: 1, uID: data.uID, cID: data.cID, o_status: 2}, function (response) {
+                $.post("/delivery-orders/updateOrderStatus", { dID: data.dID, d_status: 1, uID: data.uID, cID: data.cID, o_status: 2, r_status: 0}, function (response) {
                     if (response === "OK") {
                         layer.msg("订单状态已更新");
                         reloadTable();  // 刷新表格
@@ -125,7 +125,7 @@
             }
 
             if(layEvent === 'signed') {
-                $.post("/delivery-orders/updateOrderStatus", { dID: data.dID, d_status: 2, uID: data.uID, cID: data.cID, o_status: 3}, function (response) {
+                $.post("/delivery-orders/updateOrderStatus", { dID: data.dID, d_status: 2, uID: data.uID, cID: data.cID, o_status: 3, r_status: 2, }, function (response) {
                     if (response === "OK") {
                         layer.msg("订单状态已更新");
                         reloadTable();  // 刷新表格

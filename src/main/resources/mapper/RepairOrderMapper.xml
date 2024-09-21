@@ -33,6 +33,12 @@
         WHERE id = #{id}
     </update>
 
+    <update id="updateRepairOrderStatusByoID">
+        update t_repair_order
+        set orderStatus = #{rStatus}
+        where oID = #{oID}
+    </update>
+
     <delete id="deleteRepairOrderByoID">
         delete from t_repair_order where oID=#{oID}
     </delete>
