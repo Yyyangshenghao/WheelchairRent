@@ -2,7 +2,6 @@ package com.wheelchair.wym.controller;
 
 import com.wheelchair.wym.entity.*;
 import com.wheelchair.wym.service.IAdminService;
-import com.wheelchair.wym.service.IDeliveryOrderService;
 import com.wheelchair.wym.service.IOrderService;
 import com.wheelchair.wym.service.IWheelchairService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -168,11 +168,11 @@ public class AdminController {
             int cID = orderService.findChairByoID(oID);
             deliveryOrder.setuID(uID);
             deliveryOrder.setcID(cID);
-            deliveryOrder.setOrderStatus(1); //回收订单不需要后台管理员确认
+            deliveryOrder.setOrderStatus(1); // 回收订单不需要后台管理员确认
             deliveryOrder.setAddress(address);
             deliveryOrder.setName(name);
             deliveryOrder.setPhone(phone);
-            deliveryOrder.setType(1); //1代表收回轮椅
+            deliveryOrder.setType(1); // 1代表收回轮椅
             deliveryOrder.setDate(Date);
 
             int m = orderService.addDeliveryOrder(deliveryOrder);
@@ -277,14 +277,32 @@ public class AdminController {
     @RequestMapping("/genderCount")
     @ResponseBody
     public String genderCount() {
-        Map<String, Integer> genderCountMap = service.countGender();
+        // 假设返回的是 Map<String, Map<String, Object>>，每个性别对应一个包含具体信息的 Map
+        Map<String, Map<String, Object>> genderCountMap = service.countGender();
 
-        // 在控制台和终端输出结果
-        System.out.println("Gender Count: " + genderCountMap);
+        // 输出整个 Map 数据，帮助调试
+        System.out.println("Gender Count Map: " + genderCountMap);
 
-        // 创建响应字符串
-        String response = "User Gender Count:\n" + "Male: " + genderCountMap.getOrDefault("M", 0) + "\n" + "Female: " + genderCountMap.getOrDefault("F", 0) + "\n";
+        // 遍历 Map，输出每一条键值对，检查具体的内容
+        for (Map.Entry<String, Map<String, Object>> entry : genderCountMap.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
 
+        // 提取男性和女性的 count 值
+        Long maleCount = (Long) genderCountMap.getOrDefault("M", new HashMap<>()).get("count");
+        Long femaleCount = (Long) genderCountMap.getOrDefault("F", new HashMap<>()).get("count");
+
+        // 输出调试信息
+        System.out.println("Male Count: " + maleCount);
+        System.out.println("Female Count: " + femaleCount);
+
+        // 返回性别统计信息
+        String response = "User Gender Count:\n" + "Male: " + maleCount + "\n" + "Female: " + femaleCount + "\n";
         return response;
+    }
+
+    @RequestMapping("/genderPie")
+    public String genderPie() {
+        return "genderPie";
     }
 }

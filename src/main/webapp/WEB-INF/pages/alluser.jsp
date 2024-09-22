@@ -8,12 +8,23 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/layui/css/layui.css">
 </head>
 <body>
+
 <div class="layui-fluid" style="margin-top: 40px;">
     <fieldset class="layui-elem-field layui-field-title">
         <legend style="font-size: 26px">所有注册用户</legend>
     </fieldset>
+
+    <!-- 包含 genderPie.jsp，展示性别比例饼图 -->
+    <div class="layui-row" style="margin-bottom: 20px;">
+        <div class="layui-col-md6">
+            <%@ include file="genderPie.jsp" %>
+        </div>
+    </div>
+
+    <!-- 用户列表表格 -->
     <table id="allUser" lay-filter="user"></table>
 </div>
+
 <script src="${pageContext.request.contextPath }/static/layui/layui.js"></script>
 <script>
     layui.use(['element', 'table'], function () {
