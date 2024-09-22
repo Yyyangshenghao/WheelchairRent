@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wheelchair.wym.dao.CommentMapper">
+
+    <!-- Comment 表的 ResultMap -->
+    <resultMap id="CommentMap" type="com.wheelchair.wym.entity.Comment">
+        <id column="comment_id" property="commentID" jdbcType="INTEGER"/>
+        <result column="u_id" property="userID" jdbcType="INTEGER"/>
+        <result column="o_id" property="orderID" jdbcType="INTEGER"/>
+        <result column="c_id" property="wheelchairID" jdbcType="INTEGER"/>
+        <result column="comment_content" property="commentContent"
+                jdbcType="VARCHAR"/>
+        <result column="comment_date" property="commentDate"
+                jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 插入新的评论 -->
+    <insert id="addNewComment"
+            parameterType="com.wheelchair.wym.entity.Comment">
+        INSERT INTO t_comment (u_id, o_id, c_id, comment_content, comment_date)
+        VALUES (#{userID}, #{orderID}, #{wheelchairID}, #{commentContent},
+                NOW())
+    </insert>
+
+    <!-- 根据轮椅ID查询相关评论 -->
+    <select id="findCommentsByWheelchairID" parameterType="int"
+            resultMap="CommentMap">
+        SELECT comment_id, u_id, o_id, c_id, comment_content, comment_date
+        FROM t_comment
+        WHERE c_id = #{wheelchairID}
+    </select>
+
+    <!-- 根据用户ID查询相关评论 -->
+    <select id="findCommentsByUserID" parameterType="int"
+            resultMap="CommentMap">
+        SELECT comment_id, u_id, o_id, c_id, comment_content, comment_date
+        FROM t_comment
+        WHERE u_id = #{userID}
+    </select>
+
+    <!-- 根据订单ID查询相关评论 -->
+    <select id="findCommentsByOrderID" parameterType="int"
+            resultMap="CommentMap">
+        SELECT comment_id, u_id, o_id, c_id, comment_content, comment_date
+        FROM t_comment
+        WHERE o_id = #{orderID}
+    </select>
+
+    <!-- 删除评论 -->
+    <delete id="deleteCommentByID" parameterType="int">
+        DELETE
+        FROM t_comment
+        WHERE comment_id = #{commentID}
+    </delete>
+
+</mapper>

@@ -164,6 +164,16 @@
             </form>
         </div>
     </div>
+    <%-- 评论展示 --%>
+    <div>
+        <h3>用户评论：</h3>
+        <c:forEach var="comment" items="${Comments}">
+            <div class="comment">
+                <p><strong>评论内容：</strong>${comment.commentContent}</p>
+                <p><strong>评论时间：</strong>${comment.commentDate}</p>
+            </div>
+        </c:forEach>
+    </div>
 </section>
 
 
