@@ -15,7 +15,7 @@
     </fieldset>
 
     <!-- 包含 genderPie.jsp，展示性别比例饼图 -->
-    <div class="layui-row" style="margin-bottom: 20px;">
+    <div class="layui-row gender-pie" style="margin-bottom: -110px;">
         <div class="layui-col-md6">
             <%@ include file="genderPie.jsp" %>
         </div>

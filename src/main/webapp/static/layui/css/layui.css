@@ -5015,3 +5015,8 @@ body .layui-util-face .layui-layer-content {
     -webkit-animation-name: layui-fadeout;
     animation-name: layui-fadeout
 }
+
+.gender-pie {
+    width: 300px;
+    height: 300px;
+}
