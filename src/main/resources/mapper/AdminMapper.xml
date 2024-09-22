@@ -71,6 +71,15 @@
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
     </resultMap>
 
+    <resultMap id="ChairMap" type="com.wheelchair.wym.entity.Chair">
+        <id column="c_id" jdbcType="INTEGER" property="cID"/>
+        <result column="h_id" jdbcType="INTEGER" property="hID"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="u_id" jdbcType="INTEGER" property="uID"/>
+        <result column="last_maintenance_date" jdbcType="VARCHAR" property="lastMaintenanceDate"/>
+        <result column="chair_no" jdbcType="VARCHAR" property="chairNo"/>
+    </resultMap>
+
     <!-- 管理员登录 -->
     <select id="adminAccess" resultMap="BasicMap" parameterType="com.wheelchair.wym.entity.Admin">
         select *
@@ -165,6 +174,12 @@
                COUNT(*) AS count
         FROM t_users
         GROUP BY u_gender
+    </select>
+
+    <select id="findAllChair" parameterType="com.wheelchair.wym.entity.Page" resultMap="ChairMap">
+        select *
+        from t_chair
+        limit #{page}, #{limit}
     </select>
 
 </mapper>

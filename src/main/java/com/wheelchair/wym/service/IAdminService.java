@@ -75,4 +75,9 @@ public interface IAdminService {
      * 查询用户男女数量
      */
     Map<String, Integer> countGender();
+
+    /**
+     * 查询所有轮椅单品信息
+     */
+    List<Chair> findAllChair(Page p);
 }

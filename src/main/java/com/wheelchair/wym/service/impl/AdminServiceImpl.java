@@ -88,4 +88,9 @@ public class AdminServiceImpl implements IAdminService {
     public Map<String, Integer> countGender() {
         return service.countGender();
     }
+
+    @Override
+    public List<Chair> findAllChair(Page p) {
+        return service.findAllChair(p);
+    }
 }

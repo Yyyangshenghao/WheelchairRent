@@ -52,4 +52,6 @@ public interface AdminMapper {
     // 查询用户男女数量
     @MapKey("u_gender") // 将结果映射为以性别为键的Map
     Map<String, Integer> countGender();
+
+    List<Chair> findAllChair(Page p);
 }

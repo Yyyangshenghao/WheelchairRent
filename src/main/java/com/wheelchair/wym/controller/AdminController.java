@@ -29,7 +29,6 @@ public class AdminController {
     @Autowired
     private IOrderService orderService;
 
-
     @RequestMapping("/toAdminLogin")
     public String toAdminLogin() {
         return "admin";
@@ -73,6 +72,11 @@ public class AdminController {
         return u;
     }
 
+    @RequestMapping("/toAllChairPage")
+    public String toAllChairPage() {
+        return "allchair";
+    }
+
     @RequestMapping("/toAllWheelchairPage")
     public String toAllWheelchairPage() {
         return "allwheelchair";
@@ -91,6 +95,21 @@ public class AdminController {
     @RequestMapping("/toDeliveryOrderPage")
     public String toDeliveryOrderPage() {
         return "deliveryorder";
+    }
+
+    @RequestMapping("/findAllChair")
+    @ResponseBody
+    public ChairData findAllChair(int page, int limit) {
+        Page p = new Page();
+        p.setLimit(limit);
+        p.setPage((page - 1) * limit);
+        List<Chair> findAllChair = service.findAllChair(p);
+        ChairData data = new ChairData();
+        data.setCode(0);
+        data.setCount(findAllChair.size());
+        data.setData(findAllChair);
+        data.setMsg("OK");
+        return data;
     }
 
     @RequestMapping("/findAllWheelchair")

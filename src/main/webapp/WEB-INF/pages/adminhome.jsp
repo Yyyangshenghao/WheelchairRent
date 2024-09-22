@@ -53,10 +53,9 @@
             <li class="layui-nav-item">
                 <a href="javascript:">轮椅信息管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="${pageContext.request.contextPath }/toAllWheelchairPage"
-                           target="iframe">所有轮椅信息</a></dd>
-                    <dd><a href="${pageContext.request.contextPath }/addWheelchair" target="iframe">添加轮椅信息</a>
-                    </dd>
+                    <dd><a href="${pageContext.request.contextPath }/toAllWheelchairPage" target="iframe">所有轮椅信息</a></dd>
+                    <dd><a href="${pageContext.request.contextPath }/toAllChairPage" target="iframe">单个轮椅信息</a></dd>
+                    <dd><a href="${pageContext.request.contextPath }/addWheelchair" target="iframe">添加轮椅信息</a></dd>
                 </dl>
             </li>
         </ul>

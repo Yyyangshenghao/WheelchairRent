@@ -102,6 +102,22 @@
             });
         }
 
+        // 维修轮椅
+        function repairChair(data, obj){
+            layer.confirm('是否确认维修/保养？',{icon: 5, shade: 0.1}, function (index){
+                $.post("repairChair", {oID:data.oID}, function (response){
+                    if(response === "OK"){
+                        obj.del();
+                        reloadTable();
+                        layer.msg("维修/保养已开始");
+                    } else {
+                        handleAjaxError(response);
+                    }
+                });
+                layer.close(index);
+            })
+        }
+
         table.on('tool(order)',function(obj){
             var data = obj.data;
             var layEvent = obj.event;
@@ -119,6 +135,10 @@
             if(layEvent === 'confirm'){
                 confirmRepairOrder(data, obj);
             }
+
+            if(layEvent === 'repair'){
+                repairChair(data, obj);
+            }
         });
     })
 </script>
@@ -126,6 +146,11 @@
     {{# if(d.orderStatus == 0) { }}
     <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
     {{# } }}
+
+    {{# if(d.orderStatus == 2) { }}
+    <a class="layui-btn layui-btn-xs" lay-event="repair">维修/保养</a>
+    {{# } }}
+
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
 
 
