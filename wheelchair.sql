@@ -11,7 +11,7 @@
  Target Server Version : 80033 (8.0.33)
  File Encoding         : 65001
 
- Date: 21/09/2024 22:19:12
+ Date: 22/09/2024 20:26:09
 */
 
 SET NAMES utf8mb4;
@@ -63,6 +63,31 @@ INSERT INTO `t_chair` VALUES (39, 41, 0, 0, NULL, 'HBLD2-E-9');
 INSERT INTO `t_chair` VALUES (40, 41, 0, 0, NULL, 'HBLD2-E-10');
 
 -- ----------------------------
+-- Table structure for t_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `t_comment`;
+CREATE TABLE `t_comment`  (
+  `comment_id` int NOT NULL AUTO_INCREMENT COMMENT '评论id',
+  `u_id` int NOT NULL COMMENT '用户id',
+  `o_id` int NOT NULL COMMENT '订单id',
+  `c_id` int NOT NULL COMMENT '轮椅id',
+  `comment_content` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '评论内容',
+  `comment_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '评论时间',
+  PRIMARY KEY (`comment_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of t_comment
+-- ----------------------------
+INSERT INTO `t_comment` VALUES (1, 20, 1, 30, '轮椅质量很好，使用起来非常舒适。', '2023-05-11 10:00:00');
+INSERT INTO `t_comment` VALUES (2, 21, 2, 31, '配送非常及时，轮椅非常结实耐用。', '2023-06-21 12:30:00');
+INSERT INTO `t_comment` VALUES (3, 22, 3, 41, '轮椅有点重，但整体质量不错。', '2023-07-31 15:45:00');
+INSERT INTO `t_comment` VALUES (4, 23, 4, 30, '轮椅很好用，客服服务也很到位。', '2023-08-11 09:00:00');
+INSERT INTO `t_comment` VALUES (5, 24, 5, 31, '轮椅很新，但感觉座位不太舒适。', '2023-09-16 14:00:00');
+INSERT INTO `t_comment` VALUES (6, 25, 6, 41, '总体还不错，唯一不足是轮子有些卡顿。', '2023-10-21 16:00:00');
+INSERT INTO `t_comment` VALUES (7, 26, 7, 30, '使用体验非常好，值得推荐。', '2023-11-12 10:30:00');
+
+-- ----------------------------
 -- Table structure for t_delivery_order
 -- ----------------------------
 DROP TABLE IF EXISTS `t_delivery_order`;
@@ -99,18 +124,25 @@ CREATE TABLE `t_order`  (
   `name` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '姓名',
   `address` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '地址',
   `phone` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '电话',
-  `order_status` int NOT NULL COMMENT '订单状态\r\n0为已结束，\r\n1为等待发货，\r\n2为配送中，\r\n3为使用中，\r\n4为等待回收,\r\n5为回收中',
+  `order_status` int NOT NULL COMMENT '订单状态\r\n0为订单结束，\r\n1为等待发货，\r\n2为等待收货，\r\n3为使用中，\r\n4为等待上门保养/维修，\r\n5为等待上门回收',
   PRIMARY KEY (`o_id`) USING BTREE,
   INDEX `fk1`(`c_id` ASC) USING BTREE,
   INDEX `fk2`(`u_id` ASC) USING BTREE,
   CONSTRAINT `fk2` FOREIGN KEY (`u_id`) REFERENCES `t_users` (`u_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_order
 -- ----------------------------
 INSERT INTO `t_order` VALUES (27, 31, 22, '2024-09-22 00:00:00', '2024-09-27 00:00:00', 'ysh', 'shanghai', '12341234123', 3);
 INSERT INTO `t_order` VALUES (28, 32, 22, '2024-09-22 00:00:00', '2024-10-11 00:00:00', 'ysh', 'test', '12341234123', 3);
+INSERT INTO `t_order` VALUES (29, 30, 20, '2023-05-01 10:00:00', '2023-05-10 18:00:00', 'wym', 'Beijing', '13556730677', 0);
+INSERT INTO `t_order` VALUES (30, 31, 21, '2023-06-15 09:30:00', '2023-06-20 17:30:00', '李先生', 'Guangzhou', '18320495603', 0);
+INSERT INTO `t_order` VALUES (31, 41, 22, '2023-07-22 11:00:00', '2023-07-30 16:45:00', 'ysh', 'Shanghai', '13818882922', 0);
+INSERT INTO `t_order` VALUES (32, 30, 23, '2023-08-01 08:00:00', '2023-08-10 19:00:00', 'JohnDoe', 'Nanjing', '15812345678', 0);
+INSERT INTO `t_order` VALUES (33, 31, 24, '2023-09-05 12:00:00', '2023-09-15 20:00:00', 'JaneD', 'Shenzhen', '15987654321', 0);
+INSERT INTO `t_order` VALUES (34, 41, 25, '2023-10-10 14:00:00', '2023-10-20 21:00:00', '张明', 'Hangzhou', '13912347890', 0);
+INSERT INTO `t_order` VALUES (35, 30, 26, '2023-11-01 09:00:00', '2023-11-11 18:00:00', '小丽', 'Chengdu', '13765478901', 0);
 
 -- ----------------------------
 -- Table structure for t_repair_order
