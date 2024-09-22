@@ -85,7 +85,7 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public Map<String, Integer> countGender() {
+    public Map<String, Map<String, Object>> countGender() {
         return service.countGender();
     }
 }

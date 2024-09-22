@@ -74,5 +74,5 @@ public interface IAdminService {
     /**
      * 查询用户男女数量
      */
-    Map<String, Integer> countGender();
+    Map<String, Map<String, Object>> countGender();
 }
