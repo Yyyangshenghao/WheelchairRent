@@ -22,17 +22,18 @@
 
             // 提取年龄段和数量
             const ageGroups = data.split('\n').filter(line => line.trim() !== '');
-            const labels = [];
+            const formattedLabels = [];
             const counts = [];
 
             ageGroups.forEach(group => {
                 const [ageGroup, count] = group.split(': ');
-                labels.push(ageGroup);
+                // 格式化标签，添加“岁”字
+                formattedLabels.push(ageGroup + '岁');
                 counts.push(parseInt(count));
             });
 
             // 输出调试信息
-            console.log("年龄段: ", labels);
+            console.log("年龄段: ", formattedLabels);
             console.log("数量: ", counts);
 
             // 使用 Chart.js 生成条形图
@@ -40,7 +41,7 @@
             const ageGroupBarChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: formattedLabels,
                     datasets: [{
                         label: '用户数量',
                         data: counts,
@@ -51,7 +52,14 @@
                 options: {
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            // 设置 y 轴为整数类型
+                            ticks: {
+                                callback: function (value, index, values) {
+                                    return Math.floor(value);
+                                },
+                                stepSize: 1 // 设置刻度步长为 1
+                            }
                         }
                     },
                     animation: {
