@@ -53,5 +53,9 @@ public interface AdminMapper {
     @MapKey("u_gender") // 将结果映射为以性别为键的Map
     Map<String, Map<String, Object>> countGender();
 
+    // 查询不同年龄段的用户数量
+    @MapKey("age_group") // 将结果映射为以年龄段为键的Map
+    Map<String, Map<String, Object>> countAgeGroups();
+
     List<Chair> findAllChair(Page p);
 }

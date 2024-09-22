@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>查看所有用户</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/layui/css/layui.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath }/static/layui/css/layui.css">
 </head>
 <body>
 
@@ -15,9 +16,12 @@
     </fieldset>
 
     <!-- 包含 genderPie.jsp，展示性别比例饼图 -->
-    <div class="layui-row gender-pie" style="margin-bottom: -110px;">
-        <div class="layui-col-md6">
+    <div class="layui-row" style="margin-bottom: 30px;">
+        <div class="layui-col-md6 gender-pie">
             <%@ include file="genderPie.jsp" %>
+        </div>
+        <div class="layui-col-md6 age-group-bar">
+            <%@ include file="ageGroupBar.jsp" %>
         </div>
     </div>
 
@@ -43,12 +47,18 @@
                 {field: 'uPhoneNumber', title: '联系电话', align: 'center'},
                 {field: 'uNickName', title: '昵称', align: 'center'},
                 {
-                    field: 'uGender', title: '性别', align: 'center', templet: function (d) {
+                    field: 'uGender',
+                    title: '性别',
+                    align: 'center',
+                    templet: function (d) {
                         return d.uGender === 'M' ? '男' : '女';
                     }
                 },
                 {
-                    field: 'uBirthdate', title: '生日', align: 'center', templet: function (d) {
+                    field: 'uBirthdate',
+                    title: '生日',
+                    align: 'center',
+                    templet: function (d) {
                         return new Date(d.uBirthdate).toLocaleDateString();
                     }
                 },
@@ -67,7 +77,10 @@
                 window.location.href = "toEditUserPage?uID=" + data.uID;
             }
             if (layEvent === 'delete') {
-                layer.confirm('确认删除当前数据吗？', {icon: 5, shade: 0.1}, function (index) {
+                layer.confirm('确认删除当前数据吗？', {
+                    icon: 5,
+                    shade: 0.1
+                }, function (index) {
                     $.post("deleteUser", {uID: data.uID}, function (success) {
                         if (success == "OK") {
                             obj.del();
@@ -84,7 +97,8 @@
 </script>
 <script type="text/html" id="tools">
     <a class="layui-btn layui-btn-sm" lay-event="edit">修改</a>
-    <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn-sm layui-btn-danger"
+       lay-event="delete">删除</a>
 </script>
 </body>
 </html>

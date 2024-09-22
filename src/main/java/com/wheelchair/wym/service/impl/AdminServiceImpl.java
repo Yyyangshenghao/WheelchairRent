@@ -90,6 +90,11 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
+    public Map<String, Map<String, Object>> countAgeGroups() {
+        return service.countAgeGroups();
+    }
+
+    @Override
     public List<Chair> findAllChair(Page p) {
         return service.findAllChair(p);
     }

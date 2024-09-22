@@ -305,4 +305,31 @@ public class AdminController {
     public String genderPie() {
         return "genderPie";
     }
+
+    @RequestMapping("/ageGroupCount")
+    @ResponseBody
+    public String ageGroupCount() {
+        // 获取年龄段统计信息
+        Map<String, Map<String, Object>> ageGroupCountMap = service.countAgeGroups();
+
+        // 输出整个 Map 数据，帮助调试
+        System.out.println("Age Group Count Map: " + ageGroupCountMap);
+
+        // 构建响应字符串
+        // StringBuilder response = new StringBuilder("User Age Group Count:\n");
+        StringBuilder response = new StringBuilder("\n");
+        for (Map.Entry<String, Map<String, Object>> entry : ageGroupCountMap.entrySet()) {
+            String ageGroup = entry.getKey();
+            Long count = (Long) entry.getValue().get("count");
+            response.append(ageGroup).append(": ").append(count).append("\n");
+        }
+
+        return response.toString();
+    }
+
+    @RequestMapping("/ageGroupBar")
+    public String ageGroupBar() {
+        return "ageGroupBar";
+    }
+
 }

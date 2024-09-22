@@ -77,6 +77,11 @@ public interface IAdminService {
     Map<String, Map<String, Object>> countGender();
 
     /**
+     * 查询各年龄段用户数量
+     */
+    Map<String, Map<String, Object>> countAgeGroups();
+
+    /**
      * 查询所有轮椅单品信息
      */
     List<Chair> findAllChair(Page p);

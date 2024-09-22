@@ -5020,3 +5020,8 @@ body .layui-util-face .layui-layer-content {
     width: 300px;
     height: 300px;
 }
+
+.age-group-bar {
+    width: 800px;
+    height: 300px;
+}
