@@ -63,4 +63,6 @@ public interface IOrderService {
     boolean updateRepairOrderStatus(int oID, Integer rStatus);
 
     int findStatusByoID(int oID);
+
+    int findUserByoID(int oID);
 }

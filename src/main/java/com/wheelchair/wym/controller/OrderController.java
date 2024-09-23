@@ -1,6 +1,7 @@
 package com.wheelchair.wym.controller;
 
 import com.wheelchair.wym.entity.*;
+import com.wheelchair.wym.service.IDeliveryOrderService;
 import com.wheelchair.wym.service.IOrderService;
 import com.wheelchair.wym.service.impl.ChairServiceImpl;
 import com.wheelchair.wym.service.impl.WheelchairServiceImpl;
@@ -25,6 +26,30 @@ public class OrderController {
     private WheelchairServiceImpl wheelchairServiceImpl;
     @Autowired
     private ChairServiceImpl chairServiceImpl;
+    @Autowired
+    private IDeliveryOrderService deliveryOrderServiceImpl;
+
+    @RequestMapping("/returnChair")
+    @ResponseBody
+    public String returnChair(int oID, int cID, @DateTimeFormat(pattern = "yyyy-MM-dd") Date returnDate, String address, String name, String phone, int orderStatus) {
+        int uID = service.findUserByoID(oID);
+
+        // 创建配送订单
+        DeliveryOrder deliveryOrder = new DeliveryOrder();
+        deliveryOrder.setType(1);
+        deliveryOrder.setName(name);
+        deliveryOrder.setPhone(phone);
+        deliveryOrder.setOrderStatus(1);
+        deliveryOrder.setuID(uID);
+        deliveryOrder.setcID(cID);
+        deliveryOrder.setDate(returnDate);
+        deliveryOrder.setAddress(address);
+        deliveryOrderServiceImpl.createDeliveryOrder(deliveryOrder);
+
+        // 更新订单状态
+        service.updateOrderStatus(oID, orderStatus);
+        return "OK";
+    }
 
     @RequestMapping("/myorder")
     public String toOrderPage() {
@@ -38,7 +63,7 @@ public class OrderController {
 
     @RequestMapping("/addOrder")
     @ResponseBody
-    public String addOrder(@RequestParam("hID") int hID, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("address") String address, @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, HttpServletRequest request) {
+    public String addOrder(@RequestParam("hID") int hID, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("address") String address, @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, HttpServletRequest request) {
         Users u = (Users) request.getSession().getAttribute("loginUser");
         Chair availableWheelchair = chairServiceImpl.findAvailableWheelchairByHID(hID);
         if (availableWheelchair == null) {
@@ -52,7 +77,7 @@ public class OrderController {
         order.setPhone(phone);
         order.setName(name);
         order.setStartDate(startDate);
-        order.setEndDate(endDate);
+        order.setEndDate(null);
         order.setOrderStatus(1);
 
         service.addOrder(order);

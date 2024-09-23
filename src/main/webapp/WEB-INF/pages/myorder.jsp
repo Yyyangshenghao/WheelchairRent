@@ -50,29 +50,33 @@
                     title: '租赁结束时间',
                     align: 'center',
                     templet: function(d) {
-                        return util.toDateString(d.endDate, 'yyyy-MM-dd');
+                        // 如果 endDate 为 null，显示“尚未结束”，否则显示日期
+                        return d.endDate ? util.toDateString(d.endDate, 'yyyy-MM-dd') : '尚未结束';
                     }
                 },
-                {field: 'orderStatus', title: '订单状态', align: 'center',
+                {
+                    field: 'orderStatus', title: '订单状态', align: 'center',
                     templet:function(d) {
-                    switch (d.orderStatus){
-                        case 0:
-                            return '已结束';
-                        case 1:
-                            return '等待发货';
-                        case 2:
-                            return '配送中';
-                        case 3:
-                            return '使用中';
-                        case 4:
-                            return '等待回收';
-                        case 5:
-                            return '回收中';
+                        switch (d.orderStatus){
+                            case 0:
+                                return '已结束';
+                            case 1:
+                                return '等待发货';
+                            case 2:
+                                return '配送中';
+                            case 3:
+                                return '使用中';
+                            case 4:
+                                return '等待回收';
+                            case 5:
+                                return '回收中';
+                        }
                     }
-                    }},
+                },
                 {title: '操作', align: 'center', toolbar: "#tools"}
             ]]
         });
+
 
         // 封装表格刷新函数
         function reloadTable() {
@@ -117,6 +121,73 @@
                 layer.close(index);
             });
         }
+
+        // 归还轮椅
+        // 归还轮椅表单弹出
+        function openReturnForm(data) {
+            layer.open({
+                type: 1,
+                title: '归还轮椅',
+                area: ['500px', '400px'],
+                content: `
+        <form id="returnForm" class="layui-form" style="padding: 20px;">
+            <div class="layui-form-item">
+                <label class="layui-form-label">取件日</label>
+                <div class="layui-input-block">
+                    <input type="date" name="returnDate" id="returnDate" required lay-verify="required" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">取件地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="address" required lay-verify="required" placeholder="请输入地址" class="layui-input" value="${data.address}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" class="layui-input" value="${data.name}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-block">
+                    <input type="text" name="phone" required lay-verify="required|phone" placeholder="请输入电话" class="layui-input" value="${data.phone}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="submitReturn">提交归还</button>
+                </div>
+            </div>
+        </form>
+        `,
+                success: function (layero, index) {
+                    layui.form.render();
+                    layui.form.on('submit(submitReturn)', function (formData) {
+                        $.post("returnChair", {
+                            oID: data.oID,
+                            cID: data.cID,
+                            returnDate: formData.field.returnDate,
+                            address: formData.field.address,
+                            name: formData.field.name,
+                            phone: formData.field.phone,
+                            orderStatus: 5  // 等待上门回收
+                        }, function (response) {
+                            if (response === "OK") {
+                                reloadTable();
+                                layer.msg("归还成功，正在处理轮椅");
+                                layer.close(index);
+                            } else {
+                                handleAjaxError(response);
+                            }
+                        });
+                        return false;
+                    });
+                }
+            });
+        }
+
 
         // 申请维修保养表单弹出
         function openRepairForm(data) {
@@ -201,12 +272,18 @@
                 openRepairForm(data);
             } else if (layEvent === 'cancel') {
                 cancelRepairOrder(data, obj);
+            } else if (layEvent === 'return') {
+                openReturnForm(data, obj);
             }
         });
     });
 </script>
 
 <script type="text/html" id="tools">
+    {{# if(d.orderStatus == 3) { }}
+    <a class="layui-btn layui-btn-xs layui-btn-container" lay-event="return">归还</a>
+    {{# } }}
+
     {{# if(d.orderStatus == 3) { }}
     <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="repair">保养/维修</a>
     {{# } }}

@@ -6,7 +6,7 @@
     <!-- 插入配送订单 -->
     <insert id="insertDeliveryOrder" parameterType="com.wheelchair.wym.entity.DeliveryOrder">
         INSERT INTO t_delivery_order (u_id, c_id, order_status, address, name, phone, type, date)
-        VALUES (#{uId}, #{cId}, #{orderStatus}, #{address}, #{name}, #{phone}, #{type}, #{date})
+        VALUES (#{uID}, #{cID}, #{orderStatus}, #{address}, #{name}, #{phone}, #{type}, #{date})
     </insert>
 
     <!-- 根据ID删除配送订单 -->

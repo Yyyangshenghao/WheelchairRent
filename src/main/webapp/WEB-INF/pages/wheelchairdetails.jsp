@@ -114,52 +114,35 @@
         </div>
         <!-- 添加租赁表单 -->
         <div id="rentForm" style="display: none;">
-            <form class="layui-form rent-form">
+            <form class="layui-form rent-form" style="max-width: 500px; margin: 0 auto; padding: 20px; border-radius: 8px; background-color: #f2f2f2; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
                 <div class="layui-form-item">
                     <label class="layui-form-label">姓名</label>
                     <div class="layui-input-block">
-                        <input type="text" name="name" required
-                               lay-verify="required" placeholder="请输入姓名"
-                               autocomplete="off" class="layui-input">
+                        <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input" style="border-radius: 4px;">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">联系电话</label>
                     <div class="layui-input-block">
-                        <input type="text" name="phone" required
-                               lay-verify="required"
-                               placeholder="请输入联系电话" autocomplete="off"
-                               class="layui-input">
+                        <input type="text" name="phone" required lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input" style="border-radius: 4px;">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">配送地址</label>
                     <div class="layui-input-block">
-                        <input type="text" name="address" required
-                               lay-verify="required"
-                               placeholder="请输入配送地址" autocomplete="off"
-                               class="layui-input">
+                        <input type="text" name="address" required lay-verify="required" placeholder="请输入配送地址" autocomplete="off" class="layui-input" style="border-radius: 4px;">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">租赁时间</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="startDate" id="startDate"
-                               required lay-verify="required"
-                               placeholder="开始日期" autocomplete="off"
-                               class="layui-input">
-                    </div>
-                    <div class="layui-form-mid">-</div>
-                    <div class="layui-input-inline">
-                        <input type="text" name="endDate" id="endDate" required
-                               lay-verify="required" placeholder="结束日期"
-                               autocomplete="off" class="layui-input">
+                        <input type="text" name="startDate" id="startDate" required lay-verify="required" placeholder="开始日期" autocomplete="off" class="layui-input" style="border-radius: 4px;">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <button class="layui-btn" lay-submit
-                            lay-filter="submitRentForm">提交订单
-                    </button>
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="submitRentForm" style="width: 100%; background-color: #1E9FFF; border-radius: 4px;">提交订单</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -339,7 +322,6 @@
                     phone: data.field.phone,
                     address: data.field.address,
                     startDate: data.field.startDate,
-                    endDate: data.field.endDate
                 }, function (response) {
                     if (response === "OK") {
                         layer.alert("租赁成功！", {icon: 1});
@@ -366,5 +348,6 @@
         });
     });
 </script>
+
 </body>
 </html>

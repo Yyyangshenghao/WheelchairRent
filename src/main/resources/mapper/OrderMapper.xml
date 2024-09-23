@@ -50,16 +50,24 @@
 	</select>
 
 	<select id="findAnOrder" resultType="java.lang.Integer">
-		select o_id from t_order where u_id = #{uID} and c_id = #{cID}
+		SELECT o_id
+		FROM t_order
+		WHERE u_id = #{uID} AND c_id = #{cID}
+		ORDER BY o_id DESC
+			LIMIT 1
 	</select>
+
 	<select id="findChairByoID" resultType="java.lang.Integer">
 		select c_id from t_order where o_id = #{oID}
 	</select>
     <select id="findStatusByoID" resultType="java.lang.Integer">
 		select order_status from t_order where o_id = #{oID}
 	</select>
+	<select id="findUserByoID" resultType="java.lang.Integer">
+		select u_id from t_order where o_id = #{oID}
+	</select>
 
-    <!-- 删除订单 -->
+	<!-- 删除订单 -->
 	<delete id="deleteOrder" parameterType="int">
 		delete from t_order where o_id=#{oID}
 	</delete>

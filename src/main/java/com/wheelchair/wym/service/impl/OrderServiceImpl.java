@@ -99,4 +99,9 @@ public class OrderServiceImpl implements IOrderService {
     public int findStatusByoID(int oID) {
         return mapper.findStatusByoID(oID);
     }
+
+    @Override
+    public int findUserByoID(int oID) {
+        return mapper.findUserByoID(oID);
+    }
 }
