@@ -49,9 +49,13 @@
                     field: 'endDate',
                     title: '租赁结束时间',
                     align: 'center',
-                    templet: function(d) {
-                        // 如果 endDate 为 null，显示“尚未结束”，否则显示日期
-                        return d.endDate ? util.toDateString(d.endDate, 'yyyy-MM-dd') : '尚未结束';
+                    templet: function (d) {
+                        // 如果 orderStatus 是 0（已结束），显示真正的结束时间，否则显示“尚未结束”
+                        if (d.orderStatus === 0) {
+                            return d.endDate ? util.toDateString(d.endDate, 'yyyy-MM-dd') : '未提供结束时间';
+                        } else {
+                            return '尚未结束';
+                        }
                     }
                 },
                 {
