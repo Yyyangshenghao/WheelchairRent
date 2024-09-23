@@ -1,7 +1,9 @@
 package com.wheelchair.wym.service;
 
 import com.wheelchair.wym.entity.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -65,4 +67,6 @@ public interface IOrderService {
     int findStatusByoID(int oID);
 
     int findUserByoID(int oID);
+
+    int updateEndDate(int oID, Date date);
 }

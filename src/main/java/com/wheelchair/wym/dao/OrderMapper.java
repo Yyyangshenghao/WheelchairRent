@@ -5,7 +5,9 @@ import com.wheelchair.wym.entity.Order;
 import com.wheelchair.wym.entity.Page;
 import com.wheelchair.wym.entity.UserOrder;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -45,4 +47,6 @@ public interface OrderMapper {
     int findStatusByoID(int oID);
 
     int findUserByoID(int oID);
+
+    int updateEndDate(int oID, Date date);
 }

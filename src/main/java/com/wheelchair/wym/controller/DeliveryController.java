@@ -4,9 +4,11 @@ import com.wheelchair.wym.entity.DeliveryOrder;
 import com.wheelchair.wym.service.IDeliveryOrderService;
 import com.wheelchair.wym.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -71,10 +73,14 @@ public class DeliveryController {
     }
 
     @PostMapping("/updateOrderStatus")
-    public String updateOrderStatus(@RequestParam("dID") Long dID, @RequestParam("d_status") Integer d_status, @RequestParam("uID") int uID, @RequestParam("cID") int cID, @RequestParam("o_status") Integer o_status, @RequestParam("r_status") Integer r_status) {
+    public String updateOrderStatus(@RequestParam("dID") Long dID, @RequestParam("d_status") Integer d_status, @RequestParam("uID") int uID, @RequestParam("cID") int cID, @RequestParam("o_status") Integer o_status, @RequestParam("r_status") Integer r_status, @RequestParam("end_date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         int oID = orderService.findAnOrder(uID,cID);
         int Original_O_Status = orderService.findStatusByoID(oID);
-        if (Original_O_Status == 5) o_status = 0;
+        if (Original_O_Status == 5) {
+            o_status = 0;
+            int n = orderService.updateEndDate(oID, date);
+            if (n == 0) return "FAIL";
+        }
         boolean success = deliveryOrderService.updateOrderStatus(dID, d_status) && orderService.updateOrderStatus(oID, o_status);
         boolean success2 = deliveryOrderService.updateOrderStatus(dID, d_status) && orderService.updateRepairOrderStatus(oID, r_status);
         return (success || success2)? "OK" : "FAIL";

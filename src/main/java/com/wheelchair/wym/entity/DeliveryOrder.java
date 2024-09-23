@@ -1,5 +1,7 @@
 package com.wheelchair.wym.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class DeliveryOrder {
@@ -11,6 +13,7 @@ public class DeliveryOrder {
     private String name;
     private String phone;
     private int type;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     public int getdID() {

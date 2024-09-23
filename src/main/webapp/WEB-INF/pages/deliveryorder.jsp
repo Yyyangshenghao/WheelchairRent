@@ -114,7 +114,17 @@
             }
 
             if (layEvent === 'update') {
-                $.post("/delivery-orders/updateOrderStatus", { dID: data.dID, d_status: 1, uID: data.uID, cID: data.cID, o_status: 2, r_status: 0}, function (response) {
+                // 将 data.date 转换为 Date 对象
+                let originalDate = new Date(data.date);
+
+                // 加一天
+                let nextDate = new Date(originalDate);
+                nextDate.setDate(originalDate.getDate() + 1);
+
+                // 格式化为 "yyyy-MM-dd"
+                let endDate = nextDate.toISOString().split('T')[0];
+                console.log("Adjusted end_date sent to server:", endDate);
+                $.post("/delivery-orders/updateOrderStatus", { dID: data.dID, d_status: 1, uID: data.uID, cID: data.cID, o_status: 2, r_status: 0, end_date: endDate }, function (response) {
                     if (response === "OK") {
                         layer.msg("订单状态已更新");
                         reloadTable();  // 刷新表格
@@ -125,7 +135,17 @@
             }
 
             if(layEvent === 'signed') {
-                $.post("/delivery-orders/updateOrderStatus", { dID: data.dID, d_status: 2, uID: data.uID, cID: data.cID, o_status: 3, r_status: 2, }, function (response) {
+                // 将 data.date 转换为 Date 对象
+                let originalDate = new Date(data.date);
+
+                // 加一天
+                let nextDate = new Date(originalDate);
+                nextDate.setDate(originalDate.getDate() + 1);
+
+                // 格式化为 "yyyy-MM-dd"
+                let endDate = nextDate.toISOString().split('T')[0];
+                console.log("Adjusted end_date sent to server:", endDate);
+                $.post("/delivery-orders/updateOrderStatus", { dID: data.dID, d_status: 2, uID: data.uID, cID: data.cID, o_status: 3, r_status: 2, end_date: endDate }, function (response) {
                     if (response === "OK") {
                         layer.msg("订单状态已更新");
                         reloadTable();  // 刷新表格
