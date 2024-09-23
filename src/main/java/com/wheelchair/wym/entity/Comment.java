@@ -9,19 +9,24 @@ public class Comment {
     private Integer wheelchairID;  // 轮椅ID
     private String commentContent; // 评论内容
     private Date commentDate;   // 评论时间
+    private String username;    // 用户名
+    private String commentDateFormatted; // 格式化后的日期字符串
 
     // 默认构造方法
     public Comment() {
     }
 
     // 带参数的构造方法
-    public Comment(Integer commentID, Integer userID, Integer orderID, Integer wheelchairID, String commentContent, Date commentDate) {
+    public Comment(Integer commentID, Integer userID, Integer orderID,
+                   Integer wheelchairID, String commentContent,
+                   Date commentDate, String username) {
         this.commentID = commentID;
         this.userID = userID;
         this.orderID = orderID;
         this.wheelchairID = wheelchairID;
         this.commentContent = commentContent;
         this.commentDate = commentDate;
+        this.username = username;
     }
 
     // Getter 和 Setter 方法
@@ -73,8 +78,33 @@ public class Comment {
         this.commentDate = commentDate;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getCommentDateFormatted() {
+        return commentDateFormatted;
+    }
+
+    public void setCommentDateFormatted(String commentDateFormatted) {
+        this.commentDateFormatted = commentDateFormatted;
+    }
+
     @Override
     public String toString() {
-        return "Comment{" + "commentID=" + commentID + ",  userID=" + userID + ", orderID=" + orderID + ", wheelchairID=" + wheelchairID + ", commentContent='" + commentContent + '\'' + ", commentDate=" + commentDate + '}';
+        return "Comment{" +
+                "commentID=" + commentID +
+                ", userID=" + userID +
+                ", orderID=" + orderID +
+                ", wheelchairID=" + wheelchairID +
+                ", commentContent='" + commentContent + '\'' +
+                ", commentDate=" + commentDate +
+                ", username='" + username + '\'' +
+                ", commentDateFormatted='" + commentDateFormatted + '\'' +
+                '}';
     }
 }

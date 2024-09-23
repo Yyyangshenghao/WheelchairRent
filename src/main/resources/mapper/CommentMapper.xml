@@ -13,6 +13,7 @@
                 jdbcType="VARCHAR"/>
         <result column="comment_date" property="commentDate"
                 jdbcType="TIMESTAMP"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!-- 插入新的评论 -->
@@ -24,11 +25,11 @@
     </insert>
 
     <!-- 根据轮椅ID查询相关评论 -->
-    <select id="findCommentsByWheelchairID" parameterType="int"
-            resultMap="CommentMap">
-        SELECT comment_id, u_id, o_id, c_id, comment_content, comment_date
-        FROM t_comment
-        WHERE c_id = #{wheelchairID}
+    <select id="findCommentsByWheelchairID" parameterType="int" resultMap="CommentMap">
+        SELECT c.comment_id, c.u_id, c.o_id, c.c_id, c.comment_content, c.comment_date, u.u_nickname AS username
+        FROM t_comment c
+                 JOIN t_users u ON c.u_id = u.u_id
+        WHERE c.c_id = #{wheelchairID}
     </select>
 
     <!-- 根据用户ID查询相关评论 -->
