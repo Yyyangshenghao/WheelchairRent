@@ -3,6 +3,7 @@ package com.wheelchair.wym.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 
 import com.wheelchair.wym.entity.Wheelchair;
@@ -36,6 +37,12 @@ public class WheelchairDetailsController {
 
 		// 获取与该轮椅相关的评论
 		List<Comment> wheelchairComments = commentService.findCommentsByWheelchairID(id);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		for (Comment comment : wheelchairComments) {
+			String formattedDate = sdf.format(comment.getCommentDate());
+			comment.setCommentDateFormatted(formattedDate);
+		}
 
 		// 将轮椅详情和评论信息存入 session
 		request.getSession().setAttribute("Details", wheelchairDetails);
