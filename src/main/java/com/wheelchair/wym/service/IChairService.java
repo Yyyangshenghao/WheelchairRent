@@ -29,4 +29,6 @@ public interface IChairService {
     int updateScrappedChair(int cID);
 
     int updateRepairedChair(int cID, Date date);
+
+    int returnChair(int cID);
 }

@@ -3,6 +3,7 @@ package com.wheelchair.wym.controller;
 import com.wheelchair.wym.entity.DeliveryOrder;
 import com.wheelchair.wym.service.IDeliveryOrderService;
 import com.wheelchair.wym.service.IOrderService;
+import com.wheelchair.wym.service.impl.ChairServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,8 @@ public class DeliveryController {
     private IDeliveryOrderService deliveryOrderService;
     @Autowired
     private IOrderService orderService;
+    @Autowired
+    private ChairServiceImpl chairServiceImpl;
 
     // 创建配送订单
     @PostMapping
@@ -80,6 +83,8 @@ public class DeliveryController {
             o_status = 0;
             int n = orderService.updateEndDate(oID, date);
             if (n == 0) return "FAIL";
+            int m = chairServiceImpl.returnChair(cID);
+            if (m == 0) return "FAIL";
         }
         boolean success = deliveryOrderService.updateOrderStatus(dID, d_status) && orderService.updateOrderStatus(oID, o_status);
         boolean success2 = deliveryOrderService.updateOrderStatus(dID, d_status);

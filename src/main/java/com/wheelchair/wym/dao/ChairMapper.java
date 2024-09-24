@@ -27,4 +27,6 @@ public interface ChairMapper {
     int updateScrappedChair(int cID);
 
     int updateRepairedChair(int cID, Date date);
+
+    int returnChair(int cID);
 }

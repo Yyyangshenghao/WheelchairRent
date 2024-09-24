@@ -23,6 +23,9 @@
     <update id="updateRepairedChair">
         update t_chair set last_maintenance_date=#{date} where c_id = #{cID}
     </update>
+    <update id="returnChair">
+        update t_chair set status = 0, u_id = 0 where c_id = #{cID}
+    </update>
     <select id="findAvailableWheelchairByHID" parameterType="int" resultMap="BasicMap">
         select * from t_chair where h_id = #{hID} and status = 0 LIMIT 1
     </select>

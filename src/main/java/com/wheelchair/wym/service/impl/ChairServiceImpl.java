@@ -39,4 +39,9 @@ public class ChairServiceImpl implements IChairService {
     public int updateRepairedChair(int cID, Date date) {
         return mapper.updateRepairedChair(cID, date);
     }
+
+    @Override
+    public int returnChair(int cID) {
+        return mapper.returnChair(cID);
+    }
 }
