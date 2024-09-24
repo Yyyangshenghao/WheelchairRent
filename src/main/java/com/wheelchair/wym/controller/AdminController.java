@@ -4,9 +4,11 @@ import com.wheelchair.wym.entity.*;
 import com.wheelchair.wym.service.IAdminService;
 import com.wheelchair.wym.service.IOrderService;
 import com.wheelchair.wym.service.IWheelchairService;
+import com.wheelchair.wym.service.impl.ChairServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,6 +30,8 @@ public class AdminController {
 
     @Autowired
     private IOrderService orderService;
+    @Autowired
+    private ChairServiceImpl chairServiceImpl;
 
     @RequestMapping("/toAdminLogin")
     public String toAdminLogin() {
@@ -163,22 +167,7 @@ public class AdminController {
     public String confirmRepairOrder(int rID, int oID, int uID, @DateTimeFormat(pattern = "yyyy-MM-dd") Date Date, String address, String name, String phone, int status) {
         int n = service.confirmRepairOrder(rID, status);
         if (n > 0) {
-            // 创建配送订单
-            DeliveryOrder deliveryOrder = new DeliveryOrder();
-            int cID = orderService.findChairByoID(oID);
-            deliveryOrder.setuID(uID);
-            deliveryOrder.setcID(cID);
-            deliveryOrder.setOrderStatus(1); // 回收订单不需要后台管理员确认
-            deliveryOrder.setAddress(address);
-            deliveryOrder.setName(name);
-            deliveryOrder.setPhone(phone);
-            deliveryOrder.setType(1); // 1代表收回轮椅
-            deliveryOrder.setDate(Date);
-
-            int m = orderService.addDeliveryOrder(deliveryOrder);
-            boolean o = orderService.updateOrderStatus(oID, 5);
-            if (m > 0 && o) return "OK";
-            return "FAIL";
+            return "OK";
         }
         return "FAIL";
     }
@@ -332,4 +321,23 @@ public class AdminController {
         return "ageGroupBar";
     }
 
+    @RequestMapping("repairSuccess")
+    @ResponseBody
+    public String repairSuccess(int oID, int rID, @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+        int cID = orderService.findChairByoID(oID);
+        orderService.updateOrderStatus(oID, 3);// 维修成功
+        orderService.updateRepairOrderStatus(rID, 8);
+        chairServiceImpl.updateRepairedChair(cID, date);
+        return "OK";
+    }
+
+    @RequestMapping("repairFailure")
+    @ResponseBody
+    public String repairFailure(int oID, int rID){
+        int cID = orderService.findChairByoID(oID);
+        orderService.updateOrderStatus(oID, 0);// 维修失败订单结束
+        orderService.updateRepairOrderStatus(rID, 9);
+        chairServiceImpl.updateScrappedChair(cID);
+        return "OK";
+    }
 }

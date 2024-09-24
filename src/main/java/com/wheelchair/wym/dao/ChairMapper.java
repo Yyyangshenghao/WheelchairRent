@@ -4,6 +4,8 @@ import com.wheelchair.wym.entity.Chair;
 import com.wheelchair.wym.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
+
 @Mapper
 public interface ChairMapper {
 
@@ -21,4 +23,8 @@ public interface ChairMapper {
      * 更新被订单选中的轮椅单品的状态
      */
     int updateOrderedChair(Order order);
+
+    int updateScrappedChair(int cID);
+
+    int updateRepairedChair(int cID, Date date);
 }

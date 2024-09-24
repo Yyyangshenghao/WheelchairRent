@@ -17,6 +17,12 @@
     <update id="updateOrderedChair" parameterType="com.wheelchair.wym.entity.Order">
         update t_chair set status = 1, u_id = #{uID} where c_id = #{cID}
     </update>
+    <update id="updateScrappedChair">
+        update t_chair set status = 2, u_id = 0 where c_id = #{cID}
+    </update>
+    <update id="updateRepairedChair">
+        update t_chair set last_maintenance_date=#{date} where c_id = #{cID}
+    </update>
     <select id="findAvailableWheelchairByHID" parameterType="int" resultMap="BasicMap">
         select * from t_chair where h_id = #{hID} and status = 0 LIMIT 1
     </select>

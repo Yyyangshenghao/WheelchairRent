@@ -11,5 +11,5 @@ public interface RepairOrderMapper {
 
     boolean updateRepairOrderStatus(int id, int orderStatus);
 
-    boolean updateRepairOrderStatusByoID(int oID, Integer rStatus);
+    boolean updateRepairOrderStatusByrID(int rID, Integer rStatus);
 }

@@ -3,6 +3,8 @@ package com.wheelchair.wym.service;
 import com.wheelchair.wym.entity.Chair;
 import com.wheelchair.wym.entity.Order;
 
+import java.util.Date;
+
 public interface IChairService {
 
     /**
@@ -23,4 +25,8 @@ public interface IChairService {
      * @return
      */
     int updateOrderedChair(Order order);
+
+    int updateScrappedChair(int cID);
+
+    int updateRepairedChair(int cID, Date date);
 }

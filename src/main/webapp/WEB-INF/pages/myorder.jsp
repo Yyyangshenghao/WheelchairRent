@@ -71,7 +71,7 @@
                             case 3:
                                 return '使用中';
                             case 4:
-                                return '等待回收';
+                                return '等待上门维修/保养';
                             case 5:
                                 return '回收中';
                         }
@@ -209,13 +209,13 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">取件日</label>
+                        <label class="layui-form-label">上门日</label>
                         <div class="layui-input-block">
                             <input type="date" name="pickupDate" required lay-verify="required" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">取件地址</label>
+                        <label class="layui-form-label">上门地址</label>
                         <div class="layui-input-block">
                             <input type="text" name="address" required lay-verify="required" placeholder="请输入地址" class="layui-input">
                         </div>

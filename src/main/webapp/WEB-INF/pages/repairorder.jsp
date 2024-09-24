@@ -46,14 +46,10 @@
                             case 0:
                                 return '未确认';
                             case 1:
-                                return '已确认，正在回收中';
-                            case 2:
-                                return '已回收，等待维修/保养'
-                            case 3:
-                                return '正在维修/保养'
-                            case 4:
+                                return '已确认，正在上门维修/保养';
+                            case 8:
                                 return '维修/保养完成'
-                            case 5:
+                            case 9:
                                 return '维修/保养失败'
                         }}},
                 {title: '操作', align: 'center', toolbar: "#tools"}
@@ -102,21 +98,48 @@
             });
         }
 
-        // 维修轮椅
-        function repairChair(data, obj){
-            layer.confirm('是否确认维修/保养？',{icon: 5, shade: 0.1}, function (index){
-                $.post("repairChair", {oID:data.oID}, function (response){
-                    if(response === "OK"){
+        // 确认轮椅维修/保养状态
+        function repairChair(data, obj) {
+            layer.confirm('维修/保养是否成功？', {
+                icon: 5,
+                shade: 0.1,
+                btn: ['成功', '失败']  // 自定义按钮
+            }, function(index) {
+                // 用户选择 "是"，即维修成功的情况
+                // 将 data.date 转换为 Date 对象
+                let originalDate = new Date(data.pickupDate);
+
+                // 加一天
+                let nextDate = new Date(originalDate);
+                nextDate.setDate(originalDate.getDate() + 1);
+
+                // 格式化为 "yyyy-MM-dd"
+                let date = nextDate.toISOString().split('T')[0];
+                $.post("repairSuccess", { oID: data.oID, rID: data.repairOrderID, date:date}, function(response) {
+                    if (response === "OK") {
                         obj.del();
                         reloadTable();
-                        layer.msg("维修/保养已开始");
+                        layer.msg("维修/保养已完成");
                     } else {
-                        handleAjaxError(response);
+                        handleAjaxError(response);  // 错误处理
                     }
                 });
                 layer.close(index);
-            })
+            }, function(index) {
+                // 用户选择 "否"，即维修失败的情况
+                $.post("repairFailure", { oID: data.oID, rID: data.repairOrderID}, function(response) {
+                    if (response === "OK") {
+                        obj.del();
+                        reloadTable();
+                        layer.msg("维修/保养已完成");
+                    } else {
+                        handleAjaxError(response);  // 错误处理
+                    }
+                });
+                layer.close(index);
+            });
         }
+
 
         table.on('tool(order)',function(obj){
             var data = obj.data;
@@ -147,8 +170,8 @@
     <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
     {{# } }}
 
-    {{# if(d.orderStatus == 2) { }}
-    <a class="layui-btn layui-btn-xs" lay-event="repair">维修/保养</a>
+    {{# if(d.orderStatus == 1) { }}
+    <a class="layui-btn layui-btn-xs" lay-event="repair">维修/保养完成</a>
     {{# } }}
 
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>

@@ -5,7 +5,6 @@ import com.wheelchair.wym.dao.RepairOrderMapper;
 import com.wheelchair.wym.entity.*;
 import com.wheelchair.wym.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -93,8 +92,8 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public boolean updateRepairOrderStatus(int oID, Integer rStatus) {
-        return repairOrderMapper.updateRepairOrderStatusByoID(oID, rStatus);
+    public boolean updateRepairOrderStatus(int rID, Integer rStatus) {
+        return repairOrderMapper.updateRepairOrderStatusByrID(rID, rStatus);
     }
 
     @Override

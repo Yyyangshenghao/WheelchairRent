@@ -82,7 +82,7 @@ public class DeliveryController {
             if (n == 0) return "FAIL";
         }
         boolean success = deliveryOrderService.updateOrderStatus(dID, d_status) && orderService.updateOrderStatus(oID, o_status);
-        boolean success2 = deliveryOrderService.updateOrderStatus(dID, d_status) && orderService.updateRepairOrderStatus(oID, r_status);
+        boolean success2 = deliveryOrderService.updateOrderStatus(dID, d_status);
         return (success || success2)? "OK" : "FAIL";
     }
 }

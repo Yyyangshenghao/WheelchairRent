@@ -6,6 +6,8 @@ import com.wheelchair.wym.entity.Order;
 import com.wheelchair.wym.service.IChairService;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class ChairServiceImpl implements IChairService {
 
@@ -26,5 +28,15 @@ public class ChairServiceImpl implements IChairService {
     @Override
     public int updateOrderedChair(Order order) {
         return mapper.updateOrderedChair(order);
+    }
+
+    @Override
+    public int updateScrappedChair(int cID) {
+        return mapper.updateScrappedChair(cID);
+    }
+
+    @Override
+    public int updateRepairedChair(int cID, Date date) {
+        return mapper.updateRepairedChair(cID, date);
     }
 }
