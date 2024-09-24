@@ -1,5 +1,7 @@
 package com.wheelchair.wym.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Users {
@@ -10,6 +12,7 @@ public class Users {
     private String uPhoneNumber;
     private String uNickName;
     private String uGender;      // 性别 (M: 男, F: 女)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date uBirthdate;     // 生日
     private int uAge;            // 年龄
 

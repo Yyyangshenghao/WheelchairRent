@@ -107,52 +107,73 @@
                 </div>
             </div>
             <div class="layui-tab-item">
-                <div class="" style="margin: 30px 20px;">
+                <div style="margin: 30px 20px;">
                     <form class="layui-form layui-form-pane form">
+                        <!-- 用户名 -->
                         <div class="layui-form-item">
                             <label class="layui-form-label">用户名</label>
                             <div class="layui-input-block">
-                                <input type="text" name="uName" required
-                                       lay-verify="required"
-                                       placeholder="请输入用户名"
+                                <input type="text" name="uName" required lay-verify="required" placeholder="请输入用户名"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
+
+                        <!-- 密码 -->
                         <div class="layui-form-item">
                             <label class="layui-form-label">密码</label>
                             <div class="layui-input-block">
-                                <input type="text" name="uPassword" required
-                                       lay-verify="required"
-                                       placeholder="请输入密码"
+                                <input type="password" name="uPassword" required lay-verify="required" placeholder="请输入密码"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
+
+                        <!-- 手机号 -->
                         <div class="layui-form-item">
                             <label class="layui-form-label">手机号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="uPhoneNumber" required
-                                       lay-verify="required"
-                                       placeholder="注册后不能修改"
+                                <input type="text" name="uPhoneNumber" required lay-verify="required" placeholder="注册后不能修改"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
+
+                        <!-- 昵称 -->
                         <div class="layui-form-item">
                             <label class="layui-form-label">昵称</label>
                             <div class="layui-input-block">
-                                <input type="text" name="uNickName" required
-                                       lay-verify="required"
-                                       placeholder="注册后不能修改"
+                                <input type="text" name="uNickName" required lay-verify="required" placeholder="注册后不能修改"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
+
+                        <!-- 性别 -->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-block">
+                                <select name="uGender" required lay-verify="required">
+                                    <option value="">请选择性别</option>
+                                    <option value="M">男</option>
+                                    <option value="F">女</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 出生日期 -->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">出生日期</label>
+                            <div class="layui-input-block">
+                                <input type="date" name="uBirthdate" required lay-verify="required" class="layui-input">
+                            </div>
+                        </div>
+
                     </form>
+
+                    <!-- 注册按钮 -->
                     <div class="layui-form-item">
-                        <input type="submit"
-                               class="layui-btn layui-btn-fluid layui-btn-radius layui-btn-normal regist-btn"
-                               value="立即注册"/>
+                        <input type="submit" class="layui-btn layui-btn-fluid layui-btn-radius layui-btn-normal regist-btn" value="立即注册"/>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -237,8 +258,8 @@
             layer_index = layer.open({
                 type: 1,
                 content: $('#sign'),
-                area: ['360px', '460px'],
-                title: "轮椅租赁",
+                area: ['450px', '550px'],
+                title: "用户登录",
                 closeBtn: 2
             });
         });
@@ -247,20 +268,50 @@
             $(this).addClass('click-this');
         });
 
+        // 计算年龄的函数
+        function calculateAge(birthDate) {
+            var today = new Date();
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var monthDifference = today.getMonth() - birthDate.getMonth();
+
+            // 如果当前月份还没有到用户的出生月份，或者到了但当前日期还没有到出生日期，则年龄减1
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
         $('.regist-btn').click(function () {
-            if ($("input[name='uName']").val() != "" && $("input[name='uPassword']").val() != "" && $("input[name='uPhoneNumber']").val() != "" && $("input[name='uNickName']").val() != "") {
+            var uName = $("input[name='uName']").val();
+            var uPassword = $("input[name='uPassword']").val();
+            var uPhoneNumber = $("input[name='uPhoneNumber']").val();
+            var uNickName = $("input[name='uNickName']").val();
+            var uGender = $("select[name='uGender']").val();  // 获取性别
+            var uBirthdate = $("input[name='uBirthdate']").val();  // 获取出生日期
+
+            // 检查所有字段是否填写
+            if (uName && uPassword && uPhoneNumber && uNickName && uGender && uBirthdate) {
+                // 计算年龄
+                var uAge = calculateAge(new Date(uBirthdate));
+
+                // 将年龄添加到表单中
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'uAge',
+                    value: uAge
+                }).appendTo('.form');
+
                 $.post("regist", $('.form').serialize(), function (res) {
-                    console.log(res)
+                    console.log(res);
                     if (res === 'OK') {
-                        layer.close(layer_index);
                         layer.alert("注册成功", {icon: 1, time: 2000});
-                        $('.form')[0].reset();
+                        $('.form')[0].reset();  // 重置表单
                     } else {
-                        layer.msg("注册失败,用户名已存在");
+                        layer.msg("注册失败, 用户名已存在");
                     }
-                })
+                });
             } else {
-                layer.msg("请填写所有表单");
+                layer.msg("请填写所有表单项");
             }
         });
 
