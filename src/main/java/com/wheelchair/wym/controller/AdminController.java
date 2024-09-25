@@ -68,9 +68,11 @@ public class AdminController {
     @ResponseBody
     public UserData findAllUser() {
         List<Users> findAllUser = service.findAllUser();
+
+        int totalUserCount = service.getUserCount();
         UserData u = new UserData();
         u.setCode(0);
-        u.setCount(findAllUser.size());
+        u.setCount(totalUserCount);
         u.setData(findAllUser);
         u.setMsg("OK");
         return u;
@@ -108,9 +110,11 @@ public class AdminController {
         p.setLimit(limit);
         p.setPage((page - 1) * limit);
         List<Chair> findAllChair = service.findAllChair(p);
+        // 获取所有轮椅的总数量，用于分页
+        int totalChairCount = service.getChairCount();
         ChairData data = new ChairData();
         data.setCode(0);
-        data.setCount(findAllChair.size());
+        data.setCount(totalChairCount);
         data.setData(findAllChair);
         data.setMsg("OK");
         return data;
@@ -123,9 +127,10 @@ public class AdminController {
         p.setLimit(limit);
         p.setPage((page - 1) * limit);
         List<Wheelchair> findAllWheelchair = service.findAllWheelchair(p);
+        int totalWheelchairCount = service.getWheelchairCount();
         UserWheelchairData data = new UserWheelchairData();
         data.setCode(0);
-        data.setCount(findAllWheelchair.size());
+        data.setCount(totalWheelchairCount);
         data.setData(findAllWheelchair);
         data.setMsg("OK");
         return data;
@@ -138,9 +143,10 @@ public class AdminController {
         p.setLimit(limit);
         p.setPage((page - 1) * limit);
         List<UserOrder> findAllOrder = service.findAllOrder(p);
+        int totalOrderCount = service.getOrderCount();
         UserOrderData data = new UserOrderData();
         data.setCode(0);
-        data.setCount(findAllOrder.size());
+        data.setCount(totalOrderCount);
         data.setData(findAllOrder);
         data.setMsg("OK");
         return data;
@@ -152,11 +158,11 @@ public class AdminController {
         Page p = new Page();
         p.setPage((page - 1) * limit);
         p.setLimit(limit);
-
-        RepairOrderData rod = new RepairOrderData();
         List<RepairOrder> repairOrder = service.findAllRepairOrder(p);
+        int totalRepairOrderCount = service.getRepairOrderCount();
+        RepairOrderData rod = new RepairOrderData();
         rod.setCode(0);
-        rod.setCount(repairOrder.size());
+        rod.setCount(totalRepairOrderCount);
         rod.setData(repairOrder);
         rod.setMsg("OK");
         return rod;
@@ -178,11 +184,11 @@ public class AdminController {
         Page p = new Page();
         p.setPage((page - 1) * limit);
         p.setLimit(limit);
-
-        DeliveryOrderData dod = new DeliveryOrderData();
         List<DeliveryOrder> DeliveryOrder = service.findAllDeliveryOrder(p);
+        int totalDeliveryOrderCount = service.getDeliveryOrderCount();
+        DeliveryOrderData dod = new DeliveryOrderData();
         dod.setCode(0);
-        dod.setCount(DeliveryOrder.size());
+        dod.setCount(totalDeliveryOrderCount);
         dod.setData(DeliveryOrder);
         dod.setMsg("OK");
         return dod;

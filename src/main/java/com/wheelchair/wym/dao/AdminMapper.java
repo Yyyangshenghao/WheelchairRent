@@ -58,4 +58,16 @@ public interface AdminMapper {
     Map<String, Map<String, Object>> countAgeGroups();
 
     List<Chair> findAllChair(Page p);
+
+    int getChairCount();
+
+    int getUserCount();
+
+    int getWheelchairCount();
+
+    int getOrderCount();
+
+    int getDeliveryOrderCount();
+
+    int getRepairOrderCount();
 }

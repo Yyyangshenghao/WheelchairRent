@@ -85,4 +85,16 @@ public interface IAdminService {
      * 查询所有轮椅单品信息
      */
     List<Chair> findAllChair(Page p);
+
+    int getChairCount();
+
+    int getUserCount();
+
+    int getWheelchairCount();
+
+    int getOrderCount();
+
+    int getDeliveryOrderCount();
+
+    int getRepairOrderCount();
 }

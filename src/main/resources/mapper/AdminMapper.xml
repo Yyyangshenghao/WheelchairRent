@@ -228,5 +228,24 @@
         FROM t_users
         GROUP BY age_group</select>
 
+    <select id="getChairCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_chair
+    </select>
+    <select id="getUserCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_users
+    </select>
+    <select id="getWheelchairCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_wheelchair
+    </select>
+    <select id="getOrderCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_order
+    </select>
+    <select id="getDeliveryOrderCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_delivery_order
+    </select>
+    <select id="getRepairOrderCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_repair_order
+    </select>
+
 
 </mapper>

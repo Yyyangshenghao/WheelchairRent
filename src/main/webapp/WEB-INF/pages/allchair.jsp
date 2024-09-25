@@ -25,6 +25,7 @@
             elem:"#allChair",
             url:"findAllChair",
             page:true,
+            limit:10,
             cols:[[
                 {field: 'cID', title: '轮椅id', align: 'center'}
                 ,{field: 'hID', title: '轮椅品类id', align: 'center'}

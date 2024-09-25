@@ -98,4 +98,34 @@ public class AdminServiceImpl implements IAdminService {
     public List<Chair> findAllChair(Page p) {
         return service.findAllChair(p);
     }
+
+    @Override
+    public int getChairCount() {
+        return service.getChairCount();
+    }
+
+    @Override
+    public int getUserCount() {
+        return service.getUserCount();
+    }
+
+    @Override
+    public int getWheelchairCount() {
+        return service.getWheelchairCount();
+    }
+
+    @Override
+    public int getOrderCount() {
+        return service.getOrderCount();
+    }
+
+    @Override
+    public int getDeliveryOrderCount() {
+        return service.getDeliveryOrderCount();
+    }
+
+    @Override
+    public int getRepairOrderCount() {
+        return service.getRepairOrderCount();
+    }
 }
