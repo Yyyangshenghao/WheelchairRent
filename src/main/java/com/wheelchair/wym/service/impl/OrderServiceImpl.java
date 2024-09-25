@@ -1,5 +1,6 @@
 package com.wheelchair.wym.service.impl;
 
+import com.wheelchair.wym.dao.CommentMapper;
 import com.wheelchair.wym.dao.OrderMapper;
 import com.wheelchair.wym.dao.RepairOrderMapper;
 import com.wheelchair.wym.entity.*;
@@ -17,6 +18,9 @@ public class OrderServiceImpl implements IOrderService {
 
     @Autowired
     private RepairOrderMapper repairOrderMapper;
+
+    @Autowired
+    private CommentMapper commentMapper;
 
     public OrderServiceImpl(OrderMapper mapper) {
         this.mapper = mapper;
@@ -109,5 +113,10 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public int updateEndDate(int oID, Date date) {
         return mapper.updateEndDate(oID, date);
+    }
+
+    @Override
+    public int addNewComment(Comment comment) {
+        return commentMapper.addNewComment(comment);
     }
 }

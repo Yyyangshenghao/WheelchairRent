@@ -21,7 +21,7 @@
     <insert id="addNewComment"
             parameterType="com.wheelchair.wym.entity.Comment">
         INSERT INTO t_comment (u_id, o_id, c_id, rating, comment_content, comment_date)
-        VALUES (#{userID}, #{orderID}, #{rating}, #{wheelchairID}, #{commentContent},
+        VALUES (#{userID}, #{orderID}, #{wheelchairID}, #{rating},  #{commentContent},
                 NOW())
     </insert>
 

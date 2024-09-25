@@ -182,4 +182,17 @@ public class OrderController {
         return "FAIL";
     }
 
+    @RequestMapping("/addComment")
+    @ResponseBody
+    public String addComment(int oID, int uID, int cID, int rating, String commentContent) {
+        Comment comment = new Comment();
+        comment.setOrderID(oID);
+        comment.setUserID(uID);
+        comment.setWheelchairID(cID);
+        comment.setRating(rating);
+        comment.setCommentContent(commentContent);
+        int n = service.addNewComment(comment);
+        return "OK";
+    }
+
 }

@@ -68,4 +68,6 @@ public interface IOrderService {
     int findUserByoID(int oID);
 
     int updateEndDate(int oID, Date date);
+
+    int addNewComment(Comment comment);
 }

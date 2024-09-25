@@ -17,11 +17,13 @@
 
 <script src="/static/layui/layui.js"></script>
 <script>
-    layui.use(['element', 'form', 'table', 'util'], function () {
+    layui.use(['element', 'form', 'table', 'util', 'rate'], function () {
         var element = layui.element,
             $ = layui.jquery,
             table = layui.table,
-            util = layui.util;
+            util = layui.util,
+            rate = layui.rate;
+
 
         var dt = table.render({
             elem: "#wheelchairList",
@@ -265,6 +267,66 @@
             });
         }
 
+        // 添加评论功能
+        window.addComment = function (data) {
+            layer.open({
+                type: 1,
+                title: '添加评论',
+                area: ['500px', '300px'],
+                content: `<form id="commentForm" class="layui-form" style="padding: 20px;">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">评分</label>
+                        <div id="ID-rate-demo-text"></div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">评论内容</label>
+                        <div class="layui-input-block">
+                            <textarea name="comment" required lay-verify="required" placeholder="请输入评论" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="submitComment">提交评论</button>
+                        </div>
+                    </div>
+                </form>`,
+                success: function (layero, index) {
+                    layui.form.render();
+                    // 初始化评分组件
+                    rate.render({
+                        elem: '#ID-rate-demo-text',
+                        value: null, // 初始值
+                        text: true, // 开启文本
+                        choose: function(value){
+                            selectedRating = value;
+                            console.log(value);
+                        }
+                    });
+
+                    layui.form.on('submit(submitComment)', function (formData) {
+                        var rating = selectedRating
+                        console.log("Rating:", rating);
+                        $.post("addComment", {
+                            oID: data.oID,
+                            uID: ${sessionScope.loginUser.uID},
+                            cID: data.cID,
+                            rating: rating,
+                            commentContent: formData.field.comment
+                        }, function (response) {
+                            if (response === "OK") {
+                                reloadTable();
+                                layer.msg("评论成功");
+                                layer.close(index);
+                            } else {
+                                handleAjaxError(response);
+                            }
+                        });
+                        return false;
+                    });
+                }
+            });
+        }
+
         // 监听工具条事件
         table.on('tool(order)', function (obj) {
             var data = obj.data;
@@ -278,6 +340,8 @@
                 cancelRepairOrder(data, obj);
             } else if (layEvent === 'return') {
                 openReturnForm(data, obj);
+            } else if (layEvent === 'comment') {
+                addComment(data, obj);
             }
         });
     });
@@ -292,7 +356,7 @@
     <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="repair">保养/维修</a>
     {{# } }}
 
-    {{# if(d.orderStatus < 2) { }}
+    {{# if(d.orderStatus > 0 && d.orderStatus < 2) { }}
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">取消订单</a>
     {{# } }}
 
@@ -302,6 +366,10 @@
 
     {{# if(d.orderStatus == 4) { }}
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="cancel">取消保养/维修</a>
+    {{# } }}
+
+    {{# if(d.orderStatus == 0) { }}
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="comment">评论</a>
     {{# } }}
 </script>
 </body>
