@@ -7,6 +7,7 @@ public class Comment {
     private Integer userID;     // 用户ID
     private Integer orderID;    // 订单ID
     private Integer wheelchairID;  // 轮椅ID
+    private Integer rating;     // 评分
     private String commentContent; // 评论内容
     private Date commentDate;   // 评论时间
     private String username;    // 用户名
@@ -18,12 +19,13 @@ public class Comment {
 
     // 带参数的构造方法
     public Comment(Integer commentID, Integer userID, Integer orderID,
-                   Integer wheelchairID, String commentContent,
+                   Integer wheelchairID, Integer rating, String commentContent,
                    Date commentDate, String username) {
         this.commentID = commentID;
         this.userID = userID;
         this.orderID = orderID;
         this.wheelchairID = wheelchairID;
+        this.rating = rating;
         this.commentContent = commentContent;
         this.commentDate = commentDate;
         this.username = username;
@@ -60,6 +62,14 @@ public class Comment {
 
     public void setWheelchairID(Integer wheelchairID) {
         this.wheelchairID = wheelchairID;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     public String getCommentContent() {
@@ -101,6 +111,7 @@ public class Comment {
                 ", userID=" + userID +
                 ", orderID=" + orderID +
                 ", wheelchairID=" + wheelchairID +
+                ", rating=" + rating +
                 ", commentContent='" + commentContent + '\'' +
                 ", commentDate=" + commentDate +
                 ", username='" + username + '\'' +

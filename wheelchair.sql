@@ -11,7 +11,7 @@
  Target Server Version : 80032 (8.0.32)
  File Encoding         : 65001
 
- Date: 24/09/2024 23:50:44
+ Date: 25/09/2024 13:04:28
 */
 
 SET NAMES utf8mb4;
@@ -101,6 +101,7 @@ CREATE TABLE `t_comment`  (
   `u_id` int NOT NULL COMMENT '用户id',
   `o_id` int NOT NULL COMMENT '订单id',
   `c_id` int NOT NULL COMMENT '轮椅id',
+  `rating` int NULL DEFAULT NULL COMMENT '评分',
   `comment_content` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '评论内容',
   `comment_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '评论时间',
   PRIMARY KEY (`comment_id`) USING BTREE
@@ -109,13 +110,13 @@ CREATE TABLE `t_comment`  (
 -- ----------------------------
 -- Records of t_comment
 -- ----------------------------
-INSERT INTO `t_comment` VALUES (1, 20, 1, 30, '轮椅质量很好，使用起来非常舒适。', '2023-05-11 10:00:00');
-INSERT INTO `t_comment` VALUES (2, 21, 2, 31, '配送非常及时，轮椅非常结实耐用。', '2023-06-21 12:30:00');
-INSERT INTO `t_comment` VALUES (3, 22, 3, 41, '轮椅有点重，但整体质量不错。', '2023-07-31 15:45:00');
-INSERT INTO `t_comment` VALUES (4, 23, 4, 30, '轮椅很好用，客服服务也很到位。', '2023-08-11 09:00:00');
-INSERT INTO `t_comment` VALUES (5, 24, 5, 31, '轮椅很新，但感觉座位不太舒适。', '2023-09-16 14:00:00');
-INSERT INTO `t_comment` VALUES (6, 25, 6, 41, '总体还不错，唯一不足是轮子有些卡顿。', '2023-10-21 16:00:00');
-INSERT INTO `t_comment` VALUES (7, 26, 7, 30, '使用体验非常好，值得推荐。', '2023-11-12 10:30:00');
+INSERT INTO `t_comment` VALUES (1, 20, 1, 30, 4, '轮椅质量很好，使用起来非常舒适。', '2023-05-11 10:00:00');
+INSERT INTO `t_comment` VALUES (2, 21, 2, 31, 2, '配送非常及时，轮椅非常结实耐用。', '2023-06-21 12:30:00');
+INSERT INTO `t_comment` VALUES (3, 22, 3, 41, 1, '轮椅有点重，但整体质量不错。', '2023-07-31 15:45:00');
+INSERT INTO `t_comment` VALUES (4, 23, 4, 30, 5, '轮椅很好用，客服服务也很到位。', '2023-08-11 09:00:00');
+INSERT INTO `t_comment` VALUES (5, 24, 5, 31, 3, '轮椅很新，但感觉座位不太舒适。', '2023-09-16 14:00:00');
+INSERT INTO `t_comment` VALUES (6, 25, 6, 41, 4, '总体还不错，唯一不足是轮子有些卡顿。', '2023-10-21 16:00:00');
+INSERT INTO `t_comment` VALUES (7, 26, 7, 30, 2, '使用体验非常好，值得推荐。', '2023-11-12 10:30:00');
 
 -- ----------------------------
 -- Table structure for t_delivery_order

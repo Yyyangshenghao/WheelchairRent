@@ -70,8 +70,8 @@
     <div class="layui-tab layui-tab-brief" id="sign" lay-filter=""
          style="display: none;">
         <ul class="layui-tab-title">
-            <li class="layui-this">登录</li>
-            <li>注册</li>
+            <li class="layui-this" style="width: 225px">登录</li>
+            <li style="width: 225px">注册</li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
@@ -328,4 +328,7 @@
     });
 </script>
 </body>
+<style>
+
+</style>
 </html>

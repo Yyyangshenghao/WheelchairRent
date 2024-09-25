@@ -65,11 +65,12 @@
         <div class="layui-carousel" id="details-image">
             <div carousel-item style="float: left;">
                 <c:forEach items="${DetailsImg }" var="d">
-                    <div style="background: url('${d}')no-repeat center/cover"></div>
+                    <div style="background: url('${d}') no-repeat center; background-size: contain; height: 400px;"></div>
                 </c:forEach>
             </div>
         </div>
     </div>
+
     <div class="details-info layui-pull-right layui-col-md5 ">
         <div class="show-price">
             <span class="sale-price">${Details.wheelchairPrice }</span>
@@ -78,12 +79,10 @@
         </div>
         <hr>
         <div class="show-wheelchair-name">
-            <p><span class="field">小区名称：</span><span
+            <p><span class="field">品牌名称：</span><span
                     class="name">${Details.communityName }</span></p>
             <p><span class="field">发货地址：</span><span
                     class="name">${Details.wheelchairAddress }</span></p>
-            <p><span class="field">周边学校：</span><span
-                    class="name">请联系我咯</span></p>
             <p><span class="field">联系电话：</span><span
                     class="name">${Details.wheelchairLinkMan }</span></p>
         </div>
@@ -108,7 +107,7 @@
         <div class="order-btn-container">
             <input type="hidden" class="HID" value="${Details.hID}">
             <input type="hidden" class="uName" value="${loginUser.uName}">
-            <button class="order-btn" lay-submit lay-filter="addOrder">
+            <button class="order-btn layui-anim" lay-submit lay-filter="addOrder" data-anim="layui-anim-scalesmall">
                 现在租赁
             </button>
         </div>
@@ -164,6 +163,8 @@
             </form>
         </div>
     </div>
+    <!-- 分隔线，分离评论区和上方内容 -->
+    <hr style="margin: 40px 0; border-top: 2px solid #ddd;">
     <%-- 评论展示 --%>
     <div class="comment-section">
         <h3>用户评论：</h3>
@@ -174,7 +175,8 @@
                     <span class="comment-date">${comment.commentDateFormatted}</span>
                 </div>
                 <div class="comment-content">
-                    <p>${comment.commentContent}</p>
+                    <p>${comment.commentContent}</p><!-- 评分元素 -->
+                    <div id="rate-${comment.commentID}" class="rate-demo-readonly"></div>
                 </div>
             </div>
         </c:forEach>
@@ -186,8 +188,8 @@
     <div class="layui-tab layui-tab-brief" id="sign" lay-filter=""
          style="display: none;">
         <ul class="layui-tab-title">
-            <li class="layui-this">登录</li>
-            <li>注册</li>
+            <li class="layui-this" style="width: 225px">登录</li>
+            <li style="width: 225px">注册</li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
@@ -215,71 +217,104 @@
                         <br>
                         <div class="layui-form-item">
                             <button class="layui-btn layui-btn-fluid layui-btn-normal layui-btn-radius"
-                                    lay-submit lay-filter="login">立即登录
+                                    lay-submit
+                                    lay-filter="login">立即登录
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="layui-tab-item">
-                <div class="" style="margin: 30px 20px;">
+                <div style="margin: 30px 20px;">
                     <form class="layui-form layui-form-pane form">
+                        <!-- 用户名 -->
                         <div class="layui-form-item">
                             <label class="layui-form-label">用户名</label>
                             <div class="layui-input-block">
-                                <input type="text" name="uName" required
-                                       lay-verify="required"
-                                       placeholder="请输入用户名"
+                                <input type="text" name="uName" required lay-verify="required" placeholder="请输入用户名"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
+
+                        <!-- 密码 -->
                         <div class="layui-form-item">
                             <label class="layui-form-label">密码</label>
                             <div class="layui-input-block">
-                                <input type="text" name="uPassword" required
-                                       lay-verify="required"
-                                       placeholder="请输入密码"
+                                <input type="password" name="uPassword" required lay-verify="required" placeholder="请输入密码"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
+
+                        <!-- 手机号 -->
                         <div class="layui-form-item">
                             <label class="layui-form-label">手机号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="uPhoneNumber" required
-                                       lay-verify="required"
-                                       placeholder="注册后不能修改"
+                                <input type="text" name="uPhoneNumber" required lay-verify="required" placeholder="注册后不能修改"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
+
+                        <!-- 昵称 -->
                         <div class="layui-form-item">
                             <label class="layui-form-label">昵称</label>
                             <div class="layui-input-block">
-                                <input type="text" name="uNickName" required
-                                       lay-verify="required"
-                                       placeholder="注册后不能修改"
+                                <input type="text" name="uNickName" required lay-verify="required" placeholder="注册后不能修改"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
+
+                        <!-- 性别 -->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-block">
+                                <select name="uGender" required lay-verify="required">
+                                    <option value="">请选择性别</option>
+                                    <option value="M">男</option>
+                                    <option value="F">女</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 出生日期 -->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">出生日期</label>
+                            <div class="layui-input-block">
+                                <input type="date" name="uBirthdate" required lay-verify="required" class="layui-input">
+                            </div>
+                        </div>
+
                     </form>
+
+                    <!-- 注册按钮 -->
                     <div class="layui-form-item">
-                        <input type="submit"
-                               class="layui-btn layui-btn-fluid layui-btn-radius layui-btn-normal regist-btn"
-                               value="立即注册"/>
+                        <input type="submit" class="layui-btn layui-btn-fluid layui-btn-radius layui-btn-normal regist-btn" value="立即注册"/>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 <script src="${pageContext.request.contextPath}/static/layui/layui.js"></script>
 <script>
-    layui.use(['element', 'carousel', 'layer', 'form', 'laydate'], function () {
+    layui.use(['element', 'carousel', 'layer', 'form', 'laydate', 'rate'], function () {
         var element = layui.element,
             carousel = layui.carousel,
             $ = layui.jquery,
             layer = layui.layer,
             form = layui.form,
-            laydate = layui.laydate;
+            laydate = layui.laydate,
+            rate = layui.rate;
+
+
+        // 动态渲染每条评论的评分
+        <c:forEach var="comment" items="${Comments}">
+        rate.render({
+            elem: '#rate-${comment.commentID}', // 使用评论ID作为元素ID
+            value: ${comment.rating != null ? comment.rating : 0}, // 使用评论中的评分值
+            readonly: true // 只读
+        });
+        </c:forEach>
 
         // 初始化日期选择器
         laydate.render({elem: '#startDate'});
@@ -288,7 +323,7 @@
         var layer_index;
         carousel.render({
             elem: "#details-image",
-            height: "600px",
+            height: "400px",
             anim: "default"
         });
 
@@ -296,8 +331,8 @@
             layer_index = layer.open({
                 type: 1,
                 content: $('#sign'),
-                area: ['360px', '460px'],
-                title: "轮椅租赁",
+                area: ['450px', '550px'],
+                title: "用户登录",
                 closeBtn: 2
             });
         });
@@ -370,6 +405,18 @@
         });
     });
 </script>
-
 </body>
+<style>
+    .comment-section h3 {
+        font-size: 24px; /* 设置字体大小 */
+        color: #333; /* 字体颜色 */
+        text-align: left; /* 左对齐 */
+        font-weight: bold; /* 加粗字体 */
+        padding-bottom: 10px; /* 底部内边距 */
+        border-bottom: 2px solid #eee; /* 添加底部边框 */
+        margin-bottom: 20px; /* 底部外边距 */
+        font-family: 'Arial', sans-serif; /* 设置字体 */
+    }
+
+</style>
 </html>

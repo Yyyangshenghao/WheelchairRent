@@ -66,7 +66,7 @@
                             case 3:
                                 return '使用中';
                             case 4:
-                                return '等待回收';
+                                return '等待上门维修/保养';
                             case 5:
                                 return '回收中';
                         }}},

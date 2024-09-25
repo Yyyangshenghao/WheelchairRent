@@ -9,6 +9,7 @@
         <result column="u_id" property="userID" jdbcType="INTEGER"/>
         <result column="o_id" property="orderID" jdbcType="INTEGER"/>
         <result column="c_id" property="wheelchairID" jdbcType="INTEGER"/>
+        <result column="rating" property="rating" jdbcType="INTEGER"/>
         <result column="comment_content" property="commentContent"
                 jdbcType="VARCHAR"/>
         <result column="comment_date" property="commentDate"
@@ -19,14 +20,14 @@
     <!-- 插入新的评论 -->
     <insert id="addNewComment"
             parameterType="com.wheelchair.wym.entity.Comment">
-        INSERT INTO t_comment (u_id, o_id, c_id, comment_content, comment_date)
-        VALUES (#{userID}, #{orderID}, #{wheelchairID}, #{commentContent},
+        INSERT INTO t_comment (u_id, o_id, c_id, rating, comment_content, comment_date)
+        VALUES (#{userID}, #{orderID}, #{rating}, #{wheelchairID}, #{commentContent},
                 NOW())
     </insert>
 
     <!-- 根据轮椅ID查询相关评论 -->
     <select id="findCommentsByWheelchairID" parameterType="int" resultMap="CommentMap">
-        SELECT c.comment_id, c.u_id, c.o_id, c.c_id, c.comment_content, c.comment_date, u.u_nickname AS username
+        SELECT c.comment_id, c.u_id, c.o_id, c.c_id, c.rating, c.comment_content, c.comment_date, u.u_nickname AS username
         FROM t_comment c
                  JOIN t_users u ON c.u_id = u.u_id
         WHERE c.c_id = #{wheelchairID}
@@ -35,7 +36,7 @@
     <!-- 根据用户ID查询相关评论 -->
     <select id="findCommentsByUserID" parameterType="int"
             resultMap="CommentMap">
-        SELECT comment_id, u_id, o_id, c_id, comment_content, comment_date
+        SELECT comment_id, u_id, o_id, c_id, rating, comment_content, comment_date
         FROM t_comment
         WHERE u_id = #{userID}
     </select>
@@ -43,7 +44,7 @@
     <!-- 根据订单ID查询相关评论 -->
     <select id="findCommentsByOrderID" parameterType="int"
             resultMap="CommentMap">
-        SELECT comment_id, u_id, o_id, c_id, comment_content, comment_date
+        SELECT comment_id, u_id, o_id, c_id, rating, comment_content, comment_date
         FROM t_comment
         WHERE o_id = #{orderID}
     </select>
