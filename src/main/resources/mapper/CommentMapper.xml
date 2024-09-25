@@ -25,12 +25,13 @@
                 NOW())
     </insert>
 
-    <!-- 根据轮椅ID查询相关评论 -->
+    <!-- 根据h_id查询相关评论 -->
     <select id="findCommentsByWheelchairID" parameterType="int" resultMap="CommentMap">
         SELECT c.comment_id, c.u_id, c.o_id, c.c_id, c.rating, c.comment_content, c.comment_date, u.u_nickname AS username
         FROM t_comment c
                  JOIN t_users u ON c.u_id = u.u_id
-        WHERE c.c_id = #{wheelchairID}
+                 JOIN t_chair ch ON c.c_id = ch.c_id
+        WHERE ch.h_id = #{wheelchairID}
     </select>
 
     <!-- 根据用户ID查询相关评论 -->

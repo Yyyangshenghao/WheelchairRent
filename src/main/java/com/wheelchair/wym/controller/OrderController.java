@@ -192,7 +192,8 @@ public class OrderController {
         comment.setRating(rating);
         comment.setCommentContent(commentContent);
         int n = service.addNewComment(comment);
-        return "OK";
+        if (n > 0) return "OK";
+        return "FAIL";
     }
 
 }

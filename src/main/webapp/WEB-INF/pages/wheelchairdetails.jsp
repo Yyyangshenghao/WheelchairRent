@@ -336,25 +336,64 @@
                 closeBtn: 2
             });
         });
+        // 计算年龄的函数
+        function calculateAge(birthDate) {
+            var today = new Date();
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var monthDifference = today.getMonth() - birthDate.getMonth();
+
+            // 如果当前月份还没有到用户的出生月份，或者到了但当前日期还没有到出生日期，则年龄减1
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
         $('.regist-btn').click(function () {
-            if ($("input[name='uName']").val() !== "" &&
-                $("input[name='uPassword']").val() !== "" &&
-                $("input[name='uPhoneNumber']").val() !== "" &&
-                $("input[name='uNickName']").val() !== "") {
+            var uName = $("input[name='uName']").val();
+            var uPassword = $("input[name='uPassword']").val();
+            var uPhoneNumber = $("input[name='uPhoneNumber']").val();
+            var uNickName = $("input[name='uNickName']").val();
+            var uGender = $("select[name='uGender']").val();  // 获取性别
+            var uBirthdate = $("input[name='uBirthdate']").val();  // 获取出生日期
+
+            // 检查所有字段是否填写
+            if (uName && uPassword && uPhoneNumber && uNickName && uGender && uBirthdate) {
+                // 计算年龄
+                var uAge = calculateAge(new Date(uBirthdate));
+
+                // 将年龄添加到表单中
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'uAge',
+                    value: uAge
+                }).appendTo('.form');
+
                 $.post("regist", $('.form').serialize(), function (res) {
-                    console.log(res)
+                    console.log(res);
                     if (res === 'OK') {
-                        layer.close(layer_index);
                         layer.alert("注册成功", {icon: 1, time: 2000});
-                        $('.form')[0].reset();
+                        $('.form')[0].reset();  // 重置表单
                     } else {
-                        layer.msg("注册失败,用户名已存在");
+                        layer.msg("注册失败, 用户名已存在");
                     }
-                })
+                });
             } else {
-                layer.msg("请填写所有表单");
+                layer.msg("请填写所有表单项");
             }
         });
+
+        form.on("submit(login)", function () {
+            $.post("login", $('#login').serialize(), function (res) {
+                if (res === "OK") {
+                    window.location.reload();
+                } else {
+                    layer.msg("用户名或者密码错误");
+                }
+            });
+            return false;
+        });
+
         // 点击租赁按钮弹出表单
         $(".order-btn").click(function () {
             if ($(".uName").val() === "") {
@@ -392,16 +431,6 @@
                 });
                 return false;
             });
-        });
-        form.on("submit(login)", function () {
-            $.post("login", $('#login').serialize(), function (res) {
-                if (res === "OK") {
-                    window.location.reload();
-                } else {
-                    layer.msg("用户名或者密码错误");
-                }
-            });
-            return false;
         });
     });
 </script>
