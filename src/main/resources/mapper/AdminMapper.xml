@@ -179,12 +179,33 @@
 
 
     <select id="findAllRepairOrder"
-            parameterType="com.wheelchair.wym.entity.Page"
+            parameterType="map"
             resultMap="RepairOrderMap">
         select r.*, o.u_id
         from t_repair_order r
                  join t_order o on r.oID = o.o_id
-        limit #{page}, #{limit}
+        where 1=1
+        <if test="phone != null and phone != ''">
+            AND r.phone LIKE CONCAT('%', #{phone}, '%')
+        </if>
+        <if test="type != null and type != ''">
+            AND r.type = #{type}
+        </if>
+        <if test="orderStatus != null">
+            AND r.orderStatus = #{orderStatus}
+        </if>
+        <choose>
+            <when test="timeSort == 'asc'">
+                ORDER BY r.pickupDate ASC  <!-- 时间升序排序 -->
+            </when>
+            <when test="timeSort == 'desc'">
+                ORDER BY r.pickupDate DESC  <!-- 时间降序排序 -->
+            </when>
+            <otherwise>
+                ORDER BY r.id DESC  <!-- 默认按维修/保养订单ID降序排序 -->
+            </otherwise>
+        </choose>
+        limit #{page.page}, #{page.limit}
     </select>
 
     <update id="updateAdminPwd" parameterType="com.wheelchair.wym.entity.Admin">
@@ -303,7 +324,18 @@
 
     <select id="getRepairOrderCount" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_repair_order
+        where 1=1
+        <if test="phone != null and phone != ''">
+            AND phone LIKE CONCAT('%', #{phone}, '%')
+        </if>
+        <if test="type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test="orderStatus != null">
+            AND orderStatus = #{orderStatus}
+        </if>
     </select>
+
     <select id="getOrderCountByCondition" parameterType="map" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM t_order o

@@ -42,7 +42,7 @@ public interface AdminMapper {
     List<UserOrder> findOrderByCondition(@Param("uPhone") String uPhone, @Param("chairNo") String chairNo, @Param("orderStatus") Integer orderStatus, @Param("page") Page page);
 
     // 查询所有维修订单
-    List<RepairOrder> findAllRepairOrder(Page page);
+    List<RepairOrder> findAllRepairOrder(@Param("page") Page page, @Param("phone") String phone, @Param("type") String type, @Param("orderStatus") Integer orderStatus, @Param("timeSort") String timeSort);
 
     // 查询所有配送订单
     List<DeliveryOrder> findAllDeliveryOrder(@Param("page") Page page, @Param("phone") String phone, @Param("type") Integer type, @Param("orderStatus") Integer orderStatus, @Param("timeSort") String timeSort);
@@ -70,5 +70,5 @@ public interface AdminMapper {
 
     int getDeliveryOrderCount(@Param("phone") String phone, @Param("type") Integer type, @Param("orderStatus") Integer orderStatus);
 
-    int getRepairOrderCount();
+    int getRepairOrderCount(@Param("phone") String phone, @Param("type") String type, @Param("orderStatus") Integer orderStatus);
 }

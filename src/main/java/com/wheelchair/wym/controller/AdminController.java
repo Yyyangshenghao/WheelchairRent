@@ -153,12 +153,12 @@ public class AdminController {
 
     @RequestMapping("findAllRepairOrder")
     @ResponseBody
-    public RepairOrderData findAllRepairOrder(int page, int limit) {
+    public RepairOrderData findAllRepairOrder(int page, int limit, String phone, String type, Integer orderStatus, String timeSort) {
         Page p = new Page();
         p.setPage((page - 1) * limit);
         p.setLimit(limit);
-        List<RepairOrder> repairOrder = service.findAllRepairOrder(p);
-        int totalRepairOrderCount = service.getRepairOrderCount();
+        List<RepairOrder> repairOrder = service.findAllRepairOrder(p, phone, type, orderStatus, timeSort);
+        int totalRepairOrderCount = service.getRepairOrderCount(phone, type, orderStatus);
         RepairOrderData rod = new RepairOrderData();
         rod.setCode(0);
         rod.setCount(totalRepairOrderCount);

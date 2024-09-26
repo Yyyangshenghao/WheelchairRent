@@ -71,8 +71,8 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public List<RepairOrder> findAllRepairOrder(Page page) {
-        return service.findAllRepairOrder(page);
+    public List<RepairOrder> findAllRepairOrder(Page page, String phone, String type, Integer orderStatus, String timeSort) {
+        return service.findAllRepairOrder(page, phone, type, orderStatus, timeSort);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public int getRepairOrderCount() {
-        return service.getRepairOrderCount();
+    public int getRepairOrderCount(String phone, String type, Integer orderStatus) {
+        return service.getRepairOrderCount(phone, type, orderStatus);
     }
 }

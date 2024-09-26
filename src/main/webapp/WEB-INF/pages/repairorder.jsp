@@ -12,6 +12,62 @@
     <fieldset class="layui-elem-field layui-field-title">
         <legend style="font-size: 26px">保养/维修订单信息</legend>
     </fieldset>
+    <form class="layui-form" lay-filter="searchForm" style="margin-bottom: 20px;">
+        <div class="layui-form-item">
+            <!-- 联系电话输入框 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="phone" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <!-- 保养/维修类型筛选 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">类型</label>
+                <div class="layui-input-inline">
+                    <select name="type" lay-filter="type">
+                        <option value="">请选择类型</option>
+                        <option value="maintenance">保养</option>
+                        <option value="repair">维修</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 订单状态筛选 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">订单状态</label>
+                <div class="layui-input-inline">
+                    <select name="orderStatus" lay-filter="orderStatus">
+                        <option value="">请选择状态</option>
+                        <option value="0">未确认</option>
+                        <option value="1">已确认，正在上门</option>
+                        <option value="8">维修/保养完成</option>
+                        <option value="9">维修/保养失败</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 时间排序 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">时间排序</label>
+                <div class="layui-input-inline">
+                    <select name="timeSort" lay-filter="timeSort">
+                        <option value="">选择排序方式</option>
+                        <option value="asc">从早到晚</option>
+                        <option value="desc">从晚到早</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 搜索和重置按钮 -->
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="search">搜索</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
     <table id="allRepairOrder" lay-filter="order"></table>
 </div>
 <script src="${pageContext.request.contextPath }/static/layui/layui.js"></script>
@@ -20,7 +76,8 @@
         var element = layui.element,
             $ = layui.jquery,
             table = layui.table,
-            util = layui.util;
+            util = layui.util,
+            form = layui.form;
 
         var dt = table.render({
             elem: "#allRepairOrder",
@@ -32,7 +89,14 @@
                 {field: 'repairOrderID', title: '保养/维修订单id', align: 'center'},
                 {field: 'oid', title: '订单id', align: 'center'},
                 {field: 'uid', title: '用户id', align: 'center'},
-                {field: 'type', title: '保养/维修', align: 'center'},
+                {field: 'type', title: '保养/维修', align: 'center',
+                    templet:function(d) {
+                        switch (d.type){
+                            case 'maintenance':
+                                return '保养';
+                            case 'repair':
+                                return '维修';
+                        }}},
                 {field: 'pickupDate', title: '取件时间', align: 'center',
                     templet: function(d) {
                         return util.toDateString(d.pickupDate, 'yyyy-MM-dd');
@@ -54,6 +118,21 @@
                         }}},
                 {title: '操作', align: 'center', toolbar: "#tools"}
             ]]
+        });
+
+        // 监听搜索表单提交事件
+        form.on('submit(search)', function (data) {
+            // 重新加载表格，并传递筛选条件
+            table.reload('allRepairOrder', {
+                where: {
+                    phone: data.field.phone,
+                    type: data.field.type,
+                    orderStatus: data.field.orderStatus,
+                    timeSort: data.field.timeSort
+                },
+                page: {curr: 1}
+            });
+            return false;  // 阻止表单默认提交行为
         });
 
         // 封装表格刷新函数

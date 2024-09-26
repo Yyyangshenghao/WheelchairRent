@@ -62,7 +62,7 @@ public interface IAdminService {
     /**
      * 查询用户保养/维修订单
      */
-    List<RepairOrder> findAllRepairOrder(Page page);
+    List<RepairOrder> findAllRepairOrder(Page page, String phone, String type, Integer orderStatus, String timeSort);
 
     /**
      * 查询用户的配送订单
@@ -96,5 +96,5 @@ public interface IAdminService {
 
     int getDeliveryOrderCount(String phone, Integer type, Integer orderStatus);
 
-    int getRepairOrderCount();
+    int getRepairOrderCount(String phone, String type, Integer orderStatus);
 }
