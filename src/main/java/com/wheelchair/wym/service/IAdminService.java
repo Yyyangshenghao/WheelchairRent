@@ -17,7 +17,7 @@ public interface IAdminService {
     /**
      * 查询所有用户
      */
-    List<Users> findAllUser();
+    List<Users> findAllUser(Page page, String uName, String uPhoneNumber);
 
     /**
      * 查询所有轮椅信息
@@ -86,7 +86,7 @@ public interface IAdminService {
      */
     List<Chair> findAllChairByCondition(Page p, String chairNo, Integer status);
 
-    int getUserCount();
+    int getUserCount(String uName, String uPhoneNumber);
 
     int getWheelchairCount();
 

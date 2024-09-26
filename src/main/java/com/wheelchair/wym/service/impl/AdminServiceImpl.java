@@ -26,8 +26,8 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public List<Users> findAllUser() {
-        return service.findAllUser();
+    public List<Users> findAllUser(Page page, String uName, String uPhoneNumber) {
+        return service.findAllUser(page, uName, uPhoneNumber);
     }
 
     @Override
@@ -106,8 +106,8 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public int getUserCount() {
-        return service.getUserCount();
+    public int getUserCount(String uName, String uPhoneNumber) {
+        return service.getUserCount(uName, uPhoneNumber);
     }
 
     @Override

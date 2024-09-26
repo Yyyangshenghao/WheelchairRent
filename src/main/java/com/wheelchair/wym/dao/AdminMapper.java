@@ -15,7 +15,7 @@ public interface AdminMapper {
     Admin adminAccess(Admin admin);
 
     // 查询所有用户
-    List<Users> findAllUser();
+    List<Users> findAllUser(@Param("page") Page page, @Param("uName") String uName, @Param("uPhoneNumber") String uPhoneNumber);
 
     // 查询所有轮椅信息
     List<Wheelchair> findAllWheelchair(Page page);
@@ -62,7 +62,7 @@ public interface AdminMapper {
 
     int getChairCount(@Param("chairNo") String chairNo,  @Param("status") Integer status);
 
-    int getUserCount();
+    int getUserCount(@Param("uName") String uName, @Param("uPhoneNumber") String uPhoneNumber);
 
     int getWheelchairCount();
 

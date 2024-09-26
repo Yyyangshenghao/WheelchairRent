@@ -25,16 +25,44 @@
         </div>
     </div>
 
+    <hr class="divider">
+
+<%--    根据用户名、联系电话查询用户--%>
+    <form class="layui-form" lay-filter="searchForm" style="margin-bottom: 20px;">
+        <div class="layui-form-item">
+            <!-- 用户名输入框 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="uName" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <!-- 联系电话输入框 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="uPhoneNumber" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <!-- 搜索和重置按钮 -->
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="search">搜索</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
     <!-- 用户列表表格 -->
     <table id="allUser" lay-filter="user"></table>
 </div>
 
 <script src="${pageContext.request.contextPath }/static/layui/layui.js"></script>
 <script>
-    layui.use(['element', 'table'], function () {
+    layui.use(['element', 'table','form'], function () {
         var element = layui.element,
             $ = layui.jquery,
-            table = layui.table;
+            table = layui.table,
+            form = layui.form;
 
         var dt = table.render({
             elem: "#allUser",
@@ -65,6 +93,19 @@
                 {field: 'uAge', title: '年龄', align: 'center'},
                 {title: '操作', align: 'center', toolbar: "#tools"}
             ]]
+        });
+
+        // 监听搜索表单提交事件
+        form.on('submit(search)', function (data) {
+            // 重新加载表格，并传递筛选条件
+            table.reload('allUser', {
+                where: {
+                    uName: data.field.uName,
+                    uPhoneNumber: data.field.uPhoneNumber,
+                },
+                page: {curr: 1}
+            });
+            return false;  // 阻止表单默认提交行为
         });
 
         table.on('tool(user)', function (obj) {
@@ -101,4 +142,14 @@
        lay-event="delete">删除</a>
 </script>
 </body>
+<style>
+    /* 自定义粗线样式 */
+    .divider {
+        border: 0;
+        height: 2px; /* 设置线的厚度 */
+        background-color: #333; /* 设置线的颜色 */
+        margin-top: 40px;
+        margin-bottom: 30px; /* 设置上下间距 */
+    }
+</style>
 </html>

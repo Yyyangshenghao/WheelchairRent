@@ -110,9 +110,17 @@
     </select>
 
     <!-- 查询所有用户 -->
-    <select id="findAllUser" resultMap="AllUserMap">
+    <select id="findAllUser" resultMap="AllUserMap" parameterType="map">
         select *
         from t_users
+        where 1=1
+        <if test="uName != null and uName != ''">
+            AND u_name LIKE CONCAT('%', #{uName}, '%')
+        </if>
+        <if test="uPhoneNumber != null and uPhoneNumber != ''">
+            AND u_phone_number LIKE CONCAT('%', #{uPhoneNumber}, '%')
+        </if>
+        limit #{page.page}, #{page.limit}
     </select>
 
     <select id="findAllWheelchair" resultMap="AllWheelchairMap"
@@ -301,8 +309,15 @@
         </if>
     </select>
 
-    <select id="getUserCount" resultType="java.lang.Integer">
+    <select id="getUserCount" parameterType="map" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_users
+        WHERE 1=1
+        <if test="uName != null and uName != ''">
+            AND u_name LIKE CONCAT('%', #{uName}, '%')
+        </if>
+        <if test="uPhoneNumber != null and uPhoneNumber != ''">
+            AND u_phone_number LIKE CONCAT('%', #{uPhoneNumber}, '%')
+        </if>
     </select>
     <select id="getWheelchairCount" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_wheelchair

@@ -65,10 +65,12 @@ public class AdminController {
 
     @RequestMapping("/AllUsers")
     @ResponseBody
-    public UserData findAllUser() {
-        List<Users> findAllUser = service.findAllUser();
-
-        int totalUserCount = service.getUserCount();
+    public UserData findAllUser(int page, int limit, String uName, String uPhoneNumber) {
+        Page p = new Page();
+        p.setLimit(limit);
+        p.setPage((page - 1) * limit);
+        List<Users> findAllUser = service.findAllUser(p, uName, uPhoneNumber);
+        int totalUserCount = service.getUserCount(uName, uPhoneNumber);
         UserData u = new UserData();
         u.setCode(0);
         u.setCount(totalUserCount);
