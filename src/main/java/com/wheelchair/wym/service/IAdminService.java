@@ -57,7 +57,7 @@ public interface IAdminService {
     /**
      * 查询用户租赁订单
      */
-    List<UserOrder> findAllOrder(Page page);
+    List<UserOrder> findOrderByCondition(String uPhone, String chairNo, Page page);
 
     /**
      * 查询用户保养/维修订单

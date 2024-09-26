@@ -157,15 +157,23 @@
           and id = #{id}
     </select>
 
-    <!-- 管理员查询所有租赁订单 -->
-    <select id="findAllOrder" parameterType="com.wheelchair.wym.entity.Page"
-            resultMap="UserOrderMap">
+    <!-- 管理员查询租赁订单，按用户手机号和轮椅编号过滤 -->
+    <select id="findOrderByCondition" parameterType="map" resultMap="UserOrderMap">
         select o.*, h.community_name AS community_name, c.chair_no AS chair_no
         from t_order o
-                 join t_chair c on o.c_id = c.c_id
-                 join t_wheelchair h on c.h_id = h.h_id
+        join t_chair c on o.c_id = c.c_id
+        join t_wheelchair h on c.h_id = h.h_id
+        where 1=1
+        <if test="uPhone != null and uPhone != ''">
+            AND o.phone LIKE CONCAT('%', #{uPhone}, '%')
+        </if>
+        <if test="chairNo != null and chairNo != ''">
+            AND c.chair_no = #{chairNo}
+        </if>
         limit #{page}, #{limit}
     </select>
+
+
 
     <select id="findAllRepairOrder"
             parameterType="com.wheelchair.wym.entity.Page"

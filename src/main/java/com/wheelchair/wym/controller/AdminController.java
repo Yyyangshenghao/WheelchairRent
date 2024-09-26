@@ -138,11 +138,11 @@ public class AdminController {
 
     @RequestMapping("/findAllOrder")
     @ResponseBody
-    public UserOrderData findAllOrder(int page, int limit) {
+    public UserOrderData findAllOrder(int page, int limit, String uPhone, String chairNo) {
         Page p = new Page();
         p.setLimit(limit);
         p.setPage((page - 1) * limit);
-        List<UserOrder> findAllOrder = service.findAllOrder(p);
+        List<UserOrder> findAllOrder = service.findOrderByCondition(uPhone, chairNo, p);
         int totalOrderCount = service.getOrderCount();
         UserOrderData data = new UserOrderData();
         data.setCode(0);

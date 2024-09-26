@@ -6,6 +6,7 @@ import com.wheelchair.wym.entity.*;
 import com.wheelchair.wym.service.IAdminService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,8 +66,14 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public List<UserOrder> findAllOrder(Page page) {
-        return service.findAllOrder(page);
+    public List<UserOrder> findOrderByCondition(String uPhone, String chairNo, Page page) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("uPhone", uPhone);
+        params.put("chairNo", chairNo);
+        params.put("page", page.getPage());
+        params.put("limit", page.getLimit());
+
+        return service.findOrderByCondition(params);
     }
 
     @Override

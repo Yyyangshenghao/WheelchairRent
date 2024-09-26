@@ -12,6 +12,22 @@
     <fieldset class="layui-elem-field layui-field-title">
         <legend style="font-size: 26px">租赁订单信息</legend>
     </fieldset>
+
+    <!-- 搜索表单开始 -->
+    <form class="layui-form layui-row layui-col-space10">
+        <div class="layui-col-md4">
+            <input type="text" name="uPhone" placeholder="租赁人电话" class="layui-input">
+        </div>
+        <div class="layui-col-md4">
+            <input type="text" name="chairNo" placeholder="轮椅编号" class="layui-input">
+        </div>
+        <div class="layui-col-md4">
+            <button class="layui-btn" lay-submit lay-filter="search">搜索</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </form>
+    <!-- 搜索表单结束 -->
+
     <table id="allOrder" lay-filter="order"></table>
 </div>
 <script src="${pageContext.request.contextPath }/static/layui/layui.js"></script>
@@ -20,7 +36,8 @@
         var element = layui.element,
             $ = layui.jquery,
             table = layui.table,
-            util = layui.util;
+            util = layui.util,
+            form = layui.form;
 
         var dt = table.render({
             elem: "#allOrder",
@@ -73,6 +90,16 @@
                 {title: '操作', align: 'center', toolbar: "#tools"}
             ]]
         });
+
+        form.on('submit(search)', function(data) {
+            var field = data.field; // 获取表单字段值
+            // 重新加载表格数据，加入搜索条件
+            table.reload('allOrder', {
+                where: field, // 搜索条件
+                page: { curr : 1 } // 重新从第1页开始
+            })
+            return false; // 阻止表单默认提交
+        })
 
         // 封装表格刷新函数
         function reloadTable() {

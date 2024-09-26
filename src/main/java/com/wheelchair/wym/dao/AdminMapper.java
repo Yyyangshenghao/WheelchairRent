@@ -38,7 +38,7 @@ public interface AdminMapper {
     int updateAdminPwd(Admin admin);
 
     // 查询所有订单
-    List<UserOrder> findAllOrder(Page page);
+    List<UserOrder> findOrderByCondition(Map<String, Object> params);
 
     // 查询所有维修订单
     List<RepairOrder> findAllRepairOrder(Page page);
