@@ -8,7 +8,6 @@ import com.wheelchair.wym.service.impl.ChairServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -105,13 +104,13 @@ public class AdminController {
 
     @RequestMapping("/findAllChair")
     @ResponseBody
-    public ChairData findAllChair(int page, int limit) {
+    public ChairData findAllChair(int page, int limit, String chairNo, Integer status) {
         Page p = new Page();
         p.setLimit(limit);
         p.setPage((page - 1) * limit);
-        List<Chair> findAllChair = service.findAllChair(p);
+        List<Chair> findAllChair = service.findAllChairByCondition(p, chairNo, status);
         // 获取所有轮椅的总数量，用于分页
-        int totalChairCount = service.getChairCount();
+        int totalChairCount = service.getChairCountByCondition(chairNo, status);
         ChairData data = new ChairData();
         data.setCode(0);
         data.setCount(totalChairCount);
@@ -143,7 +142,7 @@ public class AdminController {
         p.setLimit(limit);
         p.setPage((page - 1) * limit);
         List<UserOrder> findAllOrder = service.findOrderByCondition(uPhone, chairNo, p);
-        int totalOrderCount = service.getOrderCount();
+        int totalOrderCount = service.getOrderCountByCondition(uPhone, chairNo);
         UserOrderData data = new UserOrderData();
         data.setCode(0);
         data.setCount(totalOrderCount);

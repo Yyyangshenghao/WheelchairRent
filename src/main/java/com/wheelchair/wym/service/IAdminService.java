@@ -84,15 +84,15 @@ public interface IAdminService {
     /**
      * 查询所有轮椅单品信息
      */
-    List<Chair> findAllChair(Page p);
-
-    int getChairCount();
+    List<Chair> findAllChairByCondition(Page p, String chairNo, Integer status);
 
     int getUserCount();
 
     int getWheelchairCount();
 
-    int getOrderCount();
+    int getOrderCountByCondition(String uPhone, String chairNo);
+
+    int getChairCountByCondition(String chairNo, Integer status);
 
     int getDeliveryOrderCount();
 

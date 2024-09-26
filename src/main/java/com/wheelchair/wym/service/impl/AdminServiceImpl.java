@@ -102,13 +102,13 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public List<Chair> findAllChair(Page p) {
-        return service.findAllChair(p);
+    public List<Chair> findAllChairByCondition(Page p, String chairNo, Integer status) {
+        return service.findAllChair(p, chairNo, status);
     }
 
     @Override
-    public int getChairCount() {
-        return service.getChairCount();
+    public int getChairCountByCondition(String chairNo, Integer status) {
+        return service.getChairCount(chairNo, status);
     }
 
     @Override
@@ -122,8 +122,8 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public int getOrderCount() {
-        return service.getOrderCount();
+    public int getOrderCountByCondition(String uPhone, String chairNo) {
+        return service.getOrderCountByCondition(uPhone, chairNo);
     }
 
     @Override

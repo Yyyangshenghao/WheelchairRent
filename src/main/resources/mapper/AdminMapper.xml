@@ -168,7 +168,7 @@
             AND o.phone LIKE CONCAT('%', #{uPhone}, '%')
         </if>
         <if test="chairNo != null and chairNo != ''">
-            AND c.chair_no = #{chairNo}
+            AND c.chair_no LIKE CONCAT('%', #{chairNo}, '%')
         </if>
         limit #{page}, #{limit}
     </select>
@@ -212,12 +212,20 @@
         GROUP BY u_gender
     </select>
 
-    <select id="findAllChair" parameterType="com.wheelchair.wym.entity.Page"
-            resultMap="ChairMap">
-        select *
-        from t_chair
-        limit #{page}, #{limit}
+    <select id="findAllChair" parameterType="map" resultMap="ChairMap">
+        SELECT *
+        FROM t_chair
+        WHERE 1=1
+        <if test="chairNo != null and chairNo != ''">
+            AND chair_no LIKE CONCAT('%', #{chairNo}, '%')  <!-- 模糊匹配 -->
+        </if>
+        <if test="status != null">  <!-- 假设 -1 表示不按状态筛选 -->
+            AND status = #{status}
+        </if>
+        <!-- 实现分页逻辑 -->
+        LIMIT #{p.page}, #{p.limit}
     </select>
+
 
     <!-- 查询不同年龄段的用户数量 -->
     <select id="countAgeGroups" resultType="map">
@@ -237,16 +245,22 @@
         GROUP BY age_group</select>
 
     <select id="getChairCount" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM t_chair
+        SELECT COUNT(*)
+        FROM t_chair
+        WHERE 1=1
+        <if test="chairNo != null and chairNo != ''">
+            AND chair_no LIKE CONCAT('%', #{chairNo}, '%')  <!-- 模糊匹配 -->
+        </if>
+        <if test="status != null">  <!-- 假设 -1 表示不按状态筛选 -->
+            AND status = #{status}
+        </if>
     </select>
+
     <select id="getUserCount" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_users
     </select>
     <select id="getWheelchairCount" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_wheelchair
-    </select>
-    <select id="getOrderCount" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM t_order
     </select>
     <select id="getDeliveryOrderCount" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_delivery_order
@@ -254,6 +268,19 @@
     <select id="getRepairOrderCount" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_repair_order
     </select>
+    <select id="getOrderCountByCondition" parameterType="map" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM t_order o
+        JOIN t_chair c ON o.c_id = c.c_id
+        WHERE 1=1
+        <if test="uPhone != null and uPhone != ''">
+            AND o.phone LIKE CONCAT('%', #{uPhone}, '%')
+        </if>
+        <if test="chairNo != null and chairNo != ''">
+            AND c.chair_no LIKE CONCAT('%', #{chairNo}, '%')
+        </if>
+    </select>
+
 
 
 </mapper>

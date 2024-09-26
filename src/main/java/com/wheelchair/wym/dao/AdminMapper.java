@@ -3,6 +3,7 @@ package com.wheelchair.wym.dao;
 import com.wheelchair.wym.entity.*;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -57,15 +58,15 @@ public interface AdminMapper {
     @MapKey("age_group") // 将结果映射为以年龄段为键的Map
     Map<String, Map<String, Object>> countAgeGroups();
 
-    List<Chair> findAllChair(Page p);
+    List<Chair> findAllChair(@Param("p") Page p,  @Param("chairNo") String chairNo,  @Param("status") Integer status);
 
-    int getChairCount();
+    int getChairCount(@Param("chairNo") String chairNo,  @Param("status") Integer status);
 
     int getUserCount();
 
     int getWheelchairCount();
 
-    int getOrderCount();
+    int getOrderCountByCondition(@Param("uPhone") String uPhone, @Param("chairNo") String chairNo);
 
     int getDeliveryOrderCount();
 

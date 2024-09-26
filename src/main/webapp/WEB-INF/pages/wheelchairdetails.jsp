@@ -167,7 +167,7 @@
     <hr style="margin: 40px 0; border-top: 2px solid #ddd;">
     <%-- 评论展示 --%>
     <div class="comment-section">
-        <h3>用户评论：</h3>
+        <h3>用户评论</h3>
         <c:forEach var="comment" items="${Comments}">
             <div class="comment-card">
                 <div class="comment-header">

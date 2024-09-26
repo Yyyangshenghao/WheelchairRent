@@ -30,6 +30,7 @@
 			wheelchair_price,
 			wheelchair_floor,
 			wheelchair_address,
+			wheelchair_oriented,
 			wheelchair_image
 		FROM
 			t_wheelchair

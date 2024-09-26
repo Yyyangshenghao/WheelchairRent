@@ -12,6 +12,33 @@
     <fieldset class="layui-elem-field layui-field-title">
         <legend style="font-size: 26px">单个轮椅信息</legend>
     </fieldset>
+    <!-- 搜索框和筛选框 -->
+    <form class="layui-form" lay-filter="searchForm" style="margin-bottom: 20px;">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">轮椅编号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="chairNo" placeholder="请输入轮椅编号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">轮椅状态</label>
+                <div class="layui-input-inline">
+                    <select name="status" lay-filter="status">
+                        <option value="">请选择状态</option>
+                        <option value="0">可用</option>
+                        <option value="1">租赁中</option>
+                        <option value="2">维修/保养中</option>
+                        <option value="3">报废</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="search">搜索</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
     <table id="allChair" lay-filter="chair"></table>
 </div>
 <script src="${pageContext.request.contextPath }/static/layui/layui.js"></script>
@@ -19,7 +46,20 @@
     layui.use(['element','form','table'],function () {
         var element = layui.element,
             $ = layui.jquery,
-            table = layui.table;
+            table = layui.table,
+            form = layui.form;
+
+        form.on('submit(search)', function(data) {
+            var field = data.field; // 获取表单字段值
+            // 将空字符串的状态转换为 null
+            field.status = field.status === '' ? null : field.status;
+            // 重新加载表格数据，加入搜索条件
+            table.reload('allChair', {
+                where: field, // 搜索条件
+                page: { curr : 1 } // 重新从第1页开始
+            })
+            return false; // 阻止表单默认提交
+        });
 
        var dt = table.render({
             elem:"#allChair",
@@ -60,26 +100,11 @@
             var layEvent = obj.event;
             var tr = obj.tr;
             var currPage = dt.config.page.curr;
-            
-            // if(layEvent === 'delete'){
-            // 	console.log(data.hID)
-            //     layer.confirm('确认删除当前数据吗？',{icon:5,shade:0.1},function(index){
-            //         $.post("deleteWheelchair",{hID:data.hID},function(success){
-            //         	if(success == "OK"){
-            //         		obj.del();
-            //         		dt.reload({
-            //         			page:{curr:1}
-            //         		});
-            //         		layer.msg("删除成功");
-            //         	}
-            //         })
-            //     });
-            // }
         });
     })
 </script>
 <script type="text/html" id="tools">
-<%--    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>--%>
+
 </script>
 </body>
 </html>
