@@ -157,7 +157,7 @@
           and id = #{id}
     </select>
 
-    <!-- 管理员查询租赁订单，按用户手机号和轮椅编号过滤 -->
+    <!-- 管理员查询租赁订单，按用户手机号、轮椅编号、订单状态过滤 -->
     <select id="findOrderByCondition" parameterType="map" resultMap="UserOrderMap">
         select o.*, h.community_name AS community_name, c.chair_no AS chair_no
         from t_order o
@@ -170,7 +170,10 @@
         <if test="chairNo != null and chairNo != ''">
             AND c.chair_no LIKE CONCAT('%', #{chairNo}, '%')
         </if>
-        limit #{page}, #{limit}
+        <if test="orderStatus != null">
+            AND o.order_status = #{orderStatus}
+        </if>
+        limit #{page.page}, #{page.limit}
     </select>
 
 
@@ -197,11 +200,32 @@
     </update>
 
     <select id="findAllDeliveryOrder"
-            parameterType="com.wheelchair.wym.entity.Page"
+            parameterType="map"
             resultMap="DeliveryOrderMap">
         SELECT *
         FROM t_delivery_order
-        LIMIT #{page}, #{limit}
+        WHERE 1=1
+        <if test="phone != null and phone != ''">
+            AND phone LIKE CONCAT('%', #{phone}, '%')
+        </if>
+        <if test="type != null">
+            AND type = #{type}
+        </if>
+        <if test="orderStatus != null">
+            AND order_status = #{orderStatus}
+        </if>
+        <choose>
+            <when test="timeSort == 'asc'">
+                ORDER BY date ASC  <!-- 根据时间升序排序 -->
+            </when>
+            <when test="timeSort == 'desc'">
+                ORDER BY date DESC  <!-- 根据时间降序排序 -->
+            </when>
+            <otherwise>
+                ORDER BY d_id DESC  <!-- 默认按订单 ID 降序排序 -->
+            </otherwise>
+        </choose>
+        LIMIT #{page.page}, #{page.limit}
     </select>
 
     <!-- 查询男女用户数量 -->
@@ -262,9 +286,21 @@
     <select id="getWheelchairCount" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_wheelchair
     </select>
+
     <select id="getDeliveryOrderCount" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_delivery_order
+        WHERE 1=1
+        <if test="phone != null and phone != ''">
+            AND phone LIKE CONCAT('%', #{phone}, '%')
+        </if>
+        <if test="type != null">
+            AND type = #{type}
+        </if>
+        <if test="orderStatus != null">
+            AND order_status = #{orderStatus}
+        </if>
     </select>
+
     <select id="getRepairOrderCount" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_repair_order
     </select>
@@ -278,6 +314,9 @@
         </if>
         <if test="chairNo != null and chairNo != ''">
             AND c.chair_no LIKE CONCAT('%', #{chairNo}, '%')
+        </if>
+        <if test="orderStatus != null">
+            AND order_status = #{orderStatus}
         </if>
     </select>
 

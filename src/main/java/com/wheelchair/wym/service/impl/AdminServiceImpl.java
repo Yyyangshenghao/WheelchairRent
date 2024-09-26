@@ -66,14 +66,8 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public List<UserOrder> findOrderByCondition(String uPhone, String chairNo, Page page) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("uPhone", uPhone);
-        params.put("chairNo", chairNo);
-        params.put("page", page.getPage());
-        params.put("limit", page.getLimit());
-
-        return service.findOrderByCondition(params);
+    public List<UserOrder> findOrderByCondition(String uPhone, String chairNo, Integer orderStatus, Page page) {
+        return service.findOrderByCondition(uPhone, chairNo, orderStatus, page);
     }
 
     @Override
@@ -82,8 +76,8 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public List<DeliveryOrder> findAllDeliveryOrder(Page page) {
-        return service.findAllDeliveryOrder(page);
+    public List<DeliveryOrder> findAllDeliveryOrder(Page page, String phone, Integer type, Integer orderStatus, String timeSort) {
+        return service.findAllDeliveryOrder(page, phone, type, orderStatus, timeSort);
     }
 
     @Override
@@ -122,13 +116,13 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public int getOrderCountByCondition(String uPhone, String chairNo) {
-        return service.getOrderCountByCondition(uPhone, chairNo);
+    public int getOrderCountByCondition(String uPhone, String chairNo, Integer orderStatus) {
+        return service.getOrderCountByCondition(uPhone, chairNo, orderStatus);
     }
 
     @Override
-    public int getDeliveryOrderCount() {
-        return service.getDeliveryOrderCount();
+    public int getDeliveryOrderCount(String phone, Integer type, Integer orderStatus) {
+        return service.getDeliveryOrderCount(phone, type, orderStatus);
     }
 
     @Override

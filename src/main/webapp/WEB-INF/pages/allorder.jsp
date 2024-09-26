@@ -14,16 +14,38 @@
     </fieldset>
 
     <!-- 搜索表单开始 -->
-    <form class="layui-form layui-row layui-col-space10">
-        <div class="layui-col-md4">
-            <input type="text" name="uPhone" placeholder="租赁人电话" class="layui-input">
-        </div>
-        <div class="layui-col-md4">
-            <input type="text" name="chairNo" placeholder="轮椅编号" class="layui-input">
-        </div>
-        <div class="layui-col-md4">
-            <button class="layui-btn" lay-submit lay-filter="search">搜索</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    <form class="layui-form" lay-filter="searchForm" style="margin-bottom: 20px;">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">租赁人电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="uPhone" placeholder="请输入租赁人电话" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">轮椅编号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="chairNo" placeholder="请输入轮椅编号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">订单状态</label>
+                <div class="layui-input-inline">
+                    <select name="orderStatus" lay-filter="orderStatus">
+                        <option value="">请选择状态</option>
+                        <option value="0">已结束</option>
+                        <option value="1">等待发货</option>
+                        <option value="2">配送中</option>
+                        <option value="3">使用中</option>
+                        <option value="4">等待上门维修/保养</option>
+                        <option value="5">回收中</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="search">搜索</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
         </div>
     </form>
     <!-- 搜索表单结束 -->

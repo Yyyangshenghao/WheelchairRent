@@ -57,7 +57,7 @@ public interface IAdminService {
     /**
      * 查询用户租赁订单
      */
-    List<UserOrder> findOrderByCondition(String uPhone, String chairNo, Page page);
+    List<UserOrder> findOrderByCondition(String uPhone, String chairNo, Integer orderStatus, Page page);
 
     /**
      * 查询用户保养/维修订单
@@ -67,7 +67,7 @@ public interface IAdminService {
     /**
      * 查询用户的配送订单
      */
-    List<DeliveryOrder> findAllDeliveryOrder(Page page);
+    List<DeliveryOrder> findAllDeliveryOrder(Page page, String phone, Integer type, Integer orderStatus, String timeSort);
 
     int confirmRepairOrder(int id, int status);
 
@@ -90,11 +90,11 @@ public interface IAdminService {
 
     int getWheelchairCount();
 
-    int getOrderCountByCondition(String uPhone, String chairNo);
+    int getOrderCountByCondition(String uPhone, String chairNo, Integer orderStatus);
 
     int getChairCountByCondition(String chairNo, Integer status);
 
-    int getDeliveryOrderCount();
+    int getDeliveryOrderCount(String phone, Integer type, Integer orderStatus);
 
     int getRepairOrderCount();
 }

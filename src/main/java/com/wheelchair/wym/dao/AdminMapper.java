@@ -39,13 +39,13 @@ public interface AdminMapper {
     int updateAdminPwd(Admin admin);
 
     // 查询所有订单
-    List<UserOrder> findOrderByCondition(Map<String, Object> params);
+    List<UserOrder> findOrderByCondition(@Param("uPhone") String uPhone, @Param("chairNo") String chairNo, @Param("orderStatus") Integer orderStatus, @Param("page") Page page);
 
     // 查询所有维修订单
     List<RepairOrder> findAllRepairOrder(Page page);
 
     // 查询所有配送订单
-    List<DeliveryOrder> findAllDeliveryOrder(Page page);
+    List<DeliveryOrder> findAllDeliveryOrder(@Param("page") Page page, @Param("phone") String phone, @Param("type") Integer type, @Param("orderStatus") Integer orderStatus, @Param("timeSort") String timeSort);
 
     // 确认维修订单
     int confirmRepairOrder(int id, int status);
@@ -66,9 +66,9 @@ public interface AdminMapper {
 
     int getWheelchairCount();
 
-    int getOrderCountByCondition(@Param("uPhone") String uPhone, @Param("chairNo") String chairNo);
+    int getOrderCountByCondition(@Param("uPhone") String uPhone, @Param("chairNo") String chairNo, @Param("orderStatus") Integer orderStatus);
 
-    int getDeliveryOrderCount();
+    int getDeliveryOrderCount(@Param("phone") String phone, @Param("type") Integer type, @Param("orderStatus") Integer orderStatus);
 
     int getRepairOrderCount();
 }

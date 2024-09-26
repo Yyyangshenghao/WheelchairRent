@@ -12,6 +12,57 @@
     <fieldset class="layui-elem-field layui-field-title">
         <legend style="font-size: 26px">配送订单信息</legend>
     </fieldset>
+    <!-- 搜索框和筛选框 -->
+    <form class="layui-form" lay-filter="searchForm" style="margin-bottom: 20px;">
+        <div class="layui-form-item">
+            <!-- 电话号码搜索 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="phone" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <!-- 配送类型筛选 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">配送类型</label>
+                <div class="layui-input-inline">
+                    <select name="type" lay-filter="type">
+                        <option value="">请选择类型</option>
+                        <option value="0">送出</option>
+                        <option value="1">收回</option>
+                    </select>
+                </div>
+            </div>
+            <!-- 订单状态筛选 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">订单状态</label>
+                <div class="layui-input-inline">
+                    <select name="orderStatus" lay-filter="orderStatus">
+                        <option value="">请选择状态</option>
+                        <option value="0">未处理</option>
+                        <option value="1">已确认，正在配送</option>
+                        <option value="2">签收成功</option>
+                    </select>
+                </div>
+            </div>
+            <!-- 时间排序 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">时间排序</label>
+                <div class="layui-input-inline">
+                    <select name="timeSort" lay-filter="timeSort">
+                        <option value="">选择排序方式</option>
+                        <option value="asc">从早到晚</option>
+                        <option value="desc">从晚到早</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="search">搜索</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
     <table id="allDeliveryOrder" lay-filter="order"></table>
 </div>
 <script src="${pageContext.request.contextPath}/static/layui/layui.js"></script>
@@ -20,7 +71,8 @@
         var element = layui.element,
             $ = layui.jquery,
             table = layui.table,
-            util = layui.util;
+            util = layui.util,
+            form = layui.form;
 
         var dt = table.render({
             elem: "#allDeliveryOrder",  // 修改为正确的表格 id
@@ -28,6 +80,12 @@
             page: true,
             limit: 10,
             loading: true,
+            where: {
+                phone:'',
+                type:'',
+                orderStatus:'',
+                timeSort:''
+            },
             cols: [[
                 {field: 'dID', title: '配送订单id', align: 'center'},
                 {field: 'uID', title: '用户id', align: 'center'},
@@ -61,6 +119,22 @@
                     }},
                 {title: '操作', align: 'center', toolbar: "#tools"}
             ]]
+        });
+
+        // 监听搜索按钮
+        form.on('submit(search)', function(data) {
+            var field = data.field;  // 获取表单数据
+            // 重新加载表格，根据筛选条件查询
+            table.reload('allDeliveryOrder', {
+                where: {
+                    phone: field.phone,
+                    type: field.type,
+                    orderStatus: field.orderStatus,
+                    timeSort: field.timeSort
+                },
+                page: { curr: 1 }  // 重置分页
+            });
+            return false;  // 阻止表单提交
         });
 
         // 封装表格刷新函数

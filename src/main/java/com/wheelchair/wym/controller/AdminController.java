@@ -137,12 +137,12 @@ public class AdminController {
 
     @RequestMapping("/findAllOrder")
     @ResponseBody
-    public UserOrderData findAllOrder(int page, int limit, String uPhone, String chairNo) {
+    public UserOrderData findAllOrder(int page, int limit, String uPhone, String chairNo, Integer orderStatus) {
         Page p = new Page();
         p.setLimit(limit);
         p.setPage((page - 1) * limit);
-        List<UserOrder> findAllOrder = service.findOrderByCondition(uPhone, chairNo, p);
-        int totalOrderCount = service.getOrderCountByCondition(uPhone, chairNo);
+        List<UserOrder> findAllOrder = service.findOrderByCondition(uPhone, chairNo, orderStatus, p);
+        int totalOrderCount = service.getOrderCountByCondition(uPhone, chairNo, orderStatus);
         UserOrderData data = new UserOrderData();
         data.setCode(0);
         data.setCount(totalOrderCount);
@@ -179,12 +179,12 @@ public class AdminController {
 
     @RequestMapping("findAllDeliveryOrder")
     @ResponseBody
-    public DeliveryOrderData findAllDeliveryOrder(int page, int limit) {
+    public DeliveryOrderData findAllDeliveryOrder(int page, int limit, String phone, Integer type, Integer orderStatus, String timeSort) {
         Page p = new Page();
         p.setPage((page - 1) * limit);
         p.setLimit(limit);
-        List<DeliveryOrder> DeliveryOrder = service.findAllDeliveryOrder(p);
-        int totalDeliveryOrderCount = service.getDeliveryOrderCount();
+        List<DeliveryOrder> DeliveryOrder = service.findAllDeliveryOrder(p, phone, type, orderStatus, timeSort);
+        int totalDeliveryOrderCount = service.getDeliveryOrderCount(phone, type, orderStatus);
         DeliveryOrderData dod = new DeliveryOrderData();
         dod.setCode(0);
         dod.setCount(totalDeliveryOrderCount);

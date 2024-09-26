@@ -28,8 +28,7 @@
                         <option value="">请选择状态</option>
                         <option value="0">可用</option>
                         <option value="1">租赁中</option>
-                        <option value="2">维修/保养中</option>
-                        <option value="3">报废</option>
+                        <option value="2">报废</option>
                     </select>
                 </div>
             </div>
@@ -78,8 +77,6 @@
                             case 1:
                                 return '租赁中';
                             case 2:
-                                return '维修/保养中';
-                            case 3:
                                 return '报废';
                             default:
                                 return '未知状态';
