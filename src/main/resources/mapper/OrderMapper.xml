@@ -7,7 +7,7 @@
 <!--		<result column="order_time" jdbcType="VARCHAR" property="orderTime"/>-->
 <!--		<result column="order_user" jdbcType="VARCHAR" property="orderUser"/>-->
 <!--	</resultMap>-->
-	
+
 	<resultMap type="com.wheelchair.wym.entity.UserOrder" id="UserOrderMapper">
 		<id column="o_id" jdbcType="INTEGER" property="oID" />
 		<result column="c_id" jdbcType="INTEGER" property="cID"/>
@@ -20,6 +20,8 @@
 		<result column="start_date" jdbcType="VARCHAR" property="startDate"/>
 		<result column="end_date" jdbcType="VARCHAR" property="endDate"/>
 		<result column="order_status" jdbcType="VARCHAR" property="orderStatus"/>
+		<result column="comment_status" jdbcType="INTEGER"
+				property="commentStatus"/>
 	</resultMap>
 	<!-- 添加订单信息 -->
 	<insert id="addOrder" parameterType="com.wheelchair.wym.entity.Order">
@@ -76,5 +78,5 @@
 	<delete id="deleteOrder" parameterType="int">
 		delete from t_order where o_id=#{oID}
 	</delete>
-	
+
 </mapper>

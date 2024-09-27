@@ -368,8 +368,13 @@
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="cancel">取消保养/维修</a>
     {{# } }}
 
-    {{# if(d.orderStatus == 0) { }}
+    {{# if(d.orderStatus == 0 && d.commentStatus == 0) { }}
     <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="comment">评论</a>
+    {{# } }}
+
+    {{# if(d.orderStatus == 0 && d.commentStatus == 1) { }}
+    <a class="layui-btn layui-btn-xs layui-btn-danger layui-btn-disabled"
+       disabled>已评论</a>
     {{# } }}
 </script>
 </body>

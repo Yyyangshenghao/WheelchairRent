@@ -15,6 +15,16 @@ public class UserOrder {
     private Date endDate;
     private int orderStatus;
 
+    public int getCommentStatus() {
+        return commentStatus;
+    }
+
+    public void setCommentStatus(int commentStatus) {
+        this.commentStatus = commentStatus;
+    }
+
+    private int commentStatus;
+
 
     public int getoID() {
         return oID;
