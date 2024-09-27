@@ -184,8 +184,8 @@
         <div class="list_more">
             <ul class="layui-pull-right list-item">
                 <li class="click-this"><a href="toIndexPage">默认排序</a></li>
-                <li><a href="findHousrOrderByAsc">价格升序</a></li>
-                <li><a href="findHousrOrderByDesc">价格降序</a></li>
+                <li><a href="findHousrOrderByAsc">价格从低到高</a></li>
+                <li><a href="findHousrOrderByDesc">价格从高到低</a></li>
             </ul>
         </div>
     </div>

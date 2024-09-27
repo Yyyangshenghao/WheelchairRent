@@ -11,7 +11,7 @@
  Target Server Version : 80033 (8.0.33)
  File Encoding         : 65001
 
- Date: 27/09/2024 12:20:18
+ Date: 27/09/2024 13:02:57
 */
 
 SET NAMES utf8mb4;
@@ -177,22 +177,14 @@ CREATE TABLE `t_order`  (
 -- ----------------------------
 -- Records of t_order
 -- ----------------------------
-INSERT INTO `t_order` VALUES (54, 31, 22, '2024-09-01 00:00:00', NULL, 'ysh',
-                              '广州市天河区', '12345678911', 1,0);
-INSERT INTO `t_order` VALUES (55, 32, 22, '2024-09-02 00:00:00', NULL, 'ysh',
-                              '广州市第二区', '12345678911', 2,0);
-INSERT INTO `t_order` VALUES (56, 33, 22, '2024-09-03 00:00:00', NULL, 'ysh',
-                              '广州市第三区', '12345678911', 3,0);
-INSERT INTO `t_order` VALUES (57, 34, 22, '2024-09-04 00:00:00', NULL, 'ysh',
-                              '广州市第四区', '12345678911', 4,0);
-INSERT INTO `t_order` VALUES (58, 35, 22, '2024-09-05 00:00:00', NULL, 'ysh',
-                              '广州市第五区', '12345678911', 4,0);
-INSERT INTO `t_order` VALUES (59, 36, 22, '2024-09-06 00:00:00', NULL, 'ysh',
-                              '广州市第六区', '12345678911', 5,0);
-INSERT INTO `t_order` VALUES (60, 37, 22, '2024-09-07 00:00:00', '2024-09-30
-00:00:00', 'ysh', '广州市第七区', '12345678911', 0,1);
-INSERT INTO `t_order` VALUES (61, 38, 22, '2024-09-08 00:00:00', '2024-09-27
-00:00:00', 'ysh', '广州市第八区', '12345678911', 0,0);
+INSERT INTO `t_order` VALUES (54, 31, 22, '2024-09-01 00:00:00', NULL, 'ysh', '广州市天河区', '12345678911', 1, 0);
+INSERT INTO `t_order` VALUES (55, 32, 22, '2024-09-02 00:00:00', NULL, 'ysh', '广州市第二区', '12345678911', 2, 0);
+INSERT INTO `t_order` VALUES (56, 33, 22, '2024-09-03 00:00:00', NULL, 'ysh', '广州市第三区', '12345678911', 3, 0);
+INSERT INTO `t_order` VALUES (57, 34, 22, '2024-09-04 00:00:00', NULL, 'ysh', '广州市第四区', '12345678911', 4, 0);
+INSERT INTO `t_order` VALUES (58, 35, 22, '2024-09-05 00:00:00', NULL, 'ysh', '广州市第五区', '12345678911', 4, 0);
+INSERT INTO `t_order` VALUES (59, 36, 22, '2024-09-06 00:00:00', NULL, 'ysh', '广州市第六区', '12345678911', 5, 0);
+INSERT INTO `t_order` VALUES (60, 37, 22, '2024-09-07 00:00:00', '2024-09-30 00:00:00', 'ysh', '广州市第七区', '12345678911', 0, 1);
+INSERT INTO `t_order` VALUES (61, 38, 22, '2024-09-08 00:00:00', '2024-09-27 00:00:00', 'ysh', '广州市第八区', '12345678911', 0, 0);
 
 -- ----------------------------
 -- Table structure for t_repair_order
@@ -277,7 +269,7 @@ CREATE TABLE `t_wheelchair`  (
 INSERT INTO `t_wheelchair` VALUES (30, '互邦HBLD2-E电动轮椅可折叠轻便携铝合金锂电池老年人残疾人轮椅代步车', '加宽轮椅，手动折叠', '20', 'HBLD2-E', 0, 30, '上海', '/static/img/wheelchair1.png', '碧桂园豪庭一期', '13813813800', '22', '/static/img/wheelchair1.png', 'wym', '2019-12-12 00:28:43');
 INSERT INTO `t_wheelchair` VALUES (31, '迪护电动轮椅老人全自动越野轻便可折叠旅行便携式家用老年代步电动车专用智能可躺上飞机带坐便器DH-QBK12AQ', '小轮便携，手动折叠', '18', 'DH-QBK12AQ', 0, 40, '上海', '/static/img/wheelchair2.png', '虎门万达广场', '18818818822', '21', '/static/img/wheelchair2.png', 'wym', '2019-12-12 00:32:02');
 INSERT INTO `t_wheelchair` VALUES (41, '互邦HBLD2-E电动轮椅可折叠轻便携铝合金锂电池老年人残疾人轮椅代步车', '加宽轮椅，手动折叠', '20', 'HBLD2-E', 4, 30, '上海', '/static/img/wheelchair3.png', '互邦', '13817355618', '21', '/static/img/wheelchair3.png', '管理员', '2024-09-15 16:29:10');
-INSERT INTO `t_wheelchair` VALUES (42, '迪护电动轮椅老人全自动越野轻便可折叠旅行便携式家用老年代步电动车专用智能可躺上飞机带坐便器DH-QBK12AQ', '小轮便携，手动折叠', '18', 'DH-QBK12AQ', 30, 40, '北京', 'http://localhost:8090/images/52f3804d-5aea-4e3a-ab07-b38820164b75.png', '迪护', '13817355618', '21', 'http://localhost:8090/images/12e8d5c2-3038-4e27-91cb-d213fc1efd42.png~', '管理员', '2024-09-24 00:22:27');
+INSERT INTO `t_wheelchair` VALUES (42, '迪护电动轮椅老人全自动越野轻便可折叠旅行便携式家用老年代步电动车专用智能可躺上飞机带坐便器DH-QBK12AQ', '小轮便携，手动折叠', '18', 'DH-QBK12AQ', 30, 40, '北京', '/static/img/wheelchair4.png', '迪护', '13817355618', '21', '/static/img/wheelchair4.png', '管理员', '2024-09-24 00:22:27');
 
 -- ----------------------------
 -- Triggers structure for table t_chair
