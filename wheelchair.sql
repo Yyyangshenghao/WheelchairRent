@@ -11,7 +11,7 @@
  Target Server Version : 80033 (8.0.33)
  File Encoding         : 65001
 
- Date: 27/09/2024 13:02:57
+ Date: 27/09/2024 14:32:24
 */
 
 SET NAMES utf8mb4;
@@ -46,7 +46,7 @@ CREATE TABLE `t_chair`  (
   `chair_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '轮椅编号',
   PRIMARY KEY (`c_id`) USING BTREE,
   INDEX `h_id`(`h_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 71 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 87 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_chair
@@ -91,6 +91,22 @@ INSERT INTO `t_chair` VALUES (67, 42, 0, 0, NULL, 'DH-QBK12AQ-27');
 INSERT INTO `t_chair` VALUES (68, 42, 0, 0, NULL, 'DH-QBK12AQ-28');
 INSERT INTO `t_chair` VALUES (69, 42, 0, 0, NULL, 'DH-QBK12AQ-29');
 INSERT INTO `t_chair` VALUES (70, 42, 0, 0, NULL, 'DH-QBK12AQ-30');
+INSERT INTO `t_chair` VALUES (71, 43, 0, 0, NULL, '简约-1');
+INSERT INTO `t_chair` VALUES (72, 43, 0, 0, NULL, '简约-2');
+INSERT INTO `t_chair` VALUES (73, 43, 0, 0, NULL, '简约-3');
+INSERT INTO `t_chair` VALUES (74, 43, 0, 0, NULL, '简约-4');
+INSERT INTO `t_chair` VALUES (75, 43, 0, 0, NULL, '简约-5');
+INSERT INTO `t_chair` VALUES (76, 43, 0, 0, NULL, '简约-6');
+INSERT INTO `t_chair` VALUES (77, 43, 0, 0, NULL, '简约-7');
+INSERT INTO `t_chair` VALUES (78, 43, 0, 0, NULL, '简约-8');
+INSERT INTO `t_chair` VALUES (79, 43, 0, 0, NULL, '简约-9');
+INSERT INTO `t_chair` VALUES (80, 43, 0, 0, NULL, '简约-10');
+INSERT INTO `t_chair` VALUES (81, 44, 0, 0, NULL, '红色-1');
+INSERT INTO `t_chair` VALUES (82, 44, 0, 0, NULL, '红色-2');
+INSERT INTO `t_chair` VALUES (83, 44, 0, 0, NULL, '红色-3');
+INSERT INTO `t_chair` VALUES (84, 44, 0, 0, NULL, '红色-4');
+INSERT INTO `t_chair` VALUES (85, 45, 0, 0, NULL, '1-1');
+INSERT INTO `t_chair` VALUES (86, 46, 0, 0, NULL, '1-1');
 
 -- ----------------------------
 -- Table structure for t_comment
@@ -261,15 +277,15 @@ CREATE TABLE `t_wheelchair`  (
   `publisher` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '管理员' COMMENT '发布人',
   `publish_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
   PRIMARY KEY (`h_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_wheelchair
 -- ----------------------------
-INSERT INTO `t_wheelchair` VALUES (30, '互邦HBLD2-E电动轮椅可折叠轻便携铝合金锂电池老年人残疾人轮椅代步车', '加宽轮椅，手动折叠', '20', 'HBLD2-E', 0, 30, '上海', '/static/img/wheelchair1.png', '碧桂园豪庭一期', '13813813800', '22', '/static/img/wheelchair1.png', 'wym', '2019-12-12 00:28:43');
-INSERT INTO `t_wheelchair` VALUES (31, '迪护电动轮椅老人全自动越野轻便可折叠旅行便携式家用老年代步电动车专用智能可躺上飞机带坐便器DH-QBK12AQ', '小轮便携，手动折叠', '18', 'DH-QBK12AQ', 0, 40, '上海', '/static/img/wheelchair2.png', '虎门万达广场', '18818818822', '21', '/static/img/wheelchair2.png', 'wym', '2019-12-12 00:32:02');
 INSERT INTO `t_wheelchair` VALUES (41, '互邦HBLD2-E电动轮椅可折叠轻便携铝合金锂电池老年人残疾人轮椅代步车', '加宽轮椅，手动折叠', '20', 'HBLD2-E', 4, 30, '上海', '/static/img/wheelchair3.png', '互邦', '13817355618', '21', '/static/img/wheelchair3.png', '管理员', '2024-09-15 16:29:10');
 INSERT INTO `t_wheelchair` VALUES (42, '迪护电动轮椅老人全自动越野轻便可折叠旅行便携式家用老年代步电动车专用智能可躺上飞机带坐便器DH-QBK12AQ', '小轮便携，手动折叠', '18', 'DH-QBK12AQ', 30, 40, '北京', '/static/img/wheelchair4.png', '迪护', '13817355618', '21', '/static/img/wheelchair4.png', '管理员', '2024-09-24 00:22:27');
+INSERT INTO `t_wheelchair` VALUES (43, '简约轮椅', '非常简约', '1000', '简约', 10, 100, '广州市天河区', '/static/img/12f198fc-28b7-46c0-955e-ee577913463e.png', '简约', '12345678901', '1000', '/static/img/12f198fc-28b7-46c0-955e-ee577913463e.png', '管理员', '2024-09-27 14:16:22');
+INSERT INTO `t_wheelchair` VALUES (44, '铝合金轮椅可折叠电动轮椅轻便老年人便携出行手推车残疾人代步车', '铝合金', '2000', '红色', 4, 88, '广州市天河区', '/static/img/d8d171de-2363-41d4-8b53-4ba5c285db62.png', '铝合金', '12345678901', '2000', '/static/img/d8d171de-2363-41d4-8b53-4ba5c285db62.png', '管理员', '2024-09-27 14:17:16');
 
 -- ----------------------------
 -- Triggers structure for table t_chair
