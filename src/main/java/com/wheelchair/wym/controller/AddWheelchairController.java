@@ -23,7 +23,7 @@ import java.util.UUID;
 @Controller
 public class AddWheelchairController {
 
-    private final String dirPath = "D:/file/";
+    private final String dirPath = "/static/img";
     // 简介图片地址
     private String simplePath = "";
     // 详细图片地址
@@ -38,51 +38,63 @@ public class AddWheelchairController {
     @RequestMapping("/MultipleUpload")
     @ResponseBody
     public Map<String, Object> upload(@RequestParam("file") List<MultipartFile> file, HttpServletRequest req) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         if (!file.isEmpty() && file.size() > 0) {
-            for (MultipartFile f : file) {
-                try {
+            try {
+                // 获取 webapp 的绝对路径
+                String realPath = req.getServletContext().getRealPath("/static/img/");
+                File filePath = new File(realPath);
+                if (!filePath.exists()) {
+                    filePath.mkdirs(); // 如果路径不存在则创建目录
+                }
+
+                for (MultipartFile f : file) {
                     // 文件名
                     String filename = UUID.randomUUID() + f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."));
-                    // 存储虚拟路径
-                    String localPath = "http://localhost:8090/images/" + filename;
-                    System.out.println(localPath);
-                    detailsPath.append(localPath + "~");
+                    // 完整的文件存储路径
+                    String fullPath = realPath + filename;
+                    // 存储虚拟路径，用于之后数据库保存等操作
+                    String localPath = "/static/img/" + filename;
+                    detailsPath.append(localPath).append("~"); // 拼接详情图片路径
 
-                    File filePath = new File(dirPath);
-                    if (!filePath.exists()) {
-                        filePath.mkdirs();
-                    }
-                    // 上传
-                    f.transferTo(new File(dirPath + filename));
-
-                } catch (Exception e) {
-                    map.put("code", 1);
-                    map.put("msg", "上传失败");
-                    e.printStackTrace();
+                    // 上传文件
+                    f.transferTo(new File(fullPath));
                 }
+                map.put("code", 0);
+                map.put("msg", "上传成功");
+            } catch (Exception e) {
+                map.put("code", 1);
+                map.put("msg", "上传失败");
+                e.printStackTrace();
             }
-            map.put("code", 0);
-            map.put("msg", "上传成功");
         }
         return map;
     }
 
     @RequestMapping("/singleUpload")
     @ResponseBody
-    public Map<String, Object> singleUpload(@RequestParam("file") MultipartFile file, HttpServletRequest req, HttpSession session) {
-        Map<String, Object> map = new HashMap<String, Object>();
+    public Map<String, Object> singleUpload(@RequestParam("file") MultipartFile file, HttpServletRequest req) {
+        Map<String, Object> map = new HashMap<>();
         try {
-            String suffixName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-            String filename = UUID.randomUUID() + suffixName;
-            File filePath = new File(dirPath);
+            // 获取 webapp 的绝对路径
+            String realPath = req.getServletContext().getRealPath("/static/img/");
+            File filePath = new File(realPath);
             if (!filePath.exists()) {
-                filePath.mkdirs();
+                filePath.mkdirs(); // 如果路径不存在则创建目录
             }
-            // 创建虚拟路径存储
-            simplePath = "http://localhost:8090/images/" + filename;
+
+            // 获取文件后缀
+            String suffixName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+            // 文件名
+            String filename = UUID.randomUUID() + suffixName;
+            // 完整的文件存储路径
+            String fullPath = realPath + filename;
+            // 创建虚拟路径，用于数据库存储等
+            simplePath = "/static/img/" + filename;
             map.put("image", simplePath);
-            file.transferTo(new File(dirPath + filename));
+
+            // 上传文件
+            file.transferTo(new File(fullPath));
             map.put("code", 0);
             map.put("msg", "上传成功");
         } catch (Exception e) {
@@ -92,6 +104,7 @@ public class AddWheelchairController {
         }
         return map;
     }
+
 
     @RequestMapping("/addWheelchair")
     public String addWheelchair() {
