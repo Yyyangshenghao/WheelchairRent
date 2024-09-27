@@ -1,17 +1,17 @@
 /*
- Navicat Premium Dump SQL
+ Navicat Premium Data Transfer
 
- Source Server         : dc
+ Source Server         : 1
  Source Server Type    : MySQL
- Source Server Version : 80032 (8.0.32)
+ Source Server Version : 80033 (8.0.33)
  Source Host           : localhost:3306
  Source Schema         : wheelchair
 
  Target Server Type    : MySQL
- Target Server Version : 80032 (8.0.32)
+ Target Server Version : 80033 (8.0.33)
  File Encoding         : 65001
 
- Date: 25/09/2024 13:04:28
+ Date: 27/09/2024 12:20:18
 */
 
 SET NAMES utf8mb4;
@@ -51,12 +51,12 @@ CREATE TABLE `t_chair`  (
 -- ----------------------------
 -- Records of t_chair
 -- ----------------------------
-INSERT INTO `t_chair` VALUES (31, 41, 0, 0, NULL, 'HBLD2-E-1');
-INSERT INTO `t_chair` VALUES (32, 41, 0, 0, NULL, 'HBLD2-E-2');
-INSERT INTO `t_chair` VALUES (33, 41, 0, 0, NULL, 'HBLD2-E-3');
-INSERT INTO `t_chair` VALUES (34, 41, 0, 0, '2024-09-28 23:44:40', 'HBLD2-E-4');
-INSERT INTO `t_chair` VALUES (35, 41, 0, 0, NULL, 'HBLD2-E-5');
-INSERT INTO `t_chair` VALUES (36, 41, 0, 0, NULL, 'HBLD2-E-6');
+INSERT INTO `t_chair` VALUES (31, 41, 1, 22, NULL, 'HBLD2-E-1');
+INSERT INTO `t_chair` VALUES (32, 41, 1, 22, NULL, 'HBLD2-E-2');
+INSERT INTO `t_chair` VALUES (33, 41, 1, 22, NULL, 'HBLD2-E-3');
+INSERT INTO `t_chair` VALUES (34, 41, 1, 22, '2024-09-28 23:44:40', 'HBLD2-E-4');
+INSERT INTO `t_chair` VALUES (35, 41, 1, 22, NULL, 'HBLD2-E-5');
+INSERT INTO `t_chair` VALUES (36, 41, 1, 22, NULL, 'HBLD2-E-6');
 INSERT INTO `t_chair` VALUES (37, 41, 0, 0, NULL, 'HBLD2-E-7');
 INSERT INTO `t_chair` VALUES (38, 41, 0, 0, NULL, 'HBLD2-E-8');
 INSERT INTO `t_chair` VALUES (39, 41, 0, 0, NULL, 'HBLD2-E-9');
@@ -105,7 +105,7 @@ CREATE TABLE `t_comment`  (
   `comment_content` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '评论内容',
   `comment_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '评论时间',
   PRIMARY KEY (`comment_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_comment
@@ -117,6 +117,9 @@ INSERT INTO `t_comment` VALUES (4, 23, 4, 30, 5, '轮椅很好用，客服服务
 INSERT INTO `t_comment` VALUES (5, 24, 5, 31, 3, '轮椅很新，但感觉座位不太舒适。', '2023-09-16 14:00:00');
 INSERT INTO `t_comment` VALUES (6, 25, 6, 41, 4, '总体还不错，唯一不足是轮子有些卡顿。', '2023-10-21 16:00:00');
 INSERT INTO `t_comment` VALUES (7, 26, 7, 30, 2, '使用体验非常好，值得推荐。', '2023-11-12 10:30:00');
+INSERT INTO `t_comment` VALUES (8, 22, 61, 38, 5, '非常好轮椅，使我的双腿旋转。爱来自一卡斯特。', '2024-09-27 12:12:40');
+INSERT INTO `t_comment` VALUES (9, 22, 61, 38, 4, '测试能不能评论两次。', '2024-09-27 12:12:54');
+INSERT INTO `t_comment` VALUES (10, 22, 61, 38, 3, '测试能不能评论三次。', '2024-09-27 12:13:03');
 
 -- ----------------------------
 -- Table structure for t_delivery_order
@@ -133,11 +136,22 @@ CREATE TABLE `t_delivery_order`  (
   `type` int NOT NULL COMMENT '0送出/1送出',
   `date` date NOT NULL COMMENT '轮椅到手/脱手日期',
   PRIMARY KEY (`d_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_delivery_order
 -- ----------------------------
+INSERT INTO `t_delivery_order` VALUES (49, 22, 31, 0, '广州市天河区', 'ysh', '12345678911', 0, '2024-09-01');
+INSERT INTO `t_delivery_order` VALUES (50, 22, 32, 1, '广州市第二区', 'ysh', '12345678911', 0, '2024-09-02');
+INSERT INTO `t_delivery_order` VALUES (51, 22, 33, 2, '广州市第三区', 'ysh', '12345678911', 0, '2024-09-03');
+INSERT INTO `t_delivery_order` VALUES (52, 22, 34, 2, '广州市第四区', 'ysh', '12345678911', 0, '2024-09-04');
+INSERT INTO `t_delivery_order` VALUES (53, 22, 35, 2, '广州市第五区', 'ysh', '12345678911', 0, '2024-09-05');
+INSERT INTO `t_delivery_order` VALUES (54, 22, 36, 2, '广州市第六区', 'ysh', '12345678911', 0, '2024-09-06');
+INSERT INTO `t_delivery_order` VALUES (55, 22, 37, 2, '广州市第七区', 'ysh', '12345678911', 0, '2024-09-07');
+INSERT INTO `t_delivery_order` VALUES (56, 22, 38, 2, '广州市第八区', 'ysh', '12345678911', 0, '2024-09-08');
+INSERT INTO `t_delivery_order` VALUES (57, 22, 36, 1, '广州市天河区', 'ysh', '12345678911', 1, '2024-09-28');
+INSERT INTO `t_delivery_order` VALUES (58, 22, 37, 2, '广州市天河区', 'ysh', '12345678900', 1, '2024-09-30');
+INSERT INTO `t_delivery_order` VALUES (59, 22, 38, 2, '广州市天河区', 'ysh', '12345678901', 1, '2024-09-27');
 
 -- ----------------------------
 -- Table structure for t_order
@@ -153,15 +167,32 @@ CREATE TABLE `t_order`  (
   `address` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '地址',
   `phone` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '电话',
   `order_status` int NOT NULL COMMENT '订单状态\r\n0为订单结束，\r\n1为等待发货，\r\n2为等待收货，\r\n3为使用中，\r\n4为等待上门保养/维修，\r\n5为等待上门回收',
+  `comment_status` int NOT NULL COMMENT '评论状态\r\n0为未评论，\r\n1为已评论',
   PRIMARY KEY (`o_id`) USING BTREE,
   INDEX `fk1`(`c_id` ASC) USING BTREE,
   INDEX `fk2`(`u_id` ASC) USING BTREE,
   CONSTRAINT `fk2` FOREIGN KEY (`u_id`) REFERENCES `t_users` (`u_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_order
 -- ----------------------------
+INSERT INTO `t_order` VALUES (54, 31, 22, '2024-09-01 00:00:00', NULL, 'ysh',
+                              '广州市天河区', '12345678911', 1,0);
+INSERT INTO `t_order` VALUES (55, 32, 22, '2024-09-02 00:00:00', NULL, 'ysh',
+                              '广州市第二区', '12345678911', 2,0);
+INSERT INTO `t_order` VALUES (56, 33, 22, '2024-09-03 00:00:00', NULL, 'ysh',
+                              '广州市第三区', '12345678911', 3,0);
+INSERT INTO `t_order` VALUES (57, 34, 22, '2024-09-04 00:00:00', NULL, 'ysh',
+                              '广州市第四区', '12345678911', 4,0);
+INSERT INTO `t_order` VALUES (58, 35, 22, '2024-09-05 00:00:00', NULL, 'ysh',
+                              '广州市第五区', '12345678911', 4,0);
+INSERT INTO `t_order` VALUES (59, 36, 22, '2024-09-06 00:00:00', NULL, 'ysh',
+                              '广州市第六区', '12345678911', 5,0);
+INSERT INTO `t_order` VALUES (60, 37, 22, '2024-09-07 00:00:00', '2024-09-30
+00:00:00', 'ysh', '广州市第七区', '12345678911', 0,1);
+INSERT INTO `t_order` VALUES (61, 38, 22, '2024-09-08 00:00:00', '2024-09-27
+00:00:00', 'ysh', '广州市第八区', '12345678911', 0,0);
 
 -- ----------------------------
 -- Table structure for t_repair_order
@@ -178,13 +209,15 @@ CREATE TABLE `t_repair_order`  (
   `orderStatus` int NOT NULL COMMENT '订单状态（例如“待处理”，“已处理”等）',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_order_id`(`oID` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_repair_order
 -- ----------------------------
 INSERT INTO `t_repair_order` VALUES (9, 52, 'repair', '2024-10-03', 'TESTREPAIR', 'TEST', '13817355618', 8);
 INSERT INTO `t_repair_order` VALUES (10, 53, 'repair', '2024-10-04', 'TEST', 'TEST', '12341234123', 8);
+INSERT INTO `t_repair_order` VALUES (11, 57, 'repair', '2024-09-27', '广州市天河区', 'ysh', '12345678911', 0);
+INSERT INTO `t_repair_order` VALUES (12, 58, 'maintenance', '2024-09-27', '广州市天河区', 'ysh', '12345678911', 0);
 
 -- ----------------------------
 -- Table structure for t_users
@@ -243,7 +276,7 @@ CREATE TABLE `t_wheelchair`  (
 -- ----------------------------
 INSERT INTO `t_wheelchair` VALUES (30, '互邦HBLD2-E电动轮椅可折叠轻便携铝合金锂电池老年人残疾人轮椅代步车', '加宽轮椅，手动折叠', '20', 'HBLD2-E', 0, 30, '上海', '/static/img/wheelchair1.png', '碧桂园豪庭一期', '13813813800', '22', '/static/img/wheelchair1.png', 'wym', '2019-12-12 00:28:43');
 INSERT INTO `t_wheelchair` VALUES (31, '迪护电动轮椅老人全自动越野轻便可折叠旅行便携式家用老年代步电动车专用智能可躺上飞机带坐便器DH-QBK12AQ', '小轮便携，手动折叠', '18', 'DH-QBK12AQ', 0, 40, '上海', '/static/img/wheelchair2.png', '虎门万达广场', '18818818822', '21', '/static/img/wheelchair2.png', 'wym', '2019-12-12 00:32:02');
-INSERT INTO `t_wheelchair` VALUES (41, '互邦HBLD2-E电动轮椅可折叠轻便携铝合金锂电池老年人残疾人轮椅代步车', '加宽轮椅，手动折叠', '20', 'HBLD2-E', 10, 30, '上海', '/static/img/wheelchair3.png', '互邦', '13817355618', '21', '/static/img/wheelchair3.png', '管理员', '2024-09-15 16:29:10');
+INSERT INTO `t_wheelchair` VALUES (41, '互邦HBLD2-E电动轮椅可折叠轻便携铝合金锂电池老年人残疾人轮椅代步车', '加宽轮椅，手动折叠', '20', 'HBLD2-E', 4, 30, '上海', '/static/img/wheelchair3.png', '互邦', '13817355618', '21', '/static/img/wheelchair3.png', '管理员', '2024-09-15 16:29:10');
 INSERT INTO `t_wheelchair` VALUES (42, '迪护电动轮椅老人全自动越野轻便可折叠旅行便携式家用老年代步电动车专用智能可躺上飞机带坐便器DH-QBK12AQ', '小轮便携，手动折叠', '18', 'DH-QBK12AQ', 30, 40, '北京', 'http://localhost:8090/images/52f3804d-5aea-4e3a-ab07-b38820164b75.png', '迪护', '13817355618', '21', 'http://localhost:8090/images/12e8d5c2-3038-4e27-91cb-d213fc1efd42.png~', '管理员', '2024-09-24 00:22:27');
 
 -- ----------------------------
